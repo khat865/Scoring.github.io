@@ -1,11 +1,9 @@
-// ====== Adapted by assistant: fixes for null ratings and progress slider =====
-function normalizeRatings(arr){ return (arr||[]).map(v => (typeof v === 'number') ? v : undefined); }
-
 // ==================== 配置 ====================
 const CONFIG = {
-    dataFile: 'medical_data.json',  // 医学数据文件路径
+    dataFile: 'medical_data.json',
     storageKey: 'medicalRatingProgress',
-    batchSize: 50
+    batchSize: 50,
+    progressBallsPerPage: 50  // 每页显示的进度球数量
 };
 
 // ==================== 状态管理 ====================
@@ -13,7 +11,7 @@ class RatingState {
     constructor() {
         this.data = [];
         this.currentIndex = 0;
-        this.currentImageIndex = 0;  // 当前显示的图片索引
+        this.currentImageIndex = 0;
         this.ratings = [];
         this.currentRating = null;
         this.startTime = null;
@@ -22,29 +20,29 @@ class RatingState {
     loadFromStorage() {
         try {
             const saved = localStorage.getItem(CONFIG.storageKey);
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                this.currentIndex = parsed.currentIndex || 0;
-                this.ratings = parsed.ratings || [];
-                this.startTime = parsed.startTime || new Date().toISOString();
-                return true;
-            }
+            if (!saved) return false;
+
+            const data = JSON.parse(saved);
+            this.currentIndex = data.currentIndex || 0;
+            this.ratings = data.ratings || [];
+            this.startTime = data.startTime || new Date().toISOString();
+            
+            return true;
         } catch (error) {
             console.error('加载进度失败:', error);
+            return false;
         }
-        this.startTime = new Date().toISOString();
-        return false;
     }
 
     saveToStorage() {
         try {
-            const saveData = {
+            const data = {
                 currentIndex: this.currentIndex,
                 ratings: this.ratings,
                 startTime: this.startTime,
-                lastSaved: new Date().toISOString()
+                lastModified: new Date().toISOString()
             };
-            localStorage.setItem(CONFIG.storageKey, JSON.stringify(saveData));
+            localStorage.setItem(CONFIG.storageKey, JSON.stringify(data));
             return true;
         } catch (error) {
             console.error('保存进度失败:', error);
@@ -57,29 +55,31 @@ class RatingState {
     }
 
     setRating(index, score) {
-        this.ratings[index] = score;
-        this.currentRating = score;
+        this.ratings[index] = {
+            score: score,
+            timestamp: new Date().toISOString()
+        };
     }
 
     getRating(index) {
         return this.ratings[index];
     }
 
-    hasRating(index){ return typeof this.ratings[index] === 'number'; }
-
-    getTotalRated() {
-        return this.ratings.filter(r => r !== undefined).length;
-    }
-
-    isComplete() {
-        return this.currentIndex >= this.data.length;
+    getCurrentPair() {
+        return this.data[this.currentIndex];
     }
 
     getCurrentImages() {
-        if (this.currentIndex < this.data.length) {
-            return this.data[this.currentIndex].image_paths || [];
-        }
-        return [];
+        const pair = this.getCurrentPair();
+        return pair ? pair.image_paths : [];
+    }
+
+    getTotalRated() {
+        return this.ratings.filter(r => r !== null && r !== undefined).length;
+    }
+
+    isCompleted() {
+        return this.currentIndex >= this.data.length;
     }
 }
 
@@ -89,40 +89,26 @@ class DataLoader {
         try {
             const response = await fetch(CONFIG.dataFile);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP错误! 状态: ${response.status}`);
             }
             const data = await response.json();
             
-            if (!Array.isArray(data)) {
-                throw new Error('数据格式错误：应该是数组');
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error('数据格式错误或为空');
             }
-
-            // 验证数据格式
-            data.forEach((item, index) => {
-                if (!item.image_paths || !Array.isArray(item.image_paths)) {
-                    throw new Error(`数据项 ${index} 的 image_paths 应该是数组`);
-                }
-                if (!item.prompt) {
-                    throw new Error(`数据项 ${index} 缺少 prompt 字段`);
-                }
-            });
-
+            
             return data;
         } catch (error) {
             console.error('加载数据失败:', error);
-            throw error;
+            throw new Error(`无法加载数据文件: ${error.message}`);
         }
     }
 
-    // 将Windows路径转换为可用的URL
     static convertPath(windowsPath) {
-        // 如果已经是URL，直接返回
-        if (windowsPath.startsWith('http://') || windowsPath.startsWith('https://')) {
-            return windowsPath;
-        }
+        if (!windowsPath) return '';
+        if (windowsPath.startsWith('http')) return windowsPath;
+        if (windowsPath.startsWith('images/')) return windowsPath;
         
-        // 对于本地路径，需要通过服务器访问
-        // 假设图片都放在项目的 images 目录下
         const filename = windowsPath.split('\\').pop().split('/').pop();
         return `images/${filename}`;
     }
@@ -132,6 +118,8 @@ class DataLoader {
 class UIManager {
     constructor(state) {
         this.state = state;
+        this.currentProgressPage = 0;  // 当前显示的进度球页码
+        
         this.elements = {
             displayImage: document.getElementById('displayImage'),
             displayText: document.getElementById('displayText'),
@@ -148,10 +136,13 @@ class UIManager {
             nextBtn: document.getElementById('nextBtn'),
             saveProgressBtn: document.getElementById('saveProgressBtn'),
             mainContent: document.getElementById('mainContent'),
-            ratingButtons: document.querySelectorAll('.rating-btn')
+            ratingButtons: document.querySelectorAll('.rating-btn'),
+            caseProgressContainer: document.getElementById('caseProgressContainer'),
+            caseJumpSlider: document.getElementById('caseJumpSlider'),
+            caseWindowSlider: document.getElementById('caseWindowSlider'),
+            downloadCsvBtn: document.getElementById('downloadCsvBtn')
         };
 
-        // 只在元素存在时绑定事件
         if (this.elements.nextBtn && this.elements.prevBtn) {
             this.bindEvents();
         }
@@ -174,80 +165,218 @@ class UIManager {
         this.elements.prevImageBtn.addEventListener('click', () => this.prevImage());
         this.elements.nextImageBtn.addEventListener('click', () => this.nextImage());
 
+        // 快速跳转滑块
+        if (this.elements.caseJumpSlider) {
+            this.elements.caseJumpSlider.addEventListener('input', (e) => {
+                const targetIndex = parseInt(e.target.value) - 1;
+                this.jumpToCase(targetIndex);
+            });
+        }
+
+        // 进度窗口滑块
+        if (this.elements.caseWindowSlider) {
+            this.elements.caseWindowSlider.addEventListener('input', (e) => {
+                const pageIndex = parseInt(e.target.value) - 1;
+                this.currentProgressPage = pageIndex;
+                this.renderProgressBalls();
+            });
+        }
+
+        // CSV下载按钮
+        if (this.elements.downloadCsvBtn) {
+            this.elements.downloadCsvBtn.addEventListener('click', () => {
+                window.app.downloadCSV();
+            });
+        }
+
         // 键盘快捷键
         document.addEventListener('keydown', (e) => {
             if (e.key >= '1' && e.key <= '4') {
                 this.selectRating(parseInt(e.key));
-            } else if (e.key === 'ArrowLeft' && !this.elements.prevBtn.disabled) {
-                this.prevPair();
-            } else if (e.key === 'ArrowRight' && !this.elements.nextBtn.disabled) {
-                this.nextPair();
-            } else if (e.key === 'a' || e.key === 'A') {
-                this.prevImage();
-            } else if (e.key === 'd' || e.key === 'D') {
-                this.nextImage();
+            } else if (e.key === 'ArrowRight') {
+                if (!this.elements.nextBtn.disabled) {
+                    this.nextPair();
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (!this.elements.prevBtn.disabled) {
+                    this.prevPair();
+                }
+            } else if (e.key === 's' || e.key === 'S') {
+                this.saveProgress();
             }
         });
     }
 
-    displayCurrentPair() {
-        if (this.state.currentIndex < this.state.data.length) {
-            const item = this.state.data[this.state.currentIndex];
-            
-            // 重置图片索引
-            this.state.currentImageIndex = 0;
-            
-            // 显示图片
-            this.displayImages(item.image_paths);
-            
-            // 显示文本
-            this.elements.displayText.textContent = item.prompt;
-            
-            // 更新索引显示
-            this.elements.currentIndex.textContent = this.state.currentIndex + 1;
-            
-            // 更新图片数量显示
-            this.elements.imageCount.textContent = `(共 ${item.image_paths.length} 张)`;
-            
-            // 恢复之前的评分
-            if (this.state.hasRating(this.state.currentIndex)) {
-                this.selectRating(this.state.getRating(this.state.currentIndex), false);
-            } else {
-                this.clearRatingSelection();
-            }
-            
-            this.updateButtons();
-            this.updateProgress();
+    init() {
+        if (this.state.isCompleted()) {
+            this.showCompletion();
+        } else {
+            this.initializeProgressControls();
+            this.render();
         }
     }
 
-    displayImages(imagePaths) {
-        if (!imagePaths || imagePaths.length === 0) {
-            this.elements.displayImage.src = '';
-            this.elements.displayImage.alt = '无图片';
+    initializeProgressControls() {
+        const totalCases = this.state.data.length;
+        const totalPages = Math.ceil(totalCases / CONFIG.progressBallsPerPage);
+
+        // 初始化快速跳转滑块
+        if (this.elements.caseJumpSlider) {
+            this.elements.caseJumpSlider.min = 1;
+            this.elements.caseJumpSlider.max = totalCases;
+            this.elements.caseJumpSlider.value = this.state.currentIndex + 1;
+        }
+
+        // 初始化窗口滑块
+        if (this.elements.caseWindowSlider) {
+            this.elements.caseWindowSlider.min = 1;
+            this.elements.caseWindowSlider.max = totalPages;
+            
+            // 设置当前页
+            this.currentProgressPage = Math.floor(this.state.currentIndex / CONFIG.progressBallsPerPage);
+            this.elements.caseWindowSlider.value = this.currentProgressPage + 1;
+        }
+
+        // 渲染进度球
+        this.renderProgressBalls();
+    }
+
+    renderProgressBalls() {
+        if (!this.elements.caseProgressContainer) return;
+
+        const totalCases = this.state.data.length;
+        const startIndex = this.currentProgressPage * CONFIG.progressBallsPerPage;
+        const endIndex = Math.min(startIndex + CONFIG.progressBallsPerPage, totalCases);
+
+        this.elements.caseProgressContainer.innerHTML = '';
+
+        for (let i = startIndex; i < endIndex; i++) {
+            const ball = document.createElement('div');
+            ball.className = 'case-progress-item';
+            ball.textContent = i + 1;
+            ball.title = `病例 ${i + 1}`;
+
+            // 已评分的标记
+            if (this.state.getRating(i)) {
+                ball.classList.add('rated');
+            }
+
+            // 当前病例标记
+            if (i === this.state.currentIndex) {
+                ball.classList.add('active');
+            }
+
+            // 点击跳转
+            ball.addEventListener('click', () => {
+                this.jumpToCase(i);
+            });
+
+            this.elements.caseProgressContainer.appendChild(ball);
+        }
+
+        // 更新滑块位置
+        if (this.elements.caseJumpSlider) {
+            this.elements.caseJumpSlider.value = this.state.currentIndex + 1;
+        }
+    }
+
+    jumpToCase(targetIndex) {
+        if (targetIndex < 0 || targetIndex >= this.state.data.length) return;
+
+        this.state.currentIndex = targetIndex;
+        this.state.currentImageIndex = 0;
+        
+        // 更新窗口页码
+        const targetPage = Math.floor(targetIndex / CONFIG.progressBallsPerPage);
+        if (targetPage !== this.currentProgressPage) {
+            this.currentProgressPage = targetPage;
+            if (this.elements.caseWindowSlider) {
+                this.elements.caseWindowSlider.value = targetPage + 1;
+            }
+        }
+
+        this.render();
+    }
+
+    render() {
+        const pair = this.state.getCurrentPair();
+        if (!pair) {
+            this.showCompletion();
             return;
         }
 
-        // 显示当前图片
-        const currentPath = DataLoader.convertPath(imagePaths[this.state.currentImageIndex]);
-        this.elements.displayImage.src = currentPath;
-        this.elements.displayImage.alt = `图片 ${this.state.currentImageIndex + 1}`;
+        // 显示图片
+        this.displayImages(pair.image_paths);
 
-        // 更新图片导航
-        this.elements.currentImageIndex.textContent = this.state.currentImageIndex + 1;
-        this.elements.totalImages.textContent = imagePaths.length;
-        this.elements.prevImageBtn.disabled = this.state.currentImageIndex === 0;
-        this.elements.nextImageBtn.disabled = this.state.currentImageIndex === imagePaths.length - 1;
-
-        // 显示/隐藏导航按钮
-        const navigation = document.getElementById('imageNavigation');
-        if (imagePaths.length > 1) {
-            navigation.style.display = 'flex';
-            this.displayThumbnails(imagePaths);
-        } else {
-            navigation.style.display = 'none';
-            this.elements.thumbnailContainer.innerHTML = '';
+        // 显示文本
+        if (this.elements.displayText) {
+            this.elements.displayText.textContent = pair.prompt;
         }
+
+        // 更新计数器
+        if (this.elements.currentIndex) {
+            this.elements.currentIndex.textContent = this.state.currentIndex + 1;
+        }
+        if (this.elements.totalItems) {
+            this.elements.totalItems.textContent = this.state.data.length;
+        }
+
+        // 更新进度条
+        this.updateProgress();
+
+        // 更新进度球
+        this.renderProgressBalls();
+
+        // 恢复评分
+        const savedRating = this.state.getRating(this.state.currentIndex);
+        if (savedRating) {
+            this.selectRating(savedRating.score, false);
+        } else {
+            this.clearRatingSelection();
+        }
+
+        // 更新按钮状态
+        this.elements.prevBtn.disabled = this.state.currentIndex === 0;
+    }
+
+    displayImages(imagePaths) {
+        if (!imagePaths || imagePaths.length === 0) return;
+
+        const currentImagePath = imagePaths[this.state.currentImageIndex];
+        
+        // 显示主图片
+        if (this.elements.displayImage) {
+            this.elements.displayImage.src = DataLoader.convertPath(currentImagePath);
+        }
+
+        // 更新图片计数
+        if (this.elements.imageCount) {
+            this.elements.imageCount.textContent = `(${imagePaths.length}张)`;
+        }
+
+        if (this.elements.currentImageIndex) {
+            this.elements.currentImageIndex.textContent = this.state.currentImageIndex + 1;
+        }
+        if (this.elements.totalImages) {
+            this.elements.totalImages.textContent = imagePaths.length;
+        }
+
+        // 更新导航按钮
+        if (this.elements.prevImageBtn) {
+            this.elements.prevImageBtn.disabled = this.state.currentImageIndex === 0;
+        }
+        if (this.elements.nextImageBtn) {
+            this.elements.nextImageBtn.disabled = this.state.currentImageIndex === imagePaths.length - 1;
+        }
+
+        // 显示或隐藏导航区域
+        const showNav = imagePaths.length > 1;
+        if (this.elements.imageNavigation) {
+            this.elements.imageNavigation.style.display = showNav ? 'flex' : 'none';
+        }
+
+        // 显示缩略图
+        this.displayThumbnails(imagePaths);
     }
 
     displayThumbnails(imagePaths) {
@@ -293,12 +422,8 @@ class UIManager {
     }
 
     selectRating(score, saveRating = true) {
-        // 清除所有选中状态
-        this.elements.ratingButtons.forEach(btn => {
-            btn.classList.remove('selected');
-        });
+        this.clearRatingSelection();
         
-        // 选中当前按钮
         const selectedBtn = Array.from(this.elements.ratingButtons)
             .find(btn => parseInt(btn.dataset.score) === score);
         if (selectedBtn) {
@@ -310,6 +435,8 @@ class UIManager {
         if (saveRating) {
             this.state.setRating(this.state.currentIndex, score);
             this.state.saveToStorage();
+            // 更新进度球显示
+            this.renderProgressBalls();
         }
         
         this.elements.nextBtn.disabled = false;
@@ -327,23 +454,21 @@ class UIManager {
         if (this.state.currentRating === null) return;
         
         this.state.currentIndex++;
+        this.state.currentImageIndex = 0;
         
-        if (this.state.isComplete()) {
+        if (this.state.isCompleted()) {
             this.showCompletion();
         } else {
-            this.displayCurrentPair();
+            this.render();
         }
     }
 
     prevPair() {
         if (this.state.currentIndex > 0) {
             this.state.currentIndex--;
-            this.displayCurrentPair();
+            this.state.currentImageIndex = 0;
+            this.render();
         }
-    }
-
-    updateButtons() {
-        this.elements.prevBtn.disabled = this.state.currentIndex === 0;
     }
 
     updateProgress() {
@@ -372,97 +497,73 @@ class UIManager {
         }, 3000);
     }
 
-    showLoading() {
-        this.elements.mainContent.innerHTML = `
-            <div class="loading-message">
-                <h2>正在加载医学数据...</h2>
-                <p>请稍候</p>
-            </div>
-        `;
-    }
-
-    showError(error) {
-        this.elements.mainContent.innerHTML = `
-            <div class="error-message">
-                <h2>❌ 加载失败</h2>
-                <p>${error.message}</p>
-                <p>请确保 medical_data.json 文件存在且格式正确</p>
-                <button class="btn btn-primary" onclick="location.reload()">重新加载</button>
-            </div>
-        `;
-    }
-
     showCompletion() {
-        const rated = this.state.getTotalRated();
-        const total = this.state.data.length;
-        
         this.elements.mainContent.innerHTML = `
             <div class="completion-message">
-                <h2>🎉 评分完成！</h2>
-                <p>您已完成 ${rated} / ${total} 个医学病例的评分</p>
+                <h2>🎉 恭喜完成！</h2>
+                <p>您已完成所有 ${this.state.data.length} 个病例的评分</p>
+                <p>评分数量: ${this.state.getTotalRated()} / ${this.state.data.length}</p>
                 <div class="action-buttons">
-                    <button class="btn btn-success" onclick="app.downloadCSV()">下载评分结果 (CSV)</button>
-                    <button class="btn btn-info" onclick="app.downloadJSON()">下载评分结果 (JSON)</button>
+                    <button class="btn btn-success" onclick="app.downloadCSV()">下载CSV结果</button>
+                    <button class="btn btn-info" onclick="app.downloadJSON()">下载JSON结果</button>
                     <button class="btn btn-secondary" onclick="app.restart()">重新开始</button>
                 </div>
             </div>
         `;
-    }
-
-    init() {
-        this.elements.totalItems.textContent = this.state.data.length;
-        this.displayCurrentPair();
     }
 }
 
 // ==================== 导出管理器 ====================
 class ExportManager {
     static generateCSV(state) {
-        let csv = 'Index,Image_Paths,Prompt,Rating,Start_Time,Complete_Time\n';
-        
+        const headers = ['序号', '评分', '评分时间', 'Prompt'];
+        const rows = [headers];
+
         state.data.forEach((item, index) => {
-            const rating = state.ratings[index] || '';
-            const completeTime = new Date().toISOString();
-            const imagePaths = item.image_paths.join(';');  // 用分号分隔多个图片路径
-            const prompt = item.prompt.replace(/"/g, '""');
-            
-            csv += `${index + 1},"${imagePaths}","${prompt}",${rating},${state.startTime},${completeTime}\n`;
+            const rating = state.getRating(index);
+            rows.push([
+                index + 1,
+                rating ? rating.score : '',
+                rating ? rating.timestamp : '',
+                item.prompt.replace(/"/g, '""')
+            ]);
         });
 
-        return csv;
+        return rows.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
     }
 
     static generateJSON(state) {
-        const results = state.data.map((item, index) => ({
-            index: index + 1,
-            image_paths: item.image_paths,
-            prompt: item.prompt,
-            rating: state.ratings[index] || null
-        }));
+        const results = state.data.map((item, index) => {
+            const rating = state.getRating(index);
+            return {
+                index: index + 1,
+                score: rating ? rating.score : null,
+                timestamp: rating ? rating.timestamp : null,
+                prompt: item.prompt,
+                image_count: item.image_paths.length
+            };
+        });
 
         return JSON.stringify({
             metadata: {
-                totalItems: state.data.length,
-                ratedItems: state.getTotalRated(),
-                startTime: state.startTime,
-                completeTime: new Date().toISOString()
+                total_cases: state.data.length,
+                completed: state.getTotalRated(),
+                start_time: state.startTime,
+                export_time: new Date().toISOString()
             },
             results: results
         }, null, 2);
     }
 
     static download(content, filename, mimeType) {
-        const blob = new Blob(['\ufeff' + content], { type: `${mimeType};charset=utf-8;` });
-        const link = document.createElement('a');
+        const blob = new Blob([content], { type: mimeType });
         const url = URL.createObjectURL(blob);
-        
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-        link.style.visibility = 'hidden';
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
     }
 }
@@ -476,11 +577,9 @@ class RatingApp {
 
     async init() {
         const mainContent = document.getElementById('mainContent');
-        // 保存原始HTML
         const originalHTML = mainContent ? mainContent.innerHTML : '';
         
         try {
-            // 显示加载界面
             if (mainContent) {
                 mainContent.innerHTML = `
                     <div class="loading-message">
@@ -490,15 +589,12 @@ class RatingApp {
                 `;
             }
 
-            // 加载数据
             this.state.data = await DataLoader.loadData();
 
-            // 恢复原始HTML内容
             if (mainContent && originalHTML) {
                 mainContent.innerHTML = originalHTML;
             }
 
-            // 尝试加载保存的进度
             const hasProgress = this.state.loadFromStorage();
             
             if (hasProgress) {
@@ -515,13 +611,11 @@ class RatingApp {
                 }
             }
 
-            // 初始化UI
             this.ui = new UIManager(this.state);
             this.ui.init();
 
         } catch (error) {
             console.error('初始化失败:', error);
-            // 直接显示错误，不创建新的UIManager
             if (mainContent) {
                 mainContent.innerHTML = `
                     <div class="error-message">
@@ -538,13 +632,15 @@ class RatingApp {
     downloadCSV() {
         const csv = ExportManager.generateCSV(this.state);
         const filename = `medical_rating_results_${Date.now()}.csv`;
-        ExportManager.download(csv, filename, 'text/csv');
+        ExportManager.download(csv, filename, 'text/csv;charset=utf-8;');
+        this.ui.showNotification('CSV文件已下载！', 'success');
     }
 
     downloadJSON() {
         const json = ExportManager.generateJSON(this.state);
         const filename = `medical_rating_results_${Date.now()}.json`;
         ExportManager.download(json, filename, 'application/json');
+        this.ui.showNotification('JSON文件已下载！', 'success');
     }
 
     restart() {
@@ -562,117 +658,3 @@ window.addEventListener('load', () => {
     app = new RatingApp();
     app.init();
 });
-
-
-/* ====== Progress slider wiring & robust scrollIntoView for progress items ====== */
-(function(){
-    // ensure DOM exists when this runs after init
-    function setupProgressSlider(ui, state){
-        const slider = document.getElementById('caseJumpSlider');
-        const container = document.getElementById('caseProgressContainer');
-        if(!slider || !container) return;
-        slider.min = 1;
-        slider.max = state.data.length || 1;
-        slider.value = (state.currentIndex || 0) + 1;
-        // update slider when index changes: we'll patch UI displayCurrentPair to update slider too
-        slider.addEventListener('input', (e)=>{
-            const v = parseInt(e.target.value,10) - 1;
-            state.currentIndex = v;
-            ui.displayCurrentPair();
-            // ensure item is visible
-            const items = container.querySelectorAll('.case-progress-item');
-            if(items[v]) items[v].scrollIntoView({behavior:'auto',inline:'center'});
-        });
-        slider.addEventListener('change', (e)=>{
-            const v = parseInt(e.target.value,10) - 1;
-            state.currentIndex = v;
-            ui.displayCurrentPair();
-            const items = container.querySelectorAll('.case-progress-item');
-            if(items[v]) items[v].scrollIntoView({behavior:'smooth',inline:'center'});
-            state.save();
-        });
-    }
-
-    // Patch UIManager.displayCurrentPair to update slider value and set up slider on first render
-    const origDisplay = UIManager.prototype.displayCurrentPair;
-    UIManager.prototype.displayCurrentPair = function(){
-        origDisplay.apply(this, arguments);
-        // update slider if present
-        const slider = document.getElementById('caseJumpSlider');
-        if(slider){ slider.max = this.state.data.length || 1; slider.value = (this.state.currentIndex||0)+1; }
-        // ensure current item visible in container
-        const container = document.getElementById('caseProgressContainer');
-        if(container){
-            const items = container.querySelectorAll('.case-progress-item');
-            const cur = items[this.state.currentIndex];
-            if(cur) cur.scrollIntoView({behavior:'auto',inline:'center'});
-        }
-        // setup slider once (after UI created)
-        if(!window._progressSliderSetup){
-            setupProgressSlider(this, this.state);
-            window._progressSliderSetup = true;
-        }
-    };
-
-    // Improve renderProgressBar to avoid creating thousands of DOM updates repeatedly by reusing elements when possible
-    const origRender = UIManager.prototype.renderProgressBar;
-    UIManager.prototype.renderProgressBar = function(){
-        const container = this.el.caseProgressContainer;
-        // if many items, it's expensive to recreate; but for simplicity, recreate but ensure correct 'rated' detection
-        container.innerHTML = '';
-        this.state.data.forEach((_, i) => {
-            const div = document.createElement('div');
-            div.className = 'case-progress-item';
-            div.textContent = i + 1;
-            const rating = this.state.getRating(i);
-            if(typeof rating === 'number') div.classList.add('rated');
-            if(i === this.state.currentIndex) div.classList.add('active');
-            div.addEventListener('click', ()=>{
-                this.state.currentIndex = i;
-                this.displayCurrentPair();
-                this.state.save();
-            });
-            container.appendChild(div);
-        });
-    };
-})();
-
-
-
-// Override renderProgressBar with windowed rendering if not found earlier
-UIManager.prototype.renderProgressBar = function(){
-    const container = this.el.caseProgressContainer;
-    container.innerHTML = '';
-    const total = this.state.data.length;
-    const WIN = 33;
-    const slider = document.getElementById('caseWindowSlider');
-    let start = 0;
-    if(slider){
-        const maxStart = Math.max(0, total - WIN);
-        start = Math.min(maxStart, Math.max(0, (parseInt(slider.value,10)-1) )) || 0;
-    } else {
-        const half = Math.floor(WIN/2);
-        start = Math.max(0, Math.min(total - WIN, this.state.currentIndex - half));
-    }
-    const end = Math.min(total, start + WIN);
-    for(let i = start; i < end; i++){
-        const div = document.createElement('div');
-        div.className = 'case-progress-item';
-        div.textContent = i + 1;
-        const rating = this.state.getRating(i);
-        if(typeof rating === 'number') div.classList.add('rated');
-        if(i === this.state.currentIndex) div.classList.add('active');
-        div.addEventListener('click', ()=>{
-            this.state.currentIndex = i;
-            this.displayCurrentPair();
-            this.state.save();
-        });
-        container.appendChild(div);
-    }
-    if(slider){
-        const maxStart = Math.max(1, total - WIN + 1);
-        slider.min = 1;
-        slider.max = maxStart;
-        slider.value = Math.min(maxStart, start + 1);
-    }
-};
