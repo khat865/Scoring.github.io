@@ -1,8 +1,8 @@
 // ==================== 配置 ====================
 const CONFIG = {
-    dataFile: 'data.json',  // 数据文件路径
-    storageKey: 'ratingProgress',  // LocalStorage键名
-    batchSize: 50  // 每次处理的数据批次大小
+    dataFile: 'medical_data.json',  // 医学数据文件路径
+    storageKey: 'medicalRatingProgress',
+    batchSize: 50
 };
 
 // ==================== 状态管理 ====================
@@ -10,6 +10,7 @@ class RatingState {
     constructor() {
         this.data = [];
         this.currentIndex = 0;
+        this.currentImageIndex = 0;  // 当前显示的图片索引
         this.ratings = [];
         this.currentRating = null;
         this.startTime = null;
@@ -72,6 +73,13 @@ class RatingState {
     isComplete() {
         return this.currentIndex >= this.data.length;
     }
+
+    getCurrentImages() {
+        if (this.currentIndex < this.data.length) {
+            return this.data[this.currentIndex].image_paths || [];
+        }
+        return [];
+    }
 }
 
 // ==================== 数据加载器 ====================
@@ -90,8 +98,11 @@ class DataLoader {
 
             // 验证数据格式
             data.forEach((item, index) => {
-                if (!item.image || !item.text) {
-                    throw new Error(`数据项 ${index} 缺少必需字段`);
+                if (!item.image_paths || !Array.isArray(item.image_paths)) {
+                    throw new Error(`数据项 ${index} 的 image_paths 应该是数组`);
+                }
+                if (!item.prompt) {
+                    throw new Error(`数据项 ${index} 缺少 prompt 字段`);
                 }
             });
 
@@ -100,6 +111,19 @@ class DataLoader {
             console.error('加载数据失败:', error);
             throw error;
         }
+    }
+
+    // 将Windows路径转换为可用的URL
+    static convertPath(windowsPath) {
+        // 如果已经是URL，直接返回
+        if (windowsPath.startsWith('http://') || windowsPath.startsWith('https://')) {
+            return windowsPath;
+        }
+        
+        // 对于本地路径，需要通过服务器访问
+        // 假设图片都放在项目的 images 目录下
+        const filename = windowsPath.split('\\').pop().split('/').pop();
+        return `images/${filename}`;
     }
 }
 
@@ -113,6 +137,12 @@ class UIManager {
             currentIndex: document.getElementById('currentIndex'),
             totalItems: document.getElementById('totalItems'),
             progressFill: document.getElementById('progressFill'),
+            imageCount: document.getElementById('imageCount'),
+            currentImageIndex: document.getElementById('currentImageIndex'),
+            totalImages: document.getElementById('totalImages'),
+            prevImageBtn: document.getElementById('prevImageBtn'),
+            nextImageBtn: document.getElementById('nextImageBtn'),
+            thumbnailContainer: document.getElementById('thumbnailContainer'),
             prevBtn: document.getElementById('prevBtn'),
             nextBtn: document.getElementById('nextBtn'),
             saveProgressBtn: document.getElementById('saveProgressBtn'),
@@ -136,6 +166,10 @@ class UIManager {
         this.elements.prevBtn.addEventListener('click', () => this.prevPair());
         this.elements.saveProgressBtn.addEventListener('click', () => this.saveProgress());
 
+        // 图片导航按钮
+        this.elements.prevImageBtn.addEventListener('click', () => this.prevImage());
+        this.elements.nextImageBtn.addEventListener('click', () => this.nextImage());
+
         // 键盘快捷键
         document.addEventListener('keydown', (e) => {
             if (e.key >= '1' && e.key <= '4') {
@@ -144,6 +178,10 @@ class UIManager {
                 this.prevPair();
             } else if (e.key === 'ArrowRight' && !this.elements.nextBtn.disabled) {
                 this.nextPair();
+            } else if (e.key === 'a' || e.key === 'A') {
+                this.prevImage();
+            } else if (e.key === 'd' || e.key === 'D') {
+                this.nextImage();
             }
         });
     }
@@ -152,15 +190,20 @@ class UIManager {
         if (this.state.currentIndex < this.state.data.length) {
             const item = this.state.data[this.state.currentIndex];
             
+            // 重置图片索引
+            this.state.currentImageIndex = 0;
+            
             // 显示图片
-            this.elements.displayImage.src = item.image;
-            this.elements.displayImage.alt = `图片 ${this.state.currentIndex + 1}`;
+            this.displayImages(item.image_paths);
             
             // 显示文本
-            this.elements.displayText.textContent = item.text;
+            this.elements.displayText.textContent = item.prompt;
             
             // 更新索引显示
             this.elements.currentIndex.textContent = this.state.currentIndex + 1;
+            
+            // 更新图片数量显示
+            this.elements.imageCount.textContent = `(共 ${item.image_paths.length} 张)`;
             
             // 恢复之前的评分
             if (this.state.hasRating(this.state.currentIndex)) {
@@ -171,6 +214,77 @@ class UIManager {
             
             this.updateButtons();
             this.updateProgress();
+        }
+    }
+
+    displayImages(imagePaths) {
+        if (!imagePaths || imagePaths.length === 0) {
+            this.elements.displayImage.src = '';
+            this.elements.displayImage.alt = '无图片';
+            return;
+        }
+
+        // 显示当前图片
+        const currentPath = DataLoader.convertPath(imagePaths[this.state.currentImageIndex]);
+        this.elements.displayImage.src = currentPath;
+        this.elements.displayImage.alt = `图片 ${this.state.currentImageIndex + 1}`;
+
+        // 更新图片导航
+        this.elements.currentImageIndex.textContent = this.state.currentImageIndex + 1;
+        this.elements.totalImages.textContent = imagePaths.length;
+        this.elements.prevImageBtn.disabled = this.state.currentImageIndex === 0;
+        this.elements.nextImageBtn.disabled = this.state.currentImageIndex === imagePaths.length - 1;
+
+        // 显示/隐藏导航按钮
+        const navigation = document.getElementById('imageNavigation');
+        if (imagePaths.length > 1) {
+            navigation.style.display = 'flex';
+            this.displayThumbnails(imagePaths);
+        } else {
+            navigation.style.display = 'none';
+            this.elements.thumbnailContainer.innerHTML = '';
+        }
+    }
+
+    displayThumbnails(imagePaths) {
+        this.elements.thumbnailContainer.innerHTML = '';
+        
+        if (imagePaths.length <= 1) return;
+
+        imagePaths.forEach((path, index) => {
+            const thumbnail = document.createElement('div');
+            thumbnail.className = 'thumbnail';
+            if (index === this.state.currentImageIndex) {
+                thumbnail.classList.add('active');
+            }
+
+            const img = document.createElement('img');
+            img.src = DataLoader.convertPath(path);
+            img.alt = `缩略图 ${index + 1}`;
+            
+            thumbnail.appendChild(img);
+            thumbnail.addEventListener('click', () => {
+                this.state.currentImageIndex = index;
+                this.displayImages(imagePaths);
+            });
+
+            this.elements.thumbnailContainer.appendChild(thumbnail);
+        });
+    }
+
+    prevImage() {
+        const images = this.state.getCurrentImages();
+        if (this.state.currentImageIndex > 0) {
+            this.state.currentImageIndex--;
+            this.displayImages(images);
+        }
+    }
+
+    nextImage() {
+        const images = this.state.getCurrentImages();
+        if (this.state.currentImageIndex < images.length - 1) {
+            this.state.currentImageIndex++;
+            this.displayImages(images);
         }
     }
 
@@ -257,7 +371,7 @@ class UIManager {
     showLoading() {
         this.elements.mainContent.innerHTML = `
             <div class="loading-message">
-                <h2>正在加载数据...</h2>
+                <h2>正在加载医学数据...</h2>
                 <p>请稍候</p>
             </div>
         `;
@@ -268,7 +382,7 @@ class UIManager {
             <div class="error-message">
                 <h2>❌ 加载失败</h2>
                 <p>${error.message}</p>
-                <p>请确保 data.json 文件存在且格式正确</p>
+                <p>请确保 medical_data.json 文件存在且格式正确</p>
                 <button class="btn btn-primary" onclick="location.reload()">重新加载</button>
             </div>
         `;
@@ -281,7 +395,7 @@ class UIManager {
         this.elements.mainContent.innerHTML = `
             <div class="completion-message">
                 <h2>🎉 评分完成！</h2>
-                <p>您已完成 ${rated} / ${total} 个项目的评分</p>
+                <p>您已完成 ${rated} / ${total} 个医学病例的评分</p>
                 <div class="action-buttons">
                     <button class="btn btn-success" onclick="app.downloadCSV()">下载评分结果 (CSV)</button>
                     <button class="btn btn-info" onclick="app.downloadJSON()">下载评分结果 (JSON)</button>
@@ -300,15 +414,15 @@ class UIManager {
 // ==================== 导出管理器 ====================
 class ExportManager {
     static generateCSV(state) {
-        let csv = 'Index,Image_URL,Text,Rating,Start_Time,Complete_Time\n';
+        let csv = 'Index,Image_Paths,Prompt,Rating,Start_Time,Complete_Time\n';
         
         state.data.forEach((item, index) => {
             const rating = state.ratings[index] || '';
             const completeTime = new Date().toISOString();
-            const imageUrl = item.image.replace(/"/g, '""');
-            const text = item.text.replace(/"/g, '""');
+            const imagePaths = item.image_paths.join(';');  // 用分号分隔多个图片路径
+            const prompt = item.prompt.replace(/"/g, '""');
             
-            csv += `${index + 1},"${imageUrl}","${text}",${rating},${state.startTime},${completeTime}\n`;
+            csv += `${index + 1},"${imagePaths}","${prompt}",${rating},${state.startTime},${completeTime}\n`;
         });
 
         return csv;
@@ -317,10 +431,9 @@ class ExportManager {
     static generateJSON(state) {
         const results = state.data.map((item, index) => ({
             index: index + 1,
-            image: item.image,
-            text: item.text,
-            rating: state.ratings[index] || null,
-            metadata: item.metadata || {}
+            image_paths: item.image_paths,
+            prompt: item.prompt,
+            rating: state.ratings[index] || null
         }));
 
         return JSON.stringify({
@@ -396,13 +509,13 @@ class RatingApp {
 
     downloadCSV() {
         const csv = ExportManager.generateCSV(this.state);
-        const filename = `rating_results_${Date.now()}.csv`;
+        const filename = `medical_rating_results_${Date.now()}.csv`;
         ExportManager.download(csv, filename, 'text/csv');
     }
 
     downloadJSON() {
         const json = ExportManager.generateJSON(this.state);
-        const filename = `rating_results_${Date.now()}.json`;
+        const filename = `medical_rating_results_${Date.now()}.json`;
         ExportManager.download(json, filename, 'application/json');
     }
 

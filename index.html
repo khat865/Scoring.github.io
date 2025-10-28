@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图文相似度评分系统</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>医学图文相似度评分系统</title>
+    <link rel="stylesheet" href="styles-medical.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>图文相似度评分系统</h1>
-            <p>请根据图片和文本的相似度进行评分 (1-4分)</p>
+            <h1>医学图文相似度评分系统</h1>
+            <p>请根据图片和Prompt描述的相似度进行评分 (1-4分)</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
@@ -22,13 +22,28 @@
         <div class="content" id="mainContent">
             <div class="pair-container">
                 <div class="image-section">
-                    <div class="section-title">图片</div>
-                    <div class="image-container">
-                        <img id="displayImage" src="" alt="待评分图片">
+                    <div class="section-title">
+                        图片组 
+                        <span class="image-count" id="imageCount"></span>
+                    </div>
+                    <div class="image-gallery">
+                        <div class="main-image-container" id="mainImageContainer">
+                            <img id="displayImage" src="" alt="医学图片">
+                        </div>
+                        <div class="image-navigation" id="imageNavigation">
+                            <button class="nav-btn" id="prevImageBtn">◀</button>
+                            <span class="image-indicator">
+                                <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
+                            </span>
+                            <button class="nav-btn" id="nextImageBtn">▶</button>
+                        </div>
+                        <div class="thumbnail-container" id="thumbnailContainer">
+                            <!-- 缩略图将动态加载 -->
+                        </div>
                     </div>
                 </div>
                 <div class="text-section">
-                    <div class="section-title">文本描述</div>
+                    <div class="section-title">Prompt描述</div>
                     <div class="text-content" id="displayText">
                         正在加载数据...
                     </div>
@@ -50,13 +65,13 @@
             </div>
 
             <div class="action-buttons">
-                <button class="btn btn-secondary" id="prevBtn">上一个</button>
-                <button class="btn btn-primary" id="nextBtn" disabled>下一个</button>
+                <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
+                <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
                 <button class="btn btn-info" id="saveProgressBtn">保存进度</button>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app-medical.js"></script>
 </body>
 </html>
