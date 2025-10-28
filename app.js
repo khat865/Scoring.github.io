@@ -474,9 +474,12 @@ class RatingApp {
     }
 
     async init() {
+        const mainContent = document.getElementById('mainContent');
+        // 保存原始HTML
+        const originalHTML = mainContent ? mainContent.innerHTML : '';
+        
         try {
             // 显示加载界面
-            const mainContent = document.getElementById('mainContent');
             if (mainContent) {
                 mainContent.innerHTML = `
                     <div class="loading-message">
@@ -488,6 +491,11 @@ class RatingApp {
 
             // 加载数据
             this.state.data = await DataLoader.loadData();
+
+            // 恢复原始HTML内容
+            if (mainContent && originalHTML) {
+                mainContent.innerHTML = originalHTML;
+            }
 
             // 尝试加载保存的进度
             const hasProgress = this.state.loadFromStorage();
@@ -513,7 +521,6 @@ class RatingApp {
         } catch (error) {
             console.error('初始化失败:', error);
             // 直接显示错误，不创建新的UIManager
-            const mainContent = document.getElementById('mainContent');
             if (mainContent) {
                 mainContent.innerHTML = `
                     <div class="error-message">
