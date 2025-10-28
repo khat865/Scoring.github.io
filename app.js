@@ -6,7 +6,7 @@ const CONFIG = {
     // Google Sheets 云存储配置
     cloudSync: {
         enabled: true,  // 启用云同步
-        scriptUrl: 'https://script.google.com/macros/s/AKfycbxMbVfeDT_ScvufyElt1VFRc1NWZNNl4diqOZzR8Q4F27Ye2zuTkSHxM2lMZmYfdhJT/exec',  // 从 Apps Script 部署后复制
+        scriptUrl: 'https://script.google.com/macros/s/AKfycbw8BDjfd1yoEzStjbTPhzVbzztC0Leo1kleHTI-upUQne4xJMWVmbgkHckMBsSMk53U/exec',  // 从 Apps Script 部署后复制
         autoSync: true  // 每次评分后自动同步
     }
 };
