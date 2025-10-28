@@ -6,7 +6,9 @@
     <title>图文相似度评分</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>\n    <button class="btn btn-small btn-info" id="downloadCsvBtn" style="position:fixed;right:12px;top:12px;z-index:999;" title="下载CSV">CSV</button>\n
+<body>
+    <button class="btn btn-small btn-info" id="downloadCsvBtn" style="position:fixed;right:12px;top:12px;z-index:999;" title="下载CSV">CSV</button>
+    
     <div class="container">
         <div class="header">
             <h1>图文相似度评分</h1>
@@ -64,14 +66,13 @@
                 </div>
             </div>
 
-            
             <div class="case-progress-container" id="caseProgressContainer"></div>
-            <input type="range" id="caseWindowSlider" min="1" max="1" value="1" style="width:100%;margin-top:8px;" title="进度窗口滑块">
-            <input type="range" id="caseJumpSlider" min="1" max="1" value="1" style="width:100%;margin-top:8px;" title="快速跳转病例">
-<div class="action-buttons">
+            
+            <div class="action-buttons">
                 <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
                 <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
                 <button class="btn btn-info" id="saveProgressBtn">保存进度</button>
+                <button class="btn btn-success" id="syncBtn" style="display:none;">同步云端</button>
             </div>
         </div>
     </div>

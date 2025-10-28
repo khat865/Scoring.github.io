@@ -3,8 +3,86 @@ const CONFIG = {
     dataFile: 'medical_data.json',
     storageKey: 'medicalRatingProgress',
     batchSize: 50,
-    progressBallsPerPage: 50  // 每页显示的进度球数量
+    // Google Sheets 云存储配置
+    cloudSync: {
+        enabled: true,  // 设置为 true 启用云同步
+        sheetId: '1fsl_V3YM5fLqeuWjXLPApsp6SmuqbBmaWQa5eOtMRwg',     // 你的 Google Sheets ID
+        apiKey: 'AIzaSyBOvZ5Xf2k_iVcMC5wRSdsxb-yi1sdH8kA',      // 你的 Google API Key
+        range: 'Sheet1!A:E'  // 数据范围
+    }
 };
+
+// ==================== 云存储管理器 ====================
+class CloudStorage {
+    constructor(config) {
+        this.enabled = config.enabled;
+        this.sheetId = config.sheetId;
+        this.apiKey = config.apiKey;
+        this.range = config.range;
+        this.baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
+    }
+
+    async syncToCloud(state) {
+        if (!this.enabled || !this.sheetId || !this.apiKey) {
+            console.log('云同步未启用');
+            return false;
+        }
+
+        try {
+            const data = this.prepareData(state);
+            const url = `${this.baseUrl}/${this.sheetId}/values/${this.range}:append?valueInputOption=USER_ENTERED&key=${this.apiKey}`;
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    values: data
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('云同步失败');
+            }
+
+            return true;
+        } catch (error) {
+            console.error('云同步错误:', error);
+            return false;
+        }
+    }
+
+    prepareData(state) {
+        const rows = [];
+        const userId = this.getUserId();
+        const timestamp = new Date().toISOString();
+
+        state.data.forEach((item, index) => {
+            const rating = state.getRating(index);
+            if (rating) {
+                rows.push([
+                    userId,
+                    index + 1,
+                    rating.score,
+                    rating.timestamp,
+                    item.prompt.substring(0, 100)
+                ]);
+            }
+        });
+
+        return rows;
+    }
+
+    getUserId() {
+        let userId = localStorage.getItem('userId');
+        if (!userId) {
+            userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('userId', userId);
+        }
+        return userId;
+    }
+}
 
 // ==================== 状态管理 ====================
 class RatingState {
@@ -118,7 +196,6 @@ class DataLoader {
 class UIManager {
     constructor(state) {
         this.state = state;
-        this.currentProgressPage = 0;  // 当前显示的进度球页码
         
         this.elements = {
             displayImage: document.getElementById('displayImage'),
@@ -138,9 +215,8 @@ class UIManager {
             mainContent: document.getElementById('mainContent'),
             ratingButtons: document.querySelectorAll('.rating-btn'),
             caseProgressContainer: document.getElementById('caseProgressContainer'),
-            caseJumpSlider: document.getElementById('caseJumpSlider'),
-            caseWindowSlider: document.getElementById('caseWindowSlider'),
-            downloadCsvBtn: document.getElementById('downloadCsvBtn')
+            downloadCsvBtn: document.getElementById('downloadCsvBtn'),
+            syncBtn: document.getElementById('syncBtn')
         };
 
         if (this.elements.nextBtn && this.elements.prevBtn) {
@@ -165,27 +241,18 @@ class UIManager {
         this.elements.prevImageBtn.addEventListener('click', () => this.prevImage());
         this.elements.nextImageBtn.addEventListener('click', () => this.nextImage());
 
-        // 快速跳转滑块
-        if (this.elements.caseJumpSlider) {
-            this.elements.caseJumpSlider.addEventListener('input', (e) => {
-                const targetIndex = parseInt(e.target.value) - 1;
-                this.jumpToCase(targetIndex);
-            });
-        }
-
-        // 进度窗口滑块
-        if (this.elements.caseWindowSlider) {
-            this.elements.caseWindowSlider.addEventListener('input', (e) => {
-                const pageIndex = parseInt(e.target.value) - 1;
-                this.currentProgressPage = pageIndex;
-                this.renderProgressBalls();
-            });
-        }
-
         // CSV下载按钮
         if (this.elements.downloadCsvBtn) {
             this.elements.downloadCsvBtn.addEventListener('click', () => {
                 window.app.downloadCSV();
+            });
+        }
+
+        // 云同步按钮
+        if (this.elements.syncBtn && CONFIG.cloudSync.enabled) {
+            this.elements.syncBtn.style.display = 'inline-block';
+            this.elements.syncBtn.addEventListener('click', () => {
+                window.app.syncToCloud();
             });
         }
 
@@ -211,46 +278,19 @@ class UIManager {
         if (this.state.isCompleted()) {
             this.showCompletion();
         } else {
-            this.initializeProgressControls();
+            this.renderProgressBalls();
             this.render();
         }
-    }
-
-    initializeProgressControls() {
-        const totalCases = this.state.data.length;
-        const totalPages = Math.ceil(totalCases / CONFIG.progressBallsPerPage);
-
-        // 初始化快速跳转滑块
-        if (this.elements.caseJumpSlider) {
-            this.elements.caseJumpSlider.min = 1;
-            this.elements.caseJumpSlider.max = totalCases;
-            this.elements.caseJumpSlider.value = this.state.currentIndex + 1;
-        }
-
-        // 初始化窗口滑块
-        if (this.elements.caseWindowSlider) {
-            this.elements.caseWindowSlider.min = 1;
-            this.elements.caseWindowSlider.max = totalPages;
-            
-            // 设置当前页
-            this.currentProgressPage = Math.floor(this.state.currentIndex / CONFIG.progressBallsPerPage);
-            this.elements.caseWindowSlider.value = this.currentProgressPage + 1;
-        }
-
-        // 渲染进度球
-        this.renderProgressBalls();
     }
 
     renderProgressBalls() {
         if (!this.elements.caseProgressContainer) return;
 
         const totalCases = this.state.data.length;
-        const startIndex = this.currentProgressPage * CONFIG.progressBallsPerPage;
-        const endIndex = Math.min(startIndex + CONFIG.progressBallsPerPage, totalCases);
-
         this.elements.caseProgressContainer.innerHTML = '';
 
-        for (let i = startIndex; i < endIndex; i++) {
+        // 显示所有进度球，不分页
+        for (let i = 0; i < totalCases; i++) {
             const ball = document.createElement('div');
             ball.className = 'case-progress-item';
             ball.textContent = i + 1;
@@ -264,6 +304,10 @@ class UIManager {
             // 当前病例标记
             if (i === this.state.currentIndex) {
                 ball.classList.add('active');
+                // 滚动到当前病例
+                setTimeout(() => {
+                    ball.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }, 100);
             }
 
             // 点击跳转
@@ -273,11 +317,6 @@ class UIManager {
 
             this.elements.caseProgressContainer.appendChild(ball);
         }
-
-        // 更新滑块位置
-        if (this.elements.caseJumpSlider) {
-            this.elements.caseJumpSlider.value = this.state.currentIndex + 1;
-        }
     }
 
     jumpToCase(targetIndex) {
@@ -285,16 +324,6 @@ class UIManager {
 
         this.state.currentIndex = targetIndex;
         this.state.currentImageIndex = 0;
-        
-        // 更新窗口页码
-        const targetPage = Math.floor(targetIndex / CONFIG.progressBallsPerPage);
-        if (targetPage !== this.currentProgressPage) {
-            this.currentProgressPage = targetPage;
-            if (this.elements.caseWindowSlider) {
-                this.elements.caseWindowSlider.value = targetPage + 1;
-            }
-        }
-
         this.render();
     }
 
@@ -506,6 +535,7 @@ class UIManager {
                 <div class="action-buttons">
                     <button class="btn btn-success" onclick="app.downloadCSV()">下载CSV结果</button>
                     <button class="btn btn-info" onclick="app.downloadJSON()">下载JSON结果</button>
+                    ${CONFIG.cloudSync.enabled ? '<button class="btn btn-primary" onclick="app.syncToCloud()">同步到云端</button>' : ''}
                     <button class="btn btn-secondary" onclick="app.restart()">重新开始</button>
                 </div>
             </div>
@@ -573,6 +603,7 @@ class RatingApp {
     constructor() {
         this.state = new RatingState();
         this.ui = null;
+        this.cloudStorage = new CloudStorage(CONFIG.cloudSync);
     }
 
     async init() {
@@ -641,6 +672,16 @@ class RatingApp {
         const filename = `medical_rating_results_${Date.now()}.json`;
         ExportManager.download(json, filename, 'application/json');
         this.ui.showNotification('JSON文件已下载！', 'success');
+    }
+
+    async syncToCloud() {
+        this.ui.showNotification('正在同步到云端...', 'success');
+        const success = await this.cloudStorage.syncToCloud(this.state);
+        if (success) {
+            this.ui.showNotification('云同步成功！', 'success');
+        } else {
+            this.ui.showNotification('云同步失败，请检查配置', 'error');
+        }
     }
 
     restart() {
