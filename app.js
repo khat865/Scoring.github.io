@@ -5,10 +5,9 @@ const CONFIG = {
     batchSize: 50,
     // Google Sheets 云存储配置
     cloudSync: {
-        enabled: true,  // 设置为 true 启用云同步
-        sheetId: '',     // 你的 Google Sheets ID
-        apiKey: '',      // 你的 Google API Key
-        range: 'Sheet1!A:E'  // 数据范围
+        enabled: true,  // 启用云同步
+        scriptUrl: 'https://script.google.com/macros/s/AKfycbxMbVfeDT_ScvufyElt1VFRc1NWZNNl4diqOZzR8Q4F27Ye2zuTkSHxM2lMZmYfdhJT/exec',  // 从 Apps Script 部署后复制
+        autoSync: true  // 每次评分后自动同步
     }
 };
 
@@ -16,36 +15,36 @@ const CONFIG = {
 class CloudStorage {
     constructor(config) {
         this.enabled = config.enabled;
-        this.sheetId = config.sheetId;
-        this.apiKey = config.apiKey;
-        this.range = config.range;
-        this.baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
+        this.scriptUrl = config.scriptUrl;
+        this.autoSync = config.autoSync;
     }
 
-    async syncToCloud(state) {
-        if (!this.enabled || !this.sheetId || !this.apiKey) {
-            console.log('云同步未启用');
+    async syncRating(caseIndex, score, prompt) {
+        if (!this.enabled || !this.scriptUrl || this.scriptUrl === '在这里粘贴你的 Apps Script URL') {
+            console.log('云同步未配置');
             return false;
         }
 
         try {
-            const data = this.prepareData(state);
-            const url = `${this.baseUrl}/${this.sheetId}/values/${this.range}:append?valueInputOption=USER_ENTERED&key=${this.apiKey}`;
-            
-            const response = await fetch(url, {
+            const userId = this.getUserId();
+            const data = {
+                userId: userId,
+                caseIndex: caseIndex + 1,
+                score: score,
+                timestamp: new Date().toISOString(),
+                prompt: prompt.substring(0, 100)
+            };
+
+            const response = await fetch(this.scriptUrl, {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    values: data
-                })
+                body: JSON.stringify(data)
             });
 
-            if (!response.ok) {
-                throw new Error('云同步失败');
-            }
-
+            console.log('✓ 已同步到云端');
             return true;
         } catch (error) {
             console.error('云同步错误:', error);
@@ -53,31 +52,11 @@ class CloudStorage {
         }
     }
 
-    prepareData(state) {
-        const rows = [];
-        const userId = this.getUserId();
-        const timestamp = new Date().toISOString();
-
-        state.data.forEach((item, index) => {
-            const rating = state.getRating(index);
-            if (rating) {
-                rows.push([
-                    userId,
-                    index + 1,
-                    rating.score,
-                    rating.timestamp,
-                    item.prompt.substring(0, 100)
-                ]);
-            }
-        });
-
-        return rows;
-    }
-
     getUserId() {
         let userId = localStorage.getItem('userId');
         if (!userId) {
-            userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            const randomName = prompt('请输入你的名字或ID（用于识别评分者）：', 'User_' + Math.random().toString(36).substr(2, 5));
+            userId = randomName || 'User_' + Date.now();
             localStorage.setItem('userId', userId);
         }
         return userId;
@@ -194,8 +173,9 @@ class DataLoader {
 
 // ==================== UI管理器 ====================
 class UIManager {
-    constructor(state) {
+    constructor(state, cloudStorage) {
         this.state = state;
+        this.cloudStorage = cloudStorage;
         
         this.elements = {
             displayImage: document.getElementById('displayImage'),
@@ -223,29 +203,24 @@ class UIManager {
     }
 
     bindEvents() {
-        // 评分按钮
         this.elements.ratingButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 this.selectRating(parseInt(btn.dataset.score));
             });
         });
 
-        // 导航按钮
         this.elements.nextBtn.addEventListener('click', () => this.nextPair());
         this.elements.prevBtn.addEventListener('click', () => this.prevPair());
 
-        // 图片导航按钮
         this.elements.prevImageBtn.addEventListener('click', () => this.prevImage());
         this.elements.nextImageBtn.addEventListener('click', () => this.nextImage());
 
-        // CSV下载按钮
         if (this.elements.downloadCsvBtn) {
             this.elements.downloadCsvBtn.addEventListener('click', () => {
                 window.app.downloadCSV();
             });
         }
 
-        // 键盘快捷键
         document.addEventListener('keydown', (e) => {
             if (e.key >= '1' && e.key <= '4') {
                 this.selectRating(parseInt(e.key));
@@ -276,28 +251,23 @@ class UIManager {
         const totalCases = this.state.data.length;
         this.elements.caseProgressContainer.innerHTML = '';
 
-        // 显示所有进度球，不分页
         for (let i = 0; i < totalCases; i++) {
             const ball = document.createElement('div');
             ball.className = 'case-progress-item';
             ball.textContent = i + 1;
             ball.title = `病例 ${i + 1}`;
 
-            // 已评分的标记
             if (this.state.getRating(i)) {
                 ball.classList.add('rated');
             }
 
-            // 当前病例标记
             if (i === this.state.currentIndex) {
                 ball.classList.add('active');
-                // 滚动到当前病例
                 setTimeout(() => {
                     ball.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 }, 100);
             }
 
-            // 点击跳转
             ball.addEventListener('click', () => {
                 this.jumpToCase(i);
             });
@@ -321,15 +291,12 @@ class UIManager {
             return;
         }
 
-        // 显示图片
         this.displayImages(pair.image_paths);
 
-        // 显示文本
         if (this.elements.displayText) {
             this.elements.displayText.textContent = pair.prompt;
         }
 
-        // 更新计数器
         if (this.elements.currentIndex) {
             this.elements.currentIndex.textContent = this.state.currentIndex + 1;
         }
@@ -337,13 +304,9 @@ class UIManager {
             this.elements.totalItems.textContent = this.state.data.length;
         }
 
-        // 更新进度条
         this.updateProgress();
-
-        // 更新进度球
         this.renderProgressBalls();
 
-        // 恢复评分
         const savedRating = this.state.getRating(this.state.currentIndex);
         if (savedRating) {
             this.selectRating(savedRating.score, false);
@@ -351,7 +314,6 @@ class UIManager {
             this.clearRatingSelection();
         }
 
-        // 更新按钮状态
         this.elements.prevBtn.disabled = this.state.currentIndex === 0;
     }
 
@@ -360,12 +322,10 @@ class UIManager {
 
         const currentImagePath = imagePaths[this.state.currentImageIndex];
         
-        // 显示主图片
         if (this.elements.displayImage) {
             this.elements.displayImage.src = DataLoader.convertPath(currentImagePath);
         }
 
-        // 更新图片计数
         if (this.elements.imageCount) {
             this.elements.imageCount.textContent = `(${imagePaths.length}张)`;
         }
@@ -377,7 +337,6 @@ class UIManager {
             this.elements.totalImages.textContent = imagePaths.length;
         }
 
-        // 更新导航按钮
         if (this.elements.prevImageBtn) {
             this.elements.prevImageBtn.disabled = this.state.currentImageIndex === 0;
         }
@@ -385,13 +344,11 @@ class UIManager {
             this.elements.nextImageBtn.disabled = this.state.currentImageIndex === imagePaths.length - 1;
         }
 
-        // 显示或隐藏导航区域
         const showNav = imagePaths.length > 1;
         if (this.elements.imageNavigation) {
             this.elements.imageNavigation.style.display = showNav ? 'flex' : 'none';
         }
 
-        // 显示缩略图
         this.displayThumbnails(imagePaths);
     }
 
@@ -437,7 +394,7 @@ class UIManager {
         }
     }
 
-    selectRating(score, saveRating = true) {
+    async selectRating(score, saveRating = true) {
         this.clearRatingSelection();
         
         const selectedBtn = Array.from(this.elements.ratingButtons)
@@ -451,7 +408,13 @@ class UIManager {
         if (saveRating) {
             this.state.setRating(this.state.currentIndex, score);
             this.state.saveToStorage();
-            // 更新进度球显示
+            
+            // 云同步
+            if (CONFIG.cloudSync.enabled && CONFIG.cloudSync.autoSync) {
+                const pair = this.state.getCurrentPair();
+                await this.cloudStorage.syncRating(this.state.currentIndex, score, pair.prompt);
+            }
+            
             this.renderProgressBalls();
         }
         
@@ -492,14 +455,6 @@ class UIManager {
         this.elements.progressFill.style.width = `${progress}%`;
     }
 
-    saveProgress() {
-        if (this.state.saveToStorage()) {
-            this.showNotification('进度已保存！', 'success');
-        } else {
-            this.showNotification('保存失败，请重试', 'error');
-        }
-    }
-
     showNotification(message, type = 'success') {
         const notification = document.createElement('div');
         notification.className = 'notification';
@@ -522,7 +477,6 @@ class UIManager {
                 <div class="action-buttons">
                     <button class="btn btn-success" onclick="app.downloadCSV()">下载CSV结果</button>
                     <button class="btn btn-info" onclick="app.downloadJSON()">下载JSON结果</button>
-                    ${CONFIG.cloudSync.enabled ? '<button class="btn btn-primary" onclick="app.syncToCloud()">同步到云端</button>' : ''}
                     <button class="btn btn-secondary" onclick="app.restart()">重新开始</button>
                 </div>
             </div>
@@ -589,8 +543,8 @@ class ExportManager {
 class RatingApp {
     constructor() {
         this.state = new RatingState();
-        this.ui = null;
         this.cloudStorage = new CloudStorage(CONFIG.cloudSync);
+        this.ui = null;
     }
 
     async init() {
@@ -629,7 +583,7 @@ class RatingApp {
                 }
             }
 
-            this.ui = new UIManager(this.state);
+            this.ui = new UIManager(this.state, this.cloudStorage);
             this.ui.init();
 
         } catch (error) {
@@ -659,16 +613,6 @@ class RatingApp {
         const filename = `medical_rating_results_${Date.now()}.json`;
         ExportManager.download(json, filename, 'application/json');
         this.ui.showNotification('JSON文件已下载！', 'success');
-    }
-
-    async syncToCloud() {
-        this.ui.showNotification('正在同步到云端...', 'success');
-        const success = await this.cloudStorage.syncToCloud(this.state);
-        if (success) {
-            this.ui.showNotification('云同步成功！', 'success');
-        } else {
-            this.ui.showNotification('云同步失败，请检查配置', 'error');
-        }
     }
 
     restart() {
