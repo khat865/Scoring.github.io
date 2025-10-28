@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="top-bar">
+        <h1>图文相似度评分</h1>
+        <button class="btn btn-small btn-info" id="downloadCsvBtn">下载CSV</button>
+    </div>
     <div class="container">
         <div class="header">
-            <h1>图文相似度评分</h1>
             <p>请根据图片和Prompt描述的相似度进行评分 (1-4分)</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
@@ -18,13 +21,11 @@
                 <span id="currentIndex">0</span> / <span id="totalItems">0</span>
             </p>
         </div>
-
         <div class="content" id="mainContent">
             <div class="pair-container">
                 <div class="image-section">
                     <div class="section-title">
-                        图片 
-                        <span class="image-count" id="imageCount"></span>
+                        图片 <span class="image-count" id="imageCount"></span>
                     </div>
                     <div class="image-gallery">
                         <div class="main-image-container" id="mainImageContainer">
@@ -37,19 +38,14 @@
                             </span>
                             <button class="nav-btn" id="nextImageBtn">▶</button>
                         </div>
-                        <div class="thumbnail-container" id="thumbnailContainer">
-                            <!-- 缩略图将动态加载 -->
-                        </div>
+                        <div class="thumbnail-container" id="thumbnailContainer"></div>
                     </div>
                 </div>
                 <div class="text-section">
                     <div class="section-title">描述</div>
-                    <div class="text-content" id="displayText">
-                        正在加载数据...
-                    </div>
+                    <div class="text-content" id="displayText">正在加载数据...</div>
                 </div>
             </div>
-
             <div class="rating-section">
                 <div class="rating-title">相似度评分</div>
                 <div class="rating-buttons" id="ratingButtons">
@@ -63,15 +59,13 @@
                     <span>非常相似</span>
                 </div>
             </div>
-
+            <div class="case-progress-container" id="caseProgressContainer"></div>
             <div class="action-buttons">
                 <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
                 <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
-                <button class="btn btn-info" id="downloadBtn">下载结果 (CSV)</button>
             </div>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
