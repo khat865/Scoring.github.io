@@ -636,3 +636,43 @@ window.addEventListener('load', () => {
         });
     };
 })();
+
+
+
+// Override renderProgressBar with windowed rendering if not found earlier
+UIManager.prototype.renderProgressBar = function(){
+    const container = this.el.caseProgressContainer;
+    container.innerHTML = '';
+    const total = this.state.data.length;
+    const WIN = 33;
+    const slider = document.getElementById('caseWindowSlider');
+    let start = 0;
+    if(slider){
+        const maxStart = Math.max(0, total - WIN);
+        start = Math.min(maxStart, Math.max(0, (parseInt(slider.value,10)-1) )) || 0;
+    } else {
+        const half = Math.floor(WIN/2);
+        start = Math.max(0, Math.min(total - WIN, this.state.currentIndex - half));
+    }
+    const end = Math.min(total, start + WIN);
+    for(let i = start; i < end; i++){
+        const div = document.createElement('div');
+        div.className = 'case-progress-item';
+        div.textContent = i + 1;
+        const rating = this.state.getRating(i);
+        if(typeof rating === 'number') div.classList.add('rated');
+        if(i === this.state.currentIndex) div.classList.add('active');
+        div.addEventListener('click', ()=>{
+            this.state.currentIndex = i;
+            this.displayCurrentPair();
+            this.state.save();
+        });
+        container.appendChild(div);
+    }
+    if(slider){
+        const maxStart = Math.max(1, total - WIN + 1);
+        slider.min = 1;
+        slider.max = maxStart;
+        slider.value = Math.min(maxStart, start + 1);
+    }
+};

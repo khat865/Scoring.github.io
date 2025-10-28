@@ -438,3 +438,11 @@ body {
 .case-progress-item { min-width:26px; height:26px; line-height:26px; border-radius:50%; text-align:center; font-size:12px; cursor:pointer; border:1px solid #ccc; background:#f2f2f2; user-select:none; }
 .case-progress-item.rated { background:#4ea6e0; color:#fff; }
 .case-progress-item.active { border:2px solid #2f6ce5; }
+
+
+
+/* Window slider for controlling which chunk of progress balls are shown */
+#caseWindowSlider { -webkit-appearance: none; height: 6px; background: #e6e6e6; border-radius: 4px; margin-top:6px; }
+#caseWindowSlider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: #2f6ce5; border-radius: 50%; cursor: pointer; border: 2px solid #fff; box-shadow: 0 0 2px rgba(0,0,0,0.3); }
+.case-progress-window { display:flex; gap:4px; align-items:center; }
+.case-progress-item { flex: 0 0 auto; }
