@@ -5,9 +5,9 @@ const CONFIG = {
     batchSize: 50,
     // Google Sheets 云存储配置
     cloudSync: {
-        enabled: true,  // 设置为 true 启用云同步
-        sheetId: '1fsl_V3YM5fLqeuWjXLPApsp6SmuqbBmaWQa5eOtMRwg',     // 你的 Google Sheets ID
-        apiKey: 'AIzaSyBOvZ5Xf2k_iVcMC5wRSdsxb-yi1sdH8kA',      // 你的 Google API Key
+        enabled: false,  // 设置为 true 启用云同步
+        sheetId: '',     // 你的 Google Sheets ID
+        apiKey: '',      // 你的 Google API Key
         range: 'Sheet1!A:E'  // 数据范围
     }
 };
@@ -211,12 +211,10 @@ class UIManager {
             thumbnailContainer: document.getElementById('thumbnailContainer'),
             prevBtn: document.getElementById('prevBtn'),
             nextBtn: document.getElementById('nextBtn'),
-            saveProgressBtn: document.getElementById('saveProgressBtn'),
             mainContent: document.getElementById('mainContent'),
             ratingButtons: document.querySelectorAll('.rating-btn'),
             caseProgressContainer: document.getElementById('caseProgressContainer'),
-            downloadCsvBtn: document.getElementById('downloadCsvBtn'),
-            syncBtn: document.getElementById('syncBtn')
+            downloadCsvBtn: document.getElementById('downloadCsvBtn')
         };
 
         if (this.elements.nextBtn && this.elements.prevBtn) {
@@ -235,7 +233,6 @@ class UIManager {
         // 导航按钮
         this.elements.nextBtn.addEventListener('click', () => this.nextPair());
         this.elements.prevBtn.addEventListener('click', () => this.prevPair());
-        this.elements.saveProgressBtn.addEventListener('click', () => this.saveProgress());
 
         // 图片导航按钮
         this.elements.prevImageBtn.addEventListener('click', () => this.prevImage());
@@ -245,14 +242,6 @@ class UIManager {
         if (this.elements.downloadCsvBtn) {
             this.elements.downloadCsvBtn.addEventListener('click', () => {
                 window.app.downloadCSV();
-            });
-        }
-
-        // 云同步按钮
-        if (this.elements.syncBtn && CONFIG.cloudSync.enabled) {
-            this.elements.syncBtn.style.display = 'inline-block';
-            this.elements.syncBtn.addEventListener('click', () => {
-                window.app.syncToCloud();
             });
         }
 
@@ -268,8 +257,6 @@ class UIManager {
                 if (!this.elements.prevBtn.disabled) {
                     this.prevPair();
                 }
-            } else if (e.key === 's' || e.key === 'S') {
-                this.saveProgress();
             }
         });
     }
