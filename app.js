@@ -150,7 +150,10 @@ class UIManager {
             ratingButtons: document.querySelectorAll('.rating-btn')
         };
 
-        this.bindEvents();
+        // 只在元素存在时绑定事件
+        if (this.elements.nextBtn && this.elements.prevBtn) {
+            this.bindEvents();
+        }
     }
 
     bindEvents() {
@@ -473,8 +476,15 @@ class RatingApp {
     async init() {
         try {
             // 显示加载界面
-            const tempUI = new UIManager(this.state);
-            tempUI.showLoading();
+            const mainContent = document.getElementById('mainContent');
+            if (mainContent) {
+                mainContent.innerHTML = `
+                    <div class="loading-message">
+                        <h2>正在加载医学数据...</h2>
+                        <p>请稍候</p>
+                    </div>
+                `;
+            }
 
             // 加载数据
             this.state.data = await DataLoader.loadData();
@@ -502,8 +512,18 @@ class RatingApp {
 
         } catch (error) {
             console.error('初始化失败:', error);
-            const tempUI = new UIManager(this.state);
-            tempUI.showError(error);
+            // 直接显示错误，不创建新的UIManager
+            const mainContent = document.getElementById('mainContent');
+            if (mainContent) {
+                mainContent.innerHTML = `
+                    <div class="error-message">
+                        <h2>❌ 加载失败</h2>
+                        <p>${error.message}</p>
+                        <p>请确保 medical_data.json 文件存在且格式正确</p>
+                        <button class="btn btn-primary" onclick="location.reload()">重新加载</button>
+                    </div>
+                `;
+            }
         }
     }
 
