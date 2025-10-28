@@ -5,7 +5,7 @@ const CONFIG = {
     batchSize: 50,
     // Google Sheets 云存储配置
     cloudSync: {
-        enabled: false,  // 设置为 true 启用云同步
+        enabled: true,  // 设置为 true 启用云同步
         sheetId: '',     // 你的 Google Sheets ID
         apiKey: '',      // 你的 Google API Key
         range: 'Sheet1!A:E'  // 数据范围
