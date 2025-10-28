@@ -1,15 +1,30 @@
 #!/usr/bin/env python3
 """
-医学数据处理工具
-处理包含多张图片的医学评分数据
+医学数据处理工具 - 改进版
+支持添加PMID或唯一ID避免文件名冲突
 """
 
 import json
 import os
 import shutil
 from pathlib import Path
+import hashlib
 
-def process_medical_data(input_file='your_data.json', output_file='medical_data.json', copy_images=True):
+def extract_pmid_from_path(path):
+    """
+    从路径中提取PMID
+    例如: E:/medical/.../38865572/images/figure.jpg -> 38865572
+    """
+    parts = Path(path).parts
+    for part in parts:
+        # 查找像PMID的数字（通常是8位数字）
+        if part.isdigit() and len(part) >= 6:
+            return part
+    return None
+
+
+def process_medical_data(input_file='your_data.json', output_file='medical_data.json', 
+                         copy_images=True, add_prefix=True):
     """
     处理医学数据并复制图片到项目目录
     
@@ -17,9 +32,10 @@ def process_medical_data(input_file='your_data.json', output_file='medical_data.
         input_file: 输入的原始数据文件
         output_file: 输出的处理后数据文件
         copy_images: 是否复制图片到项目images目录
+        add_prefix: 是否添加前缀避免重名（PMID或索引）
     """
     print("=" * 60)
-    print("医学数据处理工具")
+    print("医学数据处理工具 - 改进版")
     print("=" * 60)
     
     # 读取原始数据
@@ -47,8 +63,11 @@ def process_medical_data(input_file='your_data.json', output_file='medical_data.
     total_images = 0
     copied_images = 0
     missing_images = []
+    renamed_map = {}  # 记录重命名映射
     
     print(f"\n🔄 开始处理数据...")
+    if add_prefix:
+        print("✓ 启用前缀模式，避免文件名冲突")
     
     for idx, item in enumerate(data, 1):
         if 'image_paths' not in item or 'prompt' not in item:
@@ -57,39 +76,70 @@ def process_medical_data(input_file='your_data.json', output_file='medical_data.
         
         new_image_paths = []
         
+        # 尝试从第一个图片路径提取PMID
+        pmid = None
+        if item['image_paths'] and add_prefix:
+            pmid = extract_pmid_from_path(item['image_paths'][0])
+        
+        # 如果没有找到PMID，使用索引
+        if not pmid and add_prefix:
+            pmid = f"case{idx:04d}"
+        
         for img_path in item['image_paths']:
             total_images += 1
             
             if copy_images:
-                # 提取文件名
                 src_path = Path(img_path)
                 
                 if not src_path.exists():
                     print(f"⚠️  图片不存在: {img_path}")
                     missing_images.append(img_path)
-                    # 仍然保留原路径，让用户知道
-                    new_image_paths.append(f"images/{src_path.name}")
+                    # 仍然生成目标路径
+                    if add_prefix:
+                        new_filename = f"{pmid}_{src_path.name}"
+                    else:
+                        new_filename = src_path.name
+                    new_image_paths.append(f"images/{new_filename}")
                     continue
                 
-                # 复制到images目录
-                dst_path = images_dir / src_path.name
+                # 生成新的文件名
+                if add_prefix:
+                    new_filename = f"{pmid}_{src_path.name}"
+                else:
+                    new_filename = src_path.name
+                
+                dst_path = images_dir / new_filename
+                
+                # 记录重命名
+                if src_path.name != new_filename:
+                    renamed_map[str(src_path)] = new_filename
                 
                 try:
                     shutil.copy2(src_path, dst_path)
                     copied_images += 1
-                    new_image_paths.append(f"images/{src_path.name}")
+                    new_image_paths.append(f"images/{new_filename}")
                 except Exception as e:
                     print(f"❌ 复制失败 {src_path.name}: {e}")
                     new_image_paths.append(img_path)
             else:
-                # 不复制图片，转换路径格式
+                # 不复制图片，只转换路径格式
                 filename = Path(img_path).name
-                new_image_paths.append(f"images/{filename}")
+                if add_prefix:
+                    new_filename = f"{pmid}_{filename}"
+                else:
+                    new_filename = filename
+                new_image_paths.append(f"images/{new_filename}")
         
         processed_item = {
             'image_paths': new_image_paths,
             'prompt': item['prompt']
         }
+        
+        # 保留PMID信息（可选）
+        if pmid and pmid.startswith('case'):
+            processed_item['case_id'] = pmid
+        elif pmid:
+            processed_item['pmid'] = pmid
         
         processed_data.append(processed_item)
         
@@ -110,6 +160,8 @@ def process_medical_data(input_file='your_data.json', output_file='medical_data.
     
     if copy_images:
         print(f"✓ 成功复制图片: {copied_images}")
+        if add_prefix:
+            print(f"✓ 添加前缀避免重名: {len(renamed_map)} 个文件")
         if missing_images:
             print(f"⚠️  缺失图片: {len(missing_images)}")
             print(f"\n缺失图片列表保存到: missing_images.txt")
@@ -117,19 +169,63 @@ def process_medical_data(input_file='your_data.json', output_file='medical_data.
                 for img in missing_images:
                     f.write(f"{img}\n")
     
+    if renamed_map and copy_images:
+        print(f"\n✓ 重命名映射保存到: renamed_files.txt")
+        with open('renamed_files.txt', 'w', encoding='utf-8') as f:
+            f.write("原始路径 -> 新文件名\n")
+            f.write("=" * 80 + "\n")
+            for orig, new in renamed_map.items():
+                f.write(f"{orig}\n  -> {new}\n\n")
+    
     print(f"\n✓ 输出文件: {output_file}")
     print("=" * 60)
     
     return True
 
 
-def create_web_friendly_paths(input_file='your_data.json', output_file='medical_data.json'):
-    """
-    只转换路径，不复制图片
-    适用于图片已经在正确位置的情况
-    """
-    print("转换路径格式（不复制图片）...")
-    return process_medical_data(input_file, output_file, copy_images=False)
+def check_duplicates(input_file='your_data.json'):
+    """检查数据中是否有重复的图片文件名"""
+    print("\n" + "=" * 60)
+    print("检查重复文件名")
+    print("=" * 60)
+    
+    try:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"❌ 读取文件失败: {e}")
+        return
+    
+    all_filenames = []
+    for item in data:
+        if 'image_paths' in item:
+            for path in item['image_paths']:
+                filename = Path(path).name
+                all_filenames.append(filename)
+    
+    # 统计重复
+    from collections import Counter
+    filename_counts = Counter(all_filenames)
+    duplicates = {name: count for name, count in filename_counts.items() if count > 1}
+    
+    print(f"\n总文件数: {len(all_filenames)}")
+    print(f"唯一文件名: {len(filename_counts)}")
+    print(f"重复文件名: {len(duplicates)}")
+    
+    if duplicates:
+        print(f"\n⚠️  发现 {len(duplicates)} 个重复的文件名:")
+        print("-" * 60)
+        for name, count in sorted(duplicates.items(), key=lambda x: x[1], reverse=True)[:20]:
+            print(f"  {name}: 出现 {count} 次")
+        if len(duplicates) > 20:
+            print(f"  ... 还有 {len(duplicates)-20} 个重复文件名")
+        
+        print(f"\n💡 建议: 使用 'process' 命令并启用前缀模式")
+        print("   python medical_data_tools.py process your_data.json")
+    else:
+        print("\n✓ 没有发现重复的文件名")
+    
+    print("=" * 60)
 
 
 def validate_medical_data(data_file='medical_data.json'):
@@ -156,7 +252,6 @@ def validate_medical_data(data_file='medical_data.json'):
     
     total_images = 0
     for idx, item in enumerate(data, 1):
-        # 检查必需字段
         if 'image_paths' not in item:
             errors.append(f"病例 {idx}: 缺少 'image_paths' 字段")
         elif not isinstance(item['image_paths'], list):
@@ -172,7 +267,8 @@ def validate_medical_data(data_file='medical_data.json'):
             errors.append(f"病例 {idx}: 'prompt' 应该是字符串")
     
     print(f"  总图片数: {total_images}")
-    print(f"  平均每病例图片数: {total_images/len(data):.1f}")
+    if len(data) > 0:
+        print(f"  平均每病例图片数: {total_images/len(data):.1f}")
     
     if errors:
         print(f"\n❌ 发现 {len(errors)} 个错误:")
@@ -206,13 +302,16 @@ def create_sample_medical_data(num_cases=5, output_file='medical_data.json'):
     
     data = []
     for i in range(num_cases):
+        # 使用PMID风格的ID
+        pmid = f"{30000000 + i}"
         item = {
             "image_paths": [
-                f"images/case_{i+1:03d}_img1.jpg",
-                f"images/case_{i+1:03d}_img2.jpg",
-                f"images/case_{i+1:03d}_img3.jpg"
+                f"images/{pmid}_figure_01.jpg",
+                f"images/{pmid}_figure_02.jpg",
+                f"images/{pmid}_figure_03.jpg"
             ],
-            "prompt": sample_prompts[i % len(sample_prompts)]
+            "prompt": sample_prompts[i % len(sample_prompts)],
+            "pmid": pmid
         }
         data.append(item)
     
@@ -221,29 +320,7 @@ def create_sample_medical_data(num_cases=5, output_file='medical_data.json'):
     
     print(f"✓ 示例数据已创建: {output_file}")
     print(f"✓ 包含 {num_cases} 个病例，每个病例 3 张图片")
-
-
-def extract_unique_images(input_file='your_data.json'):
-    """提取所有唯一的图片路径"""
-    print("\n提取所有图片路径...")
-    
-    with open(input_file, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    
-    all_images = set()
-    for item in data:
-        if 'image_paths' in item:
-            for img in item['image_paths']:
-                all_images.add(img)
-    
-    output_file = 'all_image_paths.txt'
-    with open(output_file, 'w', encoding='utf-8') as f:
-        for img in sorted(all_images):
-            f.write(f"{img}\n")
-    
-    print(f"✓ 提取完成")
-    print(f"✓ 总图片数: {len(all_images)}")
-    print(f"✓ 路径列表保存到: {output_file}")
+    print(f"✓ 图片文件名已添加PMID前缀避免冲突")
 
 
 def main():
@@ -251,23 +328,21 @@ def main():
     
     if len(sys.argv) < 2:
         print("=" * 60)
-        print("医学数据处理工具")
+        print("医学数据处理工具 - 改进版")
         print("=" * 60)
         print("\n使用方法:")
         print("  python medical_data_tools.py process <输入文件> [输出文件]")
-        print("    - 处理数据并复制图片到images目录")
-        print("\n  python medical_data_tools.py convert <输入文件> [输出文件]")
-        print("    - 只转换路径格式，不复制图片")
+        print("    - 处理数据并复制图片，自动添加PMID前缀避免重名")
+        print("\n  python medical_data_tools.py check <输入文件>")
+        print("    - 检查是否有重复的文件名")
         print("\n  python medical_data_tools.py validate [数据文件]")
         print("    - 验证数据格式")
         print("\n  python medical_data_tools.py sample [数量]")
         print("    - 创建示例数据")
-        print("\n  python medical_data_tools.py extract <输入文件>")
-        print("    - 提取所有图片路径到文本文件")
         print("\n示例:")
+        print("  python medical_data_tools.py check your_data.json")
         print("  python medical_data_tools.py process your_data.json")
         print("  python medical_data_tools.py validate medical_data.json")
-        print("  python medical_data_tools.py sample 10")
         print("=" * 60)
         return
     
@@ -276,12 +351,11 @@ def main():
     if command == 'process':
         input_file = sys.argv[2] if len(sys.argv) > 2 else 'your_data.json'
         output_file = sys.argv[3] if len(sys.argv) > 3 else 'medical_data.json'
-        process_medical_data(input_file, output_file, copy_images=True)
+        process_medical_data(input_file, output_file, copy_images=True, add_prefix=True)
     
-    elif command == 'convert':
+    elif command == 'check':
         input_file = sys.argv[2] if len(sys.argv) > 2 else 'your_data.json'
-        output_file = sys.argv[3] if len(sys.argv) > 3 else 'medical_data.json'
-        create_web_friendly_paths(input_file, output_file)
+        check_duplicates(input_file)
     
     elif command == 'validate':
         data_file = sys.argv[2] if len(sys.argv) > 2 else 'medical_data.json'
@@ -291,12 +365,9 @@ def main():
         num_cases = int(sys.argv[2]) if len(sys.argv) > 2 else 5
         create_sample_medical_data(num_cases)
     
-    elif command == 'extract':
-        input_file = sys.argv[2] if len(sys.argv) > 2 else 'your_data.json'
-        extract_unique_images(input_file)
-    
     else:
         print(f"❌ 未知命令: {command}")
+        print("运行 'python medical_data_tools.py' 查看帮助")
 
 
 if __name__ == '__main__':
