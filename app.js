@@ -1,7 +1,6 @@
 // ==================== 配置 ====================
 const CONFIG = {
     dataFile: 'medical_data.json',  // 医学数据文件路径
-    storageKey: 'medicalRatingProgress',
     batchSize: 50
 };
 
@@ -13,44 +12,23 @@ class RatingState {
         this.currentImageIndex = 0;  // 当前显示的图片索引
         this.ratings = [];
         this.currentRating = null;
-        this.startTime = null;
-    }
-
-    loadFromStorage() {
-        try {
-            const saved = localStorage.getItem(CONFIG.storageKey);
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                this.currentIndex = parsed.currentIndex || 0;
-                this.ratings = parsed.ratings || [];
-                this.startTime = parsed.startTime || new Date().toISOString();
-                return true;
-            }
-        } catch (error) {
-            console.error('加载进度失败:', error);
-        }
         this.startTime = new Date().toISOString();
-        return false;
+        // 小数据库：记录每次评分（会覆盖同一 case 的记录）
+        this.records = [];
     }
 
-    saveToStorage() {
-        try {
-            const saveData = {
-                currentIndex: this.currentIndex,
-                ratings: this.ratings,
-                startTime: this.startTime,
-                lastSaved: new Date().toISOString()
-            };
-            localStorage.setItem(CONFIG.storageKey, JSON.stringify(saveData));
-            return true;
-        } catch (error) {
-            console.error('保存进度失败:', error);
-            return false;
+    // 记录或更新一项（按 index 唯一）
+    setRecord(index, recordObj) {
+        const existingIdx = this.records.findIndex(r => r.index === index);
+        if (existingIdx >= 0) {
+            this.records[existingIdx] = { ...this.records[existingIdx], ...recordObj };
+        } else {
+            this.records.push({ index, ...recordObj });
         }
     }
 
-    clearStorage() {
-        localStorage.removeItem(CONFIG.storageKey);
+    getRecord(index) {
+        return this.records.find(r => r.index === index);
     }
 
     setRating(index, score) {
@@ -113,16 +91,27 @@ class DataLoader {
         }
     }
 
-    // 将Windows路径转换为可用的URL
-    static convertPath(windowsPath) {
-        // 如果已经是URL，直接返回
-        if (windowsPath.startsWith('http://') || windowsPath.startsWith('https://')) {
-            return windowsPath;
+    // 将路径转换为页面可用 URL，并把形如 "images/38865572_full_text_figure_10.jpg"
+    // 转换为 "images/38865572/full_text_figure_10.jpg"
+    static convertPath(rawPath) {
+        // 如果已经是 URL，直接返回
+        if (typeof rawPath !== 'string') return rawPath;
+        if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) {
+            return rawPath;
         }
-        
-        // 对于本地路径，需要通过服务器访问
-        // 假设图片都放在项目的 images 目录下
-        const filename = windowsPath.split('\\').pop().split('/').pop();
+
+        // 取出文件名（去掉可能的目录）
+        const filename = rawPath.split('\\').pop().split('/').pop();
+
+        // 尝试匹配以数字开头，后接下划线的模式： "<digits>_<rest>"
+        const m = filename.match(/^(\d+)[_\-](.+)$/);
+        if (m) {
+            const id = m[1];
+            const rest = m[2];
+            return `images/${id}/${rest}`;
+        }
+
+        // 如果不匹配上述模式，就按原始 filename 放在 images 目录下
         return `images/${filename}`;
     }
 }
@@ -145,12 +134,11 @@ class UIManager {
             thumbnailContainer: document.getElementById('thumbnailContainer'),
             prevBtn: document.getElementById('prevBtn'),
             nextBtn: document.getElementById('nextBtn'),
-            saveProgressBtn: document.getElementById('saveProgressBtn'),
+            downloadBtn: document.getElementById('downloadBtn'),
             mainContent: document.getElementById('mainContent'),
             ratingButtons: document.querySelectorAll('.rating-btn')
         };
 
-        // 只在元素存在时绑定事件
         if (this.elements.nextBtn && this.elements.prevBtn) {
             this.bindEvents();
         }
@@ -167,7 +155,9 @@ class UIManager {
         // 导航按钮
         this.elements.nextBtn.addEventListener('click', () => this.nextPair());
         this.elements.prevBtn.addEventListener('click', () => this.prevPair());
-        this.elements.saveProgressBtn.addEventListener('click', () => this.saveProgress());
+        this.elements.downloadBtn.addEventListener('click', () => {
+            if (app) app.downloadCSV();
+        });
 
         // 图片导航按钮
         this.elements.prevImageBtn.addEventListener('click', () => this.prevImage());
@@ -291,7 +281,7 @@ class UIManager {
         }
     }
 
-    selectRating(score, saveRating = true) {
+    selectRating(score, saveRecord = true) {
         // 清除所有选中状态
         this.elements.ratingButtons.forEach(btn => {
             btn.classList.remove('selected');
@@ -306,9 +296,19 @@ class UIManager {
         
         this.state.currentRating = score;
         
-        if (saveRating) {
-            this.state.setRating(this.state.currentIndex, score);
-            this.state.saveToStorage();
+        // 保存评分到内存（不再使用 localStorage）
+        this.state.setRating(this.state.currentIndex, score);
+
+        if (saveRecord) {
+            const item = this.state.data[this.state.currentIndex];
+            const convertedPaths = (item.image_paths || []).map(p => DataLoader.convertPath(p));
+            this.state.setRecord(this.state.currentIndex, {
+                caseIndex: this.state.currentIndex + 1,
+                prompt: item.prompt,
+                image_paths: convertedPaths,
+                rating: score,
+                timestamp: new Date().toISOString()
+            });
         }
         
         this.elements.nextBtn.disabled = false;
@@ -348,14 +348,6 @@ class UIManager {
     updateProgress() {
         const progress = (this.state.currentIndex / this.state.data.length) * 100;
         this.elements.progressFill.style.width = `${progress}%`;
-    }
-
-    saveProgress() {
-        if (this.state.saveToStorage()) {
-            this.showNotification('进度已保存！', 'success');
-        } else {
-            this.showNotification('保存失败，请重试', 'error');
-        }
     }
 
     showNotification(message, type = 'success') {
@@ -416,37 +408,30 @@ class UIManager {
 
 // ==================== 导出管理器 ====================
 class ExportManager {
-    static generateCSV(state) {
-        let csv = 'Index,Image_Paths,Prompt,Rating,Start_Time,Complete_Time\n';
-        
-        state.data.forEach((item, index) => {
-            const rating = state.ratings[index] || '';
-            const completeTime = new Date().toISOString();
-            const imagePaths = item.image_paths.join(';');  // 用分号分隔多个图片路径
-            const prompt = item.prompt.replace(/"/g, '""');
-            
-            csv += `${index + 1},"${imagePaths}","${prompt}",${rating},${state.startTime},${completeTime}\n`;
+    static generateCSVFromRecords(records) {
+        // 填表头
+        let csv = 'CaseIndex,Prompt,Image_Paths,Rating,Timestamp\n';
+        // 记录按 caseIndex 升序
+        const sorted = records.slice().sort((a,b) => a.caseIndex - b.caseIndex);
+        sorted.forEach(r => {
+            const imagePaths = (r.image_paths || []).join(';');
+            const prompt = (r.prompt || '').replace(/"/g, '""');
+            const rating = r.rating !== undefined ? r.rating : '';
+            const ts = r.timestamp || '';
+            csv += `${r.caseIndex},"${prompt}","${imagePaths}",${rating},${ts}\n`;
         });
-
         return csv;
     }
 
-    static generateJSON(state) {
-        const results = state.data.map((item, index) => ({
-            index: index + 1,
-            image_paths: item.image_paths,
-            prompt: item.prompt,
-            rating: state.ratings[index] || null
-        }));
-
+    static generateJSONFromRecords(records, state) {
         return JSON.stringify({
             metadata: {
                 totalItems: state.data.length,
-                ratedItems: state.getTotalRated(),
+                recordedItems: records.length,
                 startTime: state.startTime,
-                completeTime: new Date().toISOString()
+                exportTime: new Date().toISOString()
             },
-            results: results
+            results: records
         }, null, 2);
     }
 
@@ -497,23 +482,6 @@ class RatingApp {
                 mainContent.innerHTML = originalHTML;
             }
 
-            // 尝试加载保存的进度
-            const hasProgress = this.state.loadFromStorage();
-            
-            if (hasProgress) {
-                const resume = confirm(
-                    `检测到之前的进度（已完成 ${this.state.getTotalRated()} / ${this.state.data.length} 项）\n\n` +
-                    `是否继续之前的进度？\n\n` +
-                    `点击"确定"继续，点击"取消"重新开始`
-                );
-                
-                if (!resume) {
-                    this.state.currentIndex = 0;
-                    this.state.ratings = [];
-                    this.state.startTime = new Date().toISOString();
-                }
-            }
-
             // 初始化UI
             this.ui = new UIManager(this.state);
             this.ui.init();
@@ -534,21 +502,25 @@ class RatingApp {
         }
     }
 
+    // 以 CSV 下载当前 records（如果没有记录，则仍然会生成空 CSV）
     downloadCSV() {
-        const csv = ExportManager.generateCSV(this.state);
-        const filename = `medical_rating_results_${Date.now()}.csv`;
+        const csv = ExportManager.generateCSVFromRecords(this.state.records);
+        const filename = `medical_rating_records_${Date.now()}.csv`;
         ExportManager.download(csv, filename, 'text/csv');
     }
 
     downloadJSON() {
-        const json = ExportManager.generateJSON(this.state);
-        const filename = `medical_rating_results_${Date.now()}.json`;
+        const json = ExportManager.generateJSONFromRecords(this.state.records, this.state);
+        const filename = `medical_rating_records_${Date.now()}.json`;
         ExportManager.download(json, filename, 'application/json');
     }
 
     restart() {
-        if (confirm('确定要重新开始吗？当前进度将被清除。')) {
-            this.state.clearStorage();
+        if (confirm('确定要重新开始吗？当前内存中的记录将被清除。')) {
+            // 只清空内存记录并 reload 页面以重置状态
+            this.state.records = [];
+            this.state.ratings = [];
+            this.state.currentIndex = 0;
             location.reload();
         }
     }
