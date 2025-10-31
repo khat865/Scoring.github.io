@@ -20,15 +20,14 @@
                 <input type="text" id="googleSheetsUrlInput" placeholder="https://script.google.com/macros/s/..." />
                 <button class="btn btn-primary" id="saveConfigBtn">保存配置</button>
                 <button class="btn btn-info" id="submitAllBtn">批量提交所有数据</button>
-                <p class="config-hint">提示：将Google Apps Script部署为Web应用后，将URL粘贴到此处</p>
             </div>
         </div>
     </div>
     
     <div class="container">
         <div class="header">
-            <h1>图文相似度评分</h1>
-            <p>请完成以下三项评分任务</p>
+            <h1>Image-text similarity score</h1>
+            <p>Please complete the following three scoring tasks</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
@@ -40,13 +39,13 @@
         <div class="content" id="mainContent">
             <!-- 任务1: 图文相似度评分 -->
             <div class="task-section">
-                <div class="task-number">任务 1</div>
-                <div class="task-title">图文相似度评分 (1-7分)</div>
+                <div class="task-number">Task 1</div>
+                <div class="task-title">Image-text similarity score (1-7)</div>
                 
                 <div class="pair-container">
                     <div class="image-section">
                         <div class="section-title">
-                            图片 
+                            Image
                             <span class="image-count" id="imageCount"></span>
                         </div>
                         <div class="image-gallery">
@@ -66,9 +65,9 @@
                         </div>
                     </div>
                     <div class="text-section">
-                        <div class="section-title">描述</div>
+                        <div class="section-title">Diagnosis</div>
                         <div class="text-content" id="displayText">
-                            正在加载数据...
+                            Loading...
                         </div>
                     </div>
                 </div>
@@ -77,31 +76,31 @@
                     <div class="rating-buttons" id="ratingButtons1">
                         <button class="rating-btn" data-score="1">
                             <span class="score-num">1</span>
-                            <span class="score-label">完全不相关</span>
+                            <span class="score-label">Completely irrelevant</span>
                         </button>
                         <button class="rating-btn" data-score="2">
                             <span class="score-num">2</span>
-                            <span class="score-label">基本不相关</span>
+                            <span class="score-label">Barely relevant</span>
                         </button>
                         <button class="rating-btn" data-score="3">
                             <span class="score-num">3</span>
-                            <span class="score-label">略微相关</span>
+                            <span class="score-label">Slightly relevant</span>
                         </button>
                         <button class="rating-btn" data-score="4">
                             <span class="score-num">4</span>
-                            <span class="score-label">中等相关</span>
+                            <span class="score-label">Moderately relevant</span>
                         </button>
                         <button class="rating-btn" data-score="5">
                             <span class="score-num">5</span>
-                            <span class="score-label">比较相关</span>
+                            <span class="score-label">Somewhat relevant</span>
                         </button>
                         <button class="rating-btn" data-score="6">
                             <span class="score-num">6</span>
-                            <span class="score-label">非常相关</span>
+                            <span class="score-label">Very relevant</span>
                         </button>
                         <button class="rating-btn" data-score="7">
                             <span class="score-num">7</span>
-                            <span class="score-label">完全相关</span>
+                            <span class="score-label">Completely relevant</span>
                         </button>
                     </div>
                 </div>
@@ -112,21 +111,21 @@
 
             <!-- 任务2: 诊断相似度评分 -->
             <div class="task-section">
-                <div class="task-number">任务 2</div>
-                <div class="task-title">诊断相似度评分 (1-7分)</div>
+                <div class="task-number">Task 2</div>
+                <div class="task-title">Diagnosis similarity score (1-7)</div>
                 
                 <div class="diagnosis-comparison">
                     <div class="diagnosis-box predicted">
-                        <div class="diagnosis-label">诊断 1 </div>
+                        <div class="diagnosis-label">Diagnosis 1</div>
                         <div class="diagnosis-content" id="predictedDiagnosis">
-                            加载中...
+                            Loading...
                         </div>
                     </div>
                     <div class="vs-divider">VS</div>
                     <div class="diagnosis-box ground-truth">
-                        <div class="diagnosis-label">诊断 2</div>
+                        <div class="diagnosis-label">Diagnosis 2</div>
                         <div class="diagnosis-content" id="groundTruthDiagnosis">
-                            加载中...
+                            Loading...
                         </div>
                     </div>
                 </div>
@@ -135,31 +134,31 @@
                     <div class="rating-buttons" id="ratingButtons2">
                         <button class="rating-btn" data-score="1">
                             <span class="score-num">1</span>
-                            <span class="score-label">完全不同</span>
+                            <span class="score-label">Completely different</span>
                         </button>
                         <button class="rating-btn" data-score="2">
                             <span class="score-num">2</span>
-                            <span class="score-label">基本不同</span>
+                            <span class="score-label">Barely different</span>
                         </button>
                         <button class="rating-btn" data-score="3">
                             <span class="score-num">3</span>
-                            <span class="score-label">略微相似</span>
+                            <span class="score-label">Slightly different</span>
                         </button>
                         <button class="rating-btn" data-score="4">
                             <span class="score-num">4</span>
-                            <span class="score-label">中等相似</span>
+                            <span class="score-label">Moderately different</span>
                         </button>
                         <button class="rating-btn" data-score="5">
                             <span class="score-num">5</span>
-                            <span class="score-label">比较相似</span>
+                            <span class="score-label">Somewhat different</span>
                         </button>
                         <button class="rating-btn" data-score="6">
                             <span class="score-num">6</span>
-                            <span class="score-label">非常相似</span>
+                            <span class="score-label">Very similar</span>
                         </button>
                         <button class="rating-btn" data-score="7">
                             <span class="score-num">7</span>
-                            <span class="score-label">完全一致</span>
+                            <span class="score-label">Completely similar</span>
                         </button>
                     </div>
                 </div>
@@ -170,8 +169,8 @@
 
             <!-- 任务3: 鉴别诊断选择 -->
             <div class="task-section">
-                <div class="task-number">任务 3</div>
-                <div class="task-title">鉴别诊断相似度对比 - 请选择相似度更高的诊断对</div>
+                <div class="task-number">Task 3</div>
+                <div class="task-title">Diagnosis similarity comparison - Please select the more similar diagnosis pair</div>
                 
                 <!-- 两对诊断的对比 -->
                 <div class="pair-comparison-container">
@@ -180,15 +179,15 @@
                         <div class="pair-header">Pair A</div>
                         <div class="pair-content">
                             <div class="diag-item predicted-item">
-                                <div class="diag-item-label">诊断1</div>
+                                <div class="diag-item-label">Diagnosis 1</div>
                                 <div class="diag-item-content" id="task3_pairA_predicted">
-                                    加载中...
+                                    Loading...
                                 </div>
                             </div>
                             <div class="diag-item truth-item">
-                                <div class="diag-item-label">诊断2</div>
+                                <div class="diag-item-label">Diagnosis 2</div>
                                 <div class="diag-item-content" id="task3_pairA_truth">
-                                    加载中...
+                                    Loading...
                                 </div>
                             </div>
                         </div>
@@ -199,15 +198,15 @@
                         <div class="pair-header">Pair B</div>
                         <div class="pair-content">
                             <div class="diag-item predicted-item">
-                                <div class="diag-item-label">诊断1</div>
+                                <div class="diag-item-label">Diagnosis 1</div>
                                 <div class="diag-item-content" id="task3_pairB_predicted">
-                                    加载中...
+                                    Loading...
                                 </div>
                             </div>
                             <div class="diag-item truth-item">
-                                <div class="diag-item-label">诊断2</div>
+                                <div class="diag-item-label">Diagnosis 2</div>
                                 <div class="diag-item-content" id="task3_pairB_truth">
-                                    加载中...
+                                    Loading...
                                 </div>
                             </div>
                         </div>
@@ -216,8 +215,8 @@
 
                 <div class="rating-section">
                     <div class="choice-buttons">
-                        <button class="choice-btn-large" data-choice="A">选择 Pair A 相似度更高</button>
-                        <button class="choice-btn-large" data-choice="B">选择 Pair B 相似度更高</button>
+                        <button class="choice-btn-large" data-choice="A">The two diagnoses of Pair A are more similar.</button>
+                        <button class="choice-btn-large" data-choice="B">The two diagnoses of Pair B are more similar.</button>
                     </div>
                 </div>
             </div>
@@ -225,8 +224,8 @@
             <div class="case-progress-container" id="caseProgressContainer"></div>
             
             <div class="action-buttons">
-                <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
-                <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
+                <button class="btn btn-secondary" id="prevBtn">Previous Case</button>
+                <button class="btn btn-primary" id="nextBtn" disabled>Next Case</button>
             </div>
         </div>
 
@@ -234,18 +233,18 @@
         <div class="completion-page" id="completionPage" style="display: none;">
             <div class="completion-content">
                 <div class="completion-icon">🎉</div>
-                <h2 class="completion-title">恭喜完成所有评分！</h2>
-                <p class="completion-text">您已经完成了所有 <span id="totalCompletedCases">0</span> 个病例的评分</p>
+                <h2 class="completion-title">Congratulations on completing all ratings!</h2>
+                <p class="completion-text">You have completed a total of <span id="totalCompletedCases">0</span> cases.</p>
 
                 <div class="completion-actions">
                     <button class="btn btn-primary btn-large" id="downloadCsvBtnFinal">
-                        <span>📊</span> 下载 CSV 文件
+                        <span>📊</span> Download the CSV file
                     </button>
                     <button class="btn btn-info btn-large" id="downloadJsonBtn">
-                        <span>📄</span> 下载 JSON 文件
+                        <span>📄</span> Download the JSON file
                     </button>
                     <button class="btn btn-secondary btn-large" id="restartBtn">
-                        <span>🔄</span> 重新开始
+                        <span>🔄</span> Restart
                     </button>
                 </div>
             </div>
