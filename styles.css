@@ -593,30 +593,51 @@ body {
 /* 病例进度条样式 */
 .case-progress-container { 
     display: flex; 
-    gap: 8px; 
+    gap: 6px; 
     overflow-x: auto; 
-    padding: 15px 8px;
+    padding: 12px;
     margin: 25px 0 20px 0;
     background: white;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 2px solid #e9ecef;
-    justify-content: center;
-    flex-wrap: wrap;
+    scrollbar-width: thin;
+    scrollbar-color: #2193b0 #f1f1f1;
+}
+
+.case-progress-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.case-progress-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.case-progress-container::-webkit-scrollbar-thumb {
+    background: #2193b0;
+    border-radius: 4px;
+}
+
+.case-progress-container::-webkit-scrollbar-thumb:hover {
+    background: #1a7a96;
 }
 
 .case-progress-item { 
-    min-width: 32px; 
-    height: 32px; 
-    line-height: 32px; 
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%; 
-    text-align: center; 
-    font-size: 13px; 
+    font-size: 14px; 
     font-weight: 600;
     cursor: pointer; 
-    border: 2px solid #dee2e6; 
+    border: 2px solid #ccc; 
     background: white; 
+    color: #333;
     user-select: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 .case-progress-item:hover {
@@ -625,14 +646,14 @@ body {
 }
 
 .case-progress-item.rated { 
-    background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+    background: #4ea6e0;
     color: white;
-    border-color: #2193b0;
+    border-color: #4ea6e0;
 }
 
 .case-progress-item.active { 
-    border: 3px solid #ff6b6b;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+    border: 3px solid #f66;
+    box-shadow: 0 0 0 2px rgba(255, 102, 102, 0.3);
 }
 
 /* 响应式设计 */
@@ -702,15 +723,14 @@ body {
     }
     
     .case-progress-container {
-        padding: 10px 5px;
-        gap: 6px;
+        padding: 8px;
+        gap: 4px;
     }
     
     .case-progress-item {
-        min-width: 28px;
-        height: 28px;
-        line-height: 28px;
-        font-size: 11px;
+        min-width: 36px;
+        height: 36px;
+        font-size: 13px;
     }
 }
 

@@ -416,20 +416,11 @@ function renderCaseProgress() {
         
         if (index === state.currentIndex) {
             ball.classList.add('active');
-            // 滚动到当前激活的球
-            setTimeout(() => {
-                ball.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            }, 100);
         }
         
         // 点击跳转到对应病例
         ball.addEventListener('click', () => {
             if (index !== state.currentIndex) {
-                // 如果要跳转到后面的病例，检查当前病例是否完成
-                if (index > state.currentIndex && !isCurrentCaseCompleted()) {
-                    showNotification('请完成当前病例的所有任务后再跳转', 'warning');
-                    return;
-                }
                 loadCase(index);
                 window.scrollTo(0, 0);
             }
@@ -437,6 +428,14 @@ function renderCaseProgress() {
         
         container.appendChild(ball);
     });
+    
+    // 滚动到当前激活的球
+    const activeBall = container.querySelector('.case-progress-item.active');
+    if (activeBall) {
+        setTimeout(() => {
+            activeBall.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }, 100);
+    }
 }
 
 // 保存评分到localStorage
