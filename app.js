@@ -10,7 +10,7 @@ const state = {
         task3: {}  // 诊断排序选择
     },
     currentImageIndex: 0,
-    googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbzwnpjIH8dTo6HYkOIiD-opbxsJkg09tkSmnEAfqAkeL_ZuqR-Zilj6g_0mshPoslce/exec', // 在这里填入你的Google Apps Script Web App URL
+    googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbzYFpftuMZc4_otcdBc7bxnva68NHte8cGHqtJ51sRu1Fu3JQIyL3S4y_t7WCWh0mSU/exec', // 在这里填入你的Google Apps Script Web App URL
     submittedCases: new Set() // 记录已提交的病例，避免重复提交
 };
 
