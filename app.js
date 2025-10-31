@@ -294,6 +294,13 @@ function setRating(taskId, value) {
     
     // 更新进度条显示
     renderCaseProgress();
+
+    // 只有当前病例的所有三个任务都完成时，才检查是否全部完成
+    if (allCompleted) {
+        setTimeout(() => {
+            checkIfAllCompleted();
+        }, 100);
+    }
     
     // 显示通知
     const taskNames = {
@@ -902,15 +909,4 @@ setupEventListeners = function() {
     document.getElementById('downloadCsvBtnFinal').addEventListener('click', downloadCSV);
     document.getElementById('downloadJsonBtn').addEventListener('click', downloadJSON);
     document.getElementById('restartBtn').addEventListener('click', restartRating);
-};
-
-// 修改任务完成后的检查
-const originalSetRating = setRating;
-setRating = function(taskId, value) {
-    originalSetRating(taskId, value);
-    
-    // 检查是否完成所有评分
-    setTimeout(() => {
-        checkIfAllCompleted();
-    }, 500);
 };

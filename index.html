@@ -216,8 +216,8 @@
 
                 <div class="rating-section">
                     <div class="choice-buttons">
-                        <button class="choice-btn-large" data-choice="A">选择 对A 相似度更高</button>
-                        <button class="choice-btn-large" data-choice="B">选择 对B 相似度更高</button>
+                        <button class="choice-btn-large" data-choice="A">选择 Pair A 相似度更高</button>
+                        <button class="choice-btn-large" data-choice="B">选择 Pair B 相似度更高</button>
                     </div>
                 </div>
             </div>
@@ -225,6 +225,10 @@
             <div class="case-progress-container" id="caseProgressContainer"></div>
             
             <div class="action-buttons">
+                <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
+                <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
+            </div>
+        </div>
 
         <!-- 结束页面 -->
         <div class="completion-page" id="completionPage" style="display: none;">
@@ -232,21 +236,6 @@
                 <div class="completion-icon">🎉</div>
                 <h2 class="completion-title">恭喜完成所有评分！</h2>
                 <p class="completion-text">您已经完成了所有 <span id="totalCompletedCases">0</span> 个病例的评分</p>
-                
-                <div class="completion-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="task1AvgScore">-</div>
-                        <div class="stat-label">任务1平均分</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="task2AvgScore">-</div>
-                        <div class="stat-label">任务2平均分</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="task3AccuracyRate">-</div>
-                        <div class="stat-label">任务3准确率</div>
-                    </div>
-                </div>
 
                 <div class="completion-actions">
                     <button class="btn btn-primary btn-large" id="downloadCsvBtnFinal">
@@ -259,10 +248,6 @@
                         <span>🔄</span> 重新开始
                     </button>
                 </div>
-            </div>
-        </div>
-                <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
-                <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
             </div>
         </div>
     </div>
