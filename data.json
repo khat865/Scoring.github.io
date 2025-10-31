@@ -2,9 +2,11 @@
   {
     "id": "0",
     "pmid": "38865572",
-    "image_paths": ["images/38865572_full_text_figure_10.jpg",
+    "image_paths": [
+      "images/38865572_full_text_figure_10.jpg",
       "images/38865572_full_text_figure_09.jpg",
-      "images/38865572_full_text_figure_11.jpg"],
+      "images/38865572_full_text_figure_11.jpg"
+    ],
     "prompt": "Chromoblastomycosis or phaeohyphomycosis",
     "predicted_diagnosis": "Chromoblastomycosis or phaeohyphomycosis",
     "ground_truth_diagnosis": "Hyalohyphomycosis (left foot) and Phaeohyphomycosis (right forearm)",
@@ -12,14 +14,14 @@
       {
         "pair_id": "A",
         "predicted": "Phaeohyphomycosis",
-        "ground_truth": "Phaeohyphomycosis",
-        "similarity": 1.0
+        "ground_truth": "Cutaneous Leishmaniasis",
+        "similarity": 0.7745
       },
       {
         "pair_id": "B",
-        "predicted": "Mold infection",
-        "ground_truth": "Cutaneous Leishmaniasis",
-        "similarity": 0.7586
+        "predicted": "Deep fungal infection",
+        "ground_truth": "Chromoblastomycosis",
+        "similarity": 0.7907
       }
     ],
     "predicted_differential_diagnosis_full": [
@@ -42,24 +44,26 @@
   {
     "id": "1",
     "pmid": "32047088",
-    "image_paths": ["images/32047088_full_text_figure_10.jpg",
+    "image_paths": [
+      "images/32047088_full_text_figure_10.jpg",
       "images/32047088_full_text_figure_09.jpg",
-      "images/32047088_full_text_figure_11.jpg"],
+      "images/32047088_full_text_figure_11.jpg"
+    ],
     "prompt": "Diabetic necrobiosis lipoidica with Mucor and MRSA infection",
     "predicted_diagnosis": "Diabetic necrobiosis lipoidica with Mucor and MRSA infection",
     "ground_truth_diagnosis": "Primary cutaneous mucormycosis",
     "task3_pairs": [
       {
         "pair_id": "A",
-        "predicted": "Diabetic necrobiosis lipoidica",
-        "ground_truth": "Cutaneous anthrax",
-        "similarity": 0.6485
+        "predicted": "Primary skin malignancy",
+        "ground_truth": "Ecthyma gangrenosum",
+        "similarity": 0.7159
       },
       {
         "pair_id": "B",
-        "predicted": "Methicillinresistant Staphylococcus aureus infection",
-        "ground_truth": "Primary cutaneous mucormycosis",
-        "similarity": 0.791
+        "predicted": "Diabetic necrobiosis lipoidica",
+        "ground_truth": "Cutaneous anthrax",
+        "similarity": 0.6485
       }
     ],
     "predicted_differential_diagnosis_full": [
@@ -80,22 +84,24 @@
   {
     "id": "3",
     "pmid": "31133007",
-    "image_paths": ["images/31133007_full_text_figure_09.jpg"],
+    "image_paths": [
+      "images/31133007_full_text_figure_09.jpg"
+    ],
     "prompt": "Onychomycosis caused by Candida albicans",
     "predicted_diagnosis": "Onychomycosis caused by Candida albicans",
     "ground_truth_diagnosis": "Distal and lateral subungual candida onychomycosis",
     "task3_pairs": [
       {
         "pair_id": "A",
-        "predicted": "Onychomycosis",
-        "ground_truth": "Congenital yellow nail syndrome",
-        "similarity": 0.7772
+        "predicted": "Other fungal infections",
+        "ground_truth": "Psoriasis",
+        "similarity": 0.8957
       },
       {
         "pair_id": "B",
-        "predicted": "Other fungal infections",
-        "ground_truth": "Bacterial paronychia",
-        "similarity": 0.7649
+        "predicted": "Onychomycosis",
+        "ground_truth": "Congenital yellow nail syndrome",
+        "similarity": 0.7772
       }
     ],
     "predicted_differential_diagnosis_full": [
@@ -114,23 +120,25 @@
   {
     "id": "4",
     "pmid": "30795738",
-    "image_paths": ["images/30795738_full_text_figure_10.jpg",
-      "images/30795738_full_text_figure_09.jpg"],
+    "image_paths": [
+      "images/30795738_full_text_figure_10.jpg",
+      "images/30795738_full_text_figure_09.jpg"
+    ],
     "prompt": "Tinea capitis",
     "predicted_diagnosis": "Tinea capitis",
     "ground_truth_diagnosis": "Tinea capitis caused by *Microsporum canis*",
     "task3_pairs": [
       {
         "pair_id": "A",
-        "predicted": "Tinea capitis",
+        "predicted": "Psoriasis",
         "ground_truth": "Neonatal lupus",
-        "similarity": 0.7733
+        "similarity": 0.8545
       },
       {
         "pair_id": "B",
-        "predicted": "Seborrheic dermatitis",
-        "ground_truth": "Atopic dermatitis",
-        "similarity": 0.917
+        "predicted": "Tinea capitis",
+        "ground_truth": "Langerhans cell histiocytosis",
+        "similarity": 0.716
       }
     ],
     "predicted_differential_diagnosis_full": [
@@ -148,29 +156,160 @@
     ]
   },
   {
-    "id": "5",
-    "pmid": "36806492",
-    "image_paths": ["images/36806492_full_text_figure_10.jpg",
-      "images/36806492_full_text_figure_09.jpg"],
+    "id": "6",
+    "pmid": "11060115",
+    "image_paths": [
+      "images/11060115_full_text_figure_10.jpg",
+      "images/11060115_full_text_figure_09.jpg",
+      "images/11060115_full_text_figure_12.jpg"
+    ],
     "prompt": "Chromoblastomycosis",
     "predicted_diagnosis": "Chromoblastomycosis",
-    "ground_truth_diagnosis": "Cutaneous mycosis caused by *Purpureocillium lilacinum*",
+    "ground_truth_diagnosis": "White grain eumycetoma caused by *Cylindrocarpon* species",
     "task3_pairs": [
       {
         "pair_id": "A",
+        "predicted": "Fungal infection",
+        "ground_truth": "Tuberculous mycetoma",
+        "similarity": 0.7436
+      },
+      {
+        "pair_id": "B",
         "predicted": "Chromoblastomycosis",
-        "ground_truth": "Purpureocillium lilacinum infection",
-        "similarity": 0.6746
+        "ground_truth": "Chronic osteomyelitis",
+        "similarity": 0.7981
       }
     ],
     "predicted_differential_diagnosis_full": [
-      "Chromoblastomycosis"
+      "Chromoblastomycosis",
+      "Fungal infection",
+      "Mycobacterial infection",
+      "Chronic inflammatory process",
+      "Chronic infection"
     ],
     "ground_truth_differential_diagnosis_full": [
-      "Purpureocillium lilacinum infection",
-      "Sporotrichosis",
-      "Atypical mycobacteriosis",
+      "Eumycetoma",
+      "Actinomycetoma",
+      "Chronic osteomyelitis",
+      "Botryomycosis",
+      "Tuberculous mycetoma"
+    ]
+  },
+  {
+    "id": "8",
+    "pmid": "29310381",
+    "image_paths": [
+      "images/29310381_full_text_figure_10.jpg",
+      "images/29310381_full_text_figure_09.jpg",
+      "images/29310381_full_text_figure_11.jpg"
+    ],
+    "prompt": "Localized fungal infection",
+    "predicted_diagnosis": "Localized fungal infection",
+    "ground_truth_diagnosis": "Primary Cutaneous Aspergillosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Saprophytic fungal infection",
+        "ground_truth": "Deep Fungal Infection",
+        "similarity": 0.9319
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Localized fungal infection",
+        "ground_truth": "Atypical Mycobacterial Infection",
+        "similarity": 0.8421
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Localized fungal infection",
+      "Saprophytic fungal infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Primary Cutaneous Aspergillosis",
+      "Bacterial Infection",
+      "Staphylococcus infection",
+      "Atypical Mycobacterial Infection",
+      "Deep Fungal Infection",
+      "Sporotrichosis"
+    ]
+  },
+  {
+    "id": "12",
+    "pmid": "25831000",
+    "image_paths": [
+      "images/25831000_full_text_figure_09.jpg",
+      "images/25831000_full_text_figure_13.jpg",
+      "images/25831000_full_text_figure_12.jpg"
+    ],
+    "prompt": "Cutaneous histoplasmosis",
+    "predicted_diagnosis": "Cutaneous histoplasmosis",
+    "ground_truth_diagnosis": "Primary Cutaneous Histoplasmosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Cutaneous histoplasmosis",
+        "ground_truth": "Cryptococcosis",
+        "similarity": 0.8052
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Malignancy",
+        "ground_truth": "Chancroid",
+        "similarity": 0.7464
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Cutaneous histoplasmosis",
+      "Sexually transmitted infections",
+      "Malignancy",
+      "Autoimmune diseases"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Primary Cutaneous Histoplasmosis",
+      "Syphilis",
+      "Squamous Cell Carcinoma",
+      "Cryptococcosis",
+      "Behçet Disease",
+      "Chancroid"
+    ]
+  },
+  {
+    "id": "13",
+    "pmid": "35387148",
+    "image_paths": [
+      "images/35387148_full_text_figure_09.jpg",
+      "images/35387148_full_text_figure_12.jpg"
+    ],
+    "prompt": "Immune-mediated polyarthritis with secondary cutaneous involvement",
+    "predicted_diagnosis": "Immune-mediated polyarthritis with secondary cutaneous involvement",
+    "ground_truth_diagnosis": "Sterile Neutrophilic Dermatosis (Sweet's Syndrome)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Immunemediated condition",
+        "ground_truth": "Adverse Drug Reaction",
+        "similarity": 0.855
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Systemic inflammatory condition",
+        "ground_truth": "Lymphoma",
+        "similarity": 0.9236
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Systemic inflammatory condition",
+      "Immunemediated condition",
       "Bacterial infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Sterile Neutrophilic Dermatosis (Sweet's Syndrome)",
+      "Systemic Lupus Erythematosus",
+      "Pyoderma Gangrenosum",
+      "Infectious/Septic Vasculitis",
+      "Adverse Drug Reaction",
+      "Erythema Multiforme",
+      "Lymphoma"
     ]
   }
 ]
