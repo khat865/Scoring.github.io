@@ -9,8 +9,9 @@ const state = {
         task2: {}, // 诊断相似度评分
         task3: {}  // 诊断排序选择
     },
+    similarityData: {}, // 存储每个病例的相似度数据（不显示给用户）
     currentImageIndex: 0,
-    googleSheetsUrl: localStorage.getItem('googleSheetsUrl') || 'https://script.google.com/macros/s/AKfycbzYFpftuMZc4_otcdBc7bxnva68NHte8cGHqtJ51sRu1Fu3JQIyL3S4y_t7WCWh0mSU/exechttps://script.google.com/macros/s/AKfycbw1Ak7TjFe6ryuWXGr42bnel-GT-URqvTPwA8D9-YOmbm4Ft6PmEQDrSlG02fYoFTDf/exec', // 从localStorage读取配置 // 在这里填入你的Google Apps Script Web App URL
+    googleSheetsUrl: localStorage.getItem('googleSheetsUrl') || 'https://script.google.com/macros/s/AKfycbw1Ak7TjFe6ryuWXGr42bnel-GT-URqvTPwA8D9-YOmbm4Ft6PmEQDrSlG02fYoFTDf/exec', // 从localStorage读取配置 // 在这里填入你的Google Apps Script Web App URL
     submittedCases: new Set() // 记录已提交的病例，避免重复提交
 };
 
@@ -231,16 +232,38 @@ function loadTask2(caseData) {
         caseData.ground_truth_diagnosis || '暂无真实诊断';
 }
 
-// 加载任务3 - 鉴别诊断选择
+// 加载任务3 - 鉴别诊断对比选择
 function loadTask3(caseData) {
-    // 选项A：从predicted_differential_diagnosis随机选择
-    const optionA = caseData.task3_option_a || '无预测鉴别诊断';
-    document.getElementById('task3_optionA').textContent = optionA;
+    // 获取两对诊断数据
+    const pairs = caseData.task3_pairs || [];
     
-    // 选项B：从ground_truth_differential_diagnosis随机选择
-    const optionB = caseData.task3_option_b || '无真实鉴别诊断';
-    document.getElementById('task3_optionB').textContent = optionB;
+    if (pairs.length >= 2) {
+        // 对A
+        const pairA = pairs[0];
+        document.getElementById('task3_pairA_predicted').textContent = pairA.predicted || '无预测诊断';
+        document.getElementById('task3_pairA_truth').textContent = pairA.ground_truth || '无真实诊断';
+        
+        // 对B
+        const pairB = pairs[1];
+        document.getElementById('task3_pairB_predicted').textContent = pairB.predicted || '无预测诊断';
+        document.getElementById('task3_pairB_truth').textContent = pairB.ground_truth || '无真实诊断';
+        
+        // 存储相似度用于后续分析（不在界面显示）
+        const caseId = caseData.pmid || caseData.id;
+        if (!state.similarityData) state.similarityData = {};
+        state.similarityData[caseId] = {
+            pairA_similarity: pairA.similarity,
+            pairB_similarity: pairB.similarity
+        };
+    } else {
+        // 如果数据不足，显示提示信息
+        document.getElementById('task3_pairA_predicted').textContent = '数据不足';
+        document.getElementById('task3_pairA_truth').textContent = '数据不足';
+        document.getElementById('task3_pairB_predicted').textContent = '数据不足';
+        document.getElementById('task3_pairB_truth').textContent = '数据不足';
+    }
 }
+
 
 // 设置评分
 function setRating(taskId, value) {
@@ -467,7 +490,7 @@ function saveSubmittedCases() {
 // 下载CSV
 function downloadCSV() {
     const rows = [
-        ['用户ID', '病例编号', '任务1评分', '任务2评分', '任务3选择', '评分时间', '描述']
+        ['用户ID', '病例编号', '任务1评分', '任务2评分', '任务3选择', '对A相似度', '对B相似度', '用户选择正确', '评分时间', '描述']
     ];
     
     // 遍历所有病例
@@ -480,12 +503,26 @@ function downloadCSV() {
         const task3Rating = state.ratings.task3[caseId];
         
         if (task1Rating && task2Rating && task3Rating) {
+            const similarityData = state.similarityData[caseId] || {};
+            const pairA_sim = similarityData.pairA_similarity || 0;
+            const pairB_sim = similarityData.pairB_similarity || 0;
+            
+            // 判断用户选择是否正确（选择了相似度更高的对）
+            let isCorrect = '';
+            if (pairA_sim !== pairB_sim) {
+                const correctChoice = pairA_sim > pairB_sim ? 'A' : 'B';
+                isCorrect = task3Rating.value === correctChoice ? '正确' : '错误';
+            }
+            
             rows.push([
                 state.userId,
                 caseId,
                 task1Rating.value,
                 task2Rating.value,
                 task3Rating.value,
+                pairA_sim.toFixed(4),
+                pairB_sim.toFixed(4),
+                isCorrect,
                 task3Rating.timestamp,
                 (caseData.prompt || caseData.description || '').substring(0, 100)
             ]);

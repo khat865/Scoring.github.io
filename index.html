@@ -171,28 +171,52 @@
             <!-- 任务3: 鉴别诊断选择 -->
             <div class="task-section">
                 <div class="task-number">任务 3</div>
-                <div class="task-title">鉴别诊断选择 - 请选择更相关的诊断</div>
+                <div class="task-title">鉴别诊断相似度对比 - 请选择相似度更高的诊断对</div>
                 
-                <div class="diagnosis-comparison compact">
-                    <div class="diagnosis-box predicted small">
-                        <div class="diagnosis-label">选项 A</div>
-                        <div class="diagnosis-content" id="task3_optionA">
-                            加载中...
+                <!-- 对A -->
+                <div style="margin-bottom: 25px;">
+                    <div style="text-align: center; margin-bottom: 10px; font-weight: 600; color: #2193b0; font-size: 16px;">对 A</div>
+                    <div class="diagnosis-comparison compact">
+                        <div class="diagnosis-box predicted small">
+                            <div class="diagnosis-label">预测诊断</div>
+                            <div class="diagnosis-content" id="task3_pairA_predicted">
+                                加载中...
+                            </div>
+                        </div>
+                        <div class="vs-divider-small">VS</div>
+                        <div class="diagnosis-box ground-truth small">
+                            <div class="diagnosis-label">真实诊断</div>
+                            <div class="diagnosis-content" id="task3_pairA_truth">
+                                加载中...
+                            </div>
                         </div>
                     </div>
-                    <div class="vs-divider-small">VS</div>
-                    <div class="diagnosis-box ground-truth small">
-                        <div class="diagnosis-label">选项 B</div>
-                        <div class="diagnosis-content" id="task3_optionB">
-                            加载中...
+                </div>
+
+                <!-- 对B -->
+                <div style="margin-bottom: 20px;">
+                    <div style="text-align: center; margin-bottom: 10px; font-weight: 600; color: #2193b0; font-size: 16px;">对 B</div>
+                    <div class="diagnosis-comparison compact">
+                        <div class="diagnosis-box predicted small">
+                            <div class="diagnosis-label">预测诊断</div>
+                            <div class="diagnosis-content" id="task3_pairB_predicted">
+                                加载中...
+                            </div>
+                        </div>
+                        <div class="vs-divider-small">VS</div>
+                        <div class="diagnosis-box ground-truth small">
+                            <div class="diagnosis-label">真实诊断</div>
+                            <div class="diagnosis-content" id="task3_pairB_truth">
+                                加载中...
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="rating-section">
                     <div class="choice-buttons">
-                        <button class="choice-btn-large" data-choice="A">选择 A</button>
-                        <button class="choice-btn-large" data-choice="B">选择 B</button>
+                        <button class="choice-btn-large" data-choice="A">选择 对A 相似度更高</button>
+                        <button class="choice-btn-large" data-choice="B">选择 对B 相似度更高</button>
                     </div>
                 </div>
             </div>

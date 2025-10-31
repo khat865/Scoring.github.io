@@ -2,14 +2,24 @@
   {
     "id": "0",
     "pmid": "38865572",
-    "image_paths": ["images/38865572_full_text_figure_10.jpg",
-      "images/38865572_full_text_figure_09.jpg",
-      "images/38865572_full_text_figure_11.jpg"],
+    "image_paths": [],
     "prompt": "Chromoblastomycosis or phaeohyphomycosis",
     "predicted_diagnosis": "Chromoblastomycosis or phaeohyphomycosis",
     "ground_truth_diagnosis": "Hyalohyphomycosis (left foot) and Phaeohyphomycosis (right forearm)",
-    "task3_option_a": "Fungal infection",
-    "task3_option_b": "Cutaneous Leishmaniasis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Mold infection",
+        "ground_truth": "Phaeohyphomycosis",
+        "similarity": 0.7523
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Dermatophyte infection",
+        "ground_truth": "Eumycetoma",
+        "similarity": 0.7835
+      }
+    ],
     "predicted_differential_diagnosis_full": [
       "Fungal infection",
       "Dermatophyte infection",
@@ -30,14 +40,24 @@
   {
     "id": "1",
     "pmid": "32047088",
-    "image_paths": ["images/32047088_full_text_figure_10.jpg",
-      "images/32047088_full_text_figure_09.jpg",
-      "images/32047088_full_text_figure_11.jpg"],
+    "image_paths": [],
     "prompt": "Diabetic necrobiosis lipoidica with Mucor and MRSA infection",
     "predicted_diagnosis": "Diabetic necrobiosis lipoidica with Mucor and MRSA infection",
     "ground_truth_diagnosis": "Primary cutaneous mucormycosis",
-    "task3_option_a": "Cutaneous metastasis",
-    "task3_option_b": "Ecthyma gangrenosum",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Diabetic necrobiosis lipoidica",
+        "ground_truth": "Primary cutaneous mucormycosis",
+        "similarity": 0.6572
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Methicillinresistant Staphylococcus aureus infection",
+        "ground_truth": "Cutaneous anthrax",
+        "similarity": 0.7362
+      }
+    ],
     "predicted_differential_diagnosis_full": [
       "Diabetic necrobiosis lipoidica",
       "Mucor infection",
@@ -56,12 +76,24 @@
   {
     "id": "3",
     "pmid": "31133007",
-    "image_paths": ["images/31133007_full_text_figure_09.jpg"],
+    "image_paths": [],
     "prompt": "Onychomycosis caused by Candida albicans",
     "predicted_diagnosis": "Onychomycosis caused by Candida albicans",
     "ground_truth_diagnosis": "Distal and lateral subungual candida onychomycosis",
-    "task3_option_a": "Onychomycosis",
-    "task3_option_b": "Lichen planus",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Onychomycosis",
+        "ground_truth": "Bacterial paronychia",
+        "similarity": 0.8181
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Other fungal infections",
+        "ground_truth": "Congenital yellow nail syndrome",
+        "similarity": 0.7448
+      }
+    ],
     "predicted_differential_diagnosis_full": [
       "Onychomycosis",
       "Other fungal infections"
@@ -78,13 +110,24 @@
   {
     "id": "4",
     "pmid": "30795738",
-    "image_paths": ["images/30795738_full_text_figure_10.jpg",
-      "images/30795738_full_text_figure_09.jpg"],
+    "image_paths": [],
     "prompt": "Tinea capitis",
     "predicted_diagnosis": "Tinea capitis",
     "ground_truth_diagnosis": "Tinea capitis caused by *Microsporum canis*",
-    "task3_option_a": "Seborrheic dermatitis",
-    "task3_option_b": "Tinea capitis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Seborrheic dermatitis",
+        "ground_truth": "Neonatal lupus",
+        "similarity": 0.8194
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "Atopic dermatitis",
+        "similarity": 0.8767
+      }
+    ],
     "predicted_differential_diagnosis_full": [
       "Tinea capitis",
       "Psoriasis",
@@ -102,13 +145,18 @@
   {
     "id": "5",
     "pmid": "36806492",
-    "image_paths": ["images/36806492_full_text_figure_10.jpg",
-      "images/36806492_full_text_figure_09.jpg"],
+    "image_paths": [],
     "prompt": "Chromoblastomycosis",
     "predicted_diagnosis": "Chromoblastomycosis",
     "ground_truth_diagnosis": "Cutaneous mycosis caused by *Purpureocillium lilacinum*",
-    "task3_option_a": "Chromoblastomycosis",
-    "task3_option_b": "Bacterial infection",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Chromoblastomycosis",
+        "ground_truth": "Purpureocillium lilacinum infection",
+        "similarity": 0.6746
+      }
+    ],
     "predicted_differential_diagnosis_full": [
       "Chromoblastomycosis"
     ],
@@ -122,14 +170,24 @@
   {
     "id": "6",
     "pmid": "11060115",
-    "image_paths": ["images/11060115_full_text_figure_10.jpg",
-      "images/11060115_full_text_figure_09.jpg",
-      "images/11060115_full_text_figure_12.jpg"],
+    "image_paths": [],
     "prompt": "Chromoblastomycosis",
     "predicted_diagnosis": "Chromoblastomycosis",
     "ground_truth_diagnosis": "White grain eumycetoma caused by *Cylindrocarpon* species",
-    "task3_option_a": "Chronic infection",
-    "task3_option_b": "Botryomycosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Chronic inflammatory process",
+        "ground_truth": "Botryomycosis",
+        "similarity": 0.6745
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Chromoblastomycosis",
+        "ground_truth": "Chronic osteomyelitis",
+        "similarity": 0.7981
+      }
+    ],
     "predicted_differential_diagnosis_full": [
       "Chromoblastomycosis",
       "Fungal infection",
@@ -144,5 +202,4086 @@
       "Botryomycosis",
       "Tuberculous mycetoma"
     ]
+  },
+  {
+    "id": "7",
+    "pmid": "37808221",
+    "image_paths": [],
+    "prompt": "Mucormycosis caused by Rhizopus arrhizus",
+    "predicted_diagnosis": "Mucormycosis caused by Rhizopus arrhizus",
+    "ground_truth_diagnosis": "Cutaneous mucormycosis due to *Rhizopus arrhizus*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Cutaneous Mucormycosis",
+        "similarity": 0.8002
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Cutaneous Mucormycosis",
+      "Bacterial Necrotizing Infection",
+      "Cutaneous Lymphoma Relapse",
+      "Aspergillosis"
+    ]
+  },
+  {
+    "id": "8",
+    "pmid": "29310381",
+    "image_paths": [],
+    "prompt": "Localized fungal infection",
+    "predicted_diagnosis": "Localized fungal infection",
+    "ground_truth_diagnosis": "Primary Cutaneous Aspergillosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Localized fungal infection",
+        "ground_truth": "Staphylococcus infection",
+        "similarity": 0.8429
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Saprophytic fungal infection",
+        "ground_truth": "Bacterial Infection",
+        "similarity": 0.8479
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Localized fungal infection",
+      "Saprophytic fungal infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Primary Cutaneous Aspergillosis",
+      "Bacterial Infection",
+      "Staphylococcus infection",
+      "Atypical Mycobacterial Infection",
+      "Deep Fungal Infection",
+      "Sporotrichosis"
+    ]
+  },
+  {
+    "id": "9",
+    "pmid": "10449477",
+    "image_paths": [],
+    "prompt": "Onychomycosis",
+    "predicted_diagnosis": "Onychomycosis",
+    "ground_truth_diagnosis": "Onychomycosis and Paronychia Caused by *Blastoschizomyces capitatus*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Dermatophyte Onychomycosis",
+        "similarity": 0.8077
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Dermatophyte Onychomycosis",
+      "Candida Onychomycosis",
+      "NonDermatophyte Mold",
+      "Blastoschizomyces capitatus"
+    ]
+  },
+  {
+    "id": "10",
+    "pmid": "28246626",
+    "image_paths": [],
+    "prompt": "Necrotizing fasciitis of the right upper extremity",
+    "predicted_diagnosis": "Necrotizing fasciitis of the right upper extremity",
+    "ground_truth_diagnosis": "Myocutaneous Mucormycosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Necrotizing fasciitis",
+        "ground_truth": "Myocutaneous Mucormycosis",
+        "similarity": 0.7375
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Necrotizing fasciitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Myocutaneous Mucormycosis",
+      "Necrotizing Fasciitis",
+      "Bacterial Gangrene",
+      "Aspergillosis",
+      "Burn Wound Impetigo"
+    ]
+  },
+  {
+    "id": "11",
+    "pmid": "34579963",
+    "image_paths": [],
+    "prompt": "Chromoblastomycosis",
+    "predicted_diagnosis": "Chromoblastomycosis",
+    "ground_truth_diagnosis": "Lobomycosis (Lacaziosis) with Malignant Transformation to Squamous Cell Carcinoma",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Chromoblastomycosis",
+        "ground_truth": "Lobomycosis",
+        "similarity": 0.811
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Chromoblastomycosis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Lobomycosis",
+      "Squamous cell carcinoma",
+      "Chromoblastomycosis",
+      "Paracoccidioidomycosis",
+      "Chronic VL/borderline leprosy"
+    ]
+  },
+  {
+    "id": "12",
+    "pmid": "25831000",
+    "image_paths": [],
+    "prompt": "Cutaneous histoplasmosis",
+    "predicted_diagnosis": "Cutaneous histoplasmosis",
+    "ground_truth_diagnosis": "Primary Cutaneous Histoplasmosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Sexually transmitted infections",
+        "ground_truth": "Cryptococcosis",
+        "similarity": 0.7514
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Cutaneous histoplasmosis",
+        "ground_truth": "Primary Cutaneous Histoplasmosis",
+        "similarity": 0.9701
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Cutaneous histoplasmosis",
+      "Sexually transmitted infections",
+      "Malignancy",
+      "Autoimmune diseases"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Primary Cutaneous Histoplasmosis",
+      "Syphilis",
+      "Squamous Cell Carcinoma",
+      "Cryptococcosis",
+      "Behçet Disease",
+      "Chancroid"
+    ]
+  },
+  {
+    "id": "13",
+    "pmid": "35387148",
+    "image_paths": [],
+    "prompt": "Immune-mediated polyarthritis with secondary cutaneous involvement",
+    "predicted_diagnosis": "Immune-mediated polyarthritis with secondary cutaneous involvement",
+    "ground_truth_diagnosis": "Sterile Neutrophilic Dermatosis (Sweet's Syndrome)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Bacterial infection",
+        "ground_truth": "Pyoderma Gangrenosum",
+        "similarity": 0.7942
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Systemic inflammatory condition",
+        "ground_truth": "Erythema Multiforme",
+        "similarity": 0.8269
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Systemic inflammatory condition",
+      "Immunemediated condition",
+      "Bacterial infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Sterile Neutrophilic Dermatosis (Sweet's Syndrome)",
+      "Systemic Lupus Erythematosus",
+      "Pyoderma Gangrenosum",
+      "Infectious/Septic Vasculitis",
+      "Adverse Drug Reaction",
+      "Erythema Multiforme",
+      "Lymphoma"
+    ]
+  },
+  {
+    "id": "14",
+    "pmid": "36604110",
+    "image_paths": [],
+    "prompt": "None",
+    "predicted_diagnosis": "None",
+    "ground_truth_diagnosis": "Subcutaneous zygomycosis caused by *Basidiobolus ranarum*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Metastatic carcinoma",
+        "ground_truth": "Granuloma annulare",
+        "similarity": 0.7545
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Chronic infectious process",
+        "ground_truth": "Morphea",
+        "similarity": 0.8355
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Cutaneous lymphoma",
+      "Metastatic carcinoma",
+      "Chronic infectious process",
+      "Tuberculosis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Subcutaneous zygomycosis",
+      "Morphea",
+      "Granuloma annulare",
+      "Malignant melanoma"
+    ]
+  },
+  {
+    "id": "15",
+    "pmid": "25317231",
+    "image_paths": [],
+    "prompt": "Kaposi sarcoma of the nasolabial fold",
+    "predicted_diagnosis": "Kaposi sarcoma of the nasolabial fold",
+    "ground_truth_diagnosis": "Kaposi Sarcoma (Classic Type)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Kaposi Sarcoma",
+        "similarity": 0.8166
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Kaposi Sarcoma",
+      "Pyogenic Granuloma",
+      "Hemangioma",
+      "Basal Cell Carcinoma",
+      "Angiosarcoma"
+    ]
+  },
+  {
+    "id": "16",
+    "pmid": "30361425",
+    "image_paths": [],
+    "prompt": "Leprosy",
+    "predicted_diagnosis": "Leprosy",
+    "ground_truth_diagnosis": "Cutaneous Sporotrichosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Sarcoidosis",
+        "ground_truth": "Atypical Mycobacteriosis",
+        "similarity": 0.7981
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Fungal infection",
+        "ground_truth": "Cutaneous Leishmaniasis",
+        "similarity": 0.8229
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Leprosy",
+      "Tuberculosis",
+      "Sarcoidosis",
+      "Fungal infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Cutaneous Sporotrichosis",
+      "Cutaneous Leishmaniasis",
+      "Atypical Mycobacteriosis",
+      "Bacterial Pyoderma"
+    ]
+  },
+  {
+    "id": "17",
+    "pmid": "25831004",
+    "image_paths": [],
+    "prompt": "Histoplasmosis",
+    "predicted_diagnosis": "Histoplasmosis",
+    "ground_truth_diagnosis": "Lacaziosis (Jorge Lobo's Disease)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Foreign body reaction",
+        "ground_truth": "Lepromatous Leprosy",
+        "similarity": 0.8377
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Sarcoidosis",
+        "ground_truth": "Chromoblastomycosis",
+        "similarity": 0.7383
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Histoplasmosis",
+      "Coccidioidomycosis",
+      "Granuloma annulare",
+      "Sarcoidosis",
+      "Foreign body reaction"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Chromoblastomycosis",
+      "Cutaneous Leishmaniasis",
+      "Lepromatous Leprosy",
+      "Granuloma Annulare",
+      "Lacaziosis"
+    ]
+  },
+  {
+    "id": "18",
+    "pmid": "29882446",
+    "image_paths": [],
+    "prompt": "Superficial fungal infection caused by Candida albicans",
+    "predicted_diagnosis": "Superficial fungal infection caused by Candida albicans",
+    "ground_truth_diagnosis": "Cutaneous candidiasis caused by *Candida albicans*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Candida infection",
+        "ground_truth": "Cutaneous candidiasis",
+        "similarity": 0.8939
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Candida infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Cutaneous candidiasis",
+      "Tinea pedis",
+      "Contact dermatitis",
+      "Lichen planus",
+      "Arthropod bite reaction"
+    ]
+  },
+  {
+    "id": "19",
+    "pmid": "31700857",
+    "image_paths": [],
+    "prompt": "Cryptococcosis",
+    "predicted_diagnosis": "Cryptococcosis",
+    "ground_truth_diagnosis": "Emergomyces africanus Disseminated Infection",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Cryptococcosis",
+        "ground_truth": "Emergomyces africanus infection",
+        "similarity": 0.7365
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Cryptococcosis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Emergomyces africanus infection",
+      "Histoplasmosis",
+      "Cryptococcosis",
+      "Disseminated Molluscum"
+    ]
+  },
+  {
+    "id": "20",
+    "pmid": "28410611",
+    "image_paths": [],
+    "prompt": "Prosthetic joint infection with septic emboli",
+    "predicted_diagnosis": "Prosthetic joint infection with septic emboli",
+    "ground_truth_diagnosis": "Recurrent *Scedosporium apiospermum* mycetoma",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Septic emboli",
+        "ground_truth": "Erysipelas",
+        "similarity": 0.6898
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Disseminated infection",
+        "ground_truth": "Scedosporium apiospermum mycetoma",
+        "similarity": 0.7221
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Prosthetic joint infection",
+      "Septic emboli",
+      "Disseminated infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scedosporium apiospermum mycetoma",
+      "Bacterial cellulitis/abscess",
+      "Erysipelas",
+      "Vasculitis (leukocytoclastic)"
+    ]
+  },
+  {
+    "id": "21",
+    "pmid": "28100575",
+    "image_paths": [],
+    "prompt": "Dermatophyte infection",
+    "predicted_diagnosis": "Dermatophyte infection",
+    "ground_truth_diagnosis": "Atrophic pityriasis versicolor",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Dermatophyte infection",
+        "ground_truth": "Atrophic pityriasis versicolor",
+        "similarity": 0.823
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Dermatophyte infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Atrophic pityriasis versicolor",
+      "Anetoderma",
+      "Atrophoderma of PasiniPierini",
+      "Middermal elastolysis",
+      "Confetti macular atrophy",
+      "Morphea",
+      "Parapsoriasis",
+      "Mycosis fungoides"
+    ]
+  },
+  {
+    "id": "22",
+    "pmid": "27438213",
+    "image_paths": [],
+    "prompt": "Invasive aspergillosis",
+    "predicted_diagnosis": "Invasive aspergillosis",
+    "ground_truth_diagnosis": "Primary cutaneous aspergillosis** due to *Aspergillus niger*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Invasive aspergillosis",
+        "ground_truth": "Primary cutaneous aspergillosis",
+        "similarity": 0.9341
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Invasive aspergillosis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Primary cutaneous aspergillosis",
+      "Secondary cutaneous aspergillosis",
+      "Ecthyma gangrenosum",
+      "Cutaneous mucormycosis",
+      "Pressureinduced necrosis"
+    ]
+  },
+  {
+    "id": "23",
+    "pmid": "28099608",
+    "image_paths": [],
+    "prompt": "Chronic paronychia",
+    "predicted_diagnosis": "Chronic paronychia",
+    "ground_truth_diagnosis": "Subungual squamous cell carcinoma",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Chronic paronychia",
+        "ground_truth": "Subungual SCC",
+        "similarity": 0.7702
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Chronic paronychia"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Subungual SCC",
+      "Keratoacanthoma",
+      "Subungual viral wart"
+    ]
+  },
+  {
+    "id": "24",
+    "pmid": "38747851",
+    "image_paths": [],
+    "prompt": "Tinea corporis caused by Microsporum canis",
+    "predicted_diagnosis": "Tinea corporis caused by Microsporum canis",
+    "ground_truth_diagnosis": "Tinea corporis due to *Microsporum canis*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Tinea corporis",
+        "similarity": 0.81
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Tinea corporis",
+      "Granuloma annulare",
+      "Nummular eczema",
+      "Pityriasis rosea",
+      "Erythema migrans"
+    ]
+  },
+  {
+    "id": "25",
+    "pmid": "24346887",
+    "image_paths": [],
+    "prompt": "Madurella mycetomatis infection",
+    "predicted_diagnosis": "Madurella mycetomatis infection",
+    "ground_truth_diagnosis": "Eumycetoma caused by *Madurella mycetomatis*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Metastatic cancer",
+        "ground_truth": "Chromoblastomycosis",
+        "similarity": 0.7995
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Cutaneous lymphoma",
+        "ground_truth": "Eumycetoma",
+        "similarity": 0.7927
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Chromoblastomycosis",
+      "Phaeohyphomycosis",
+      "Cutaneous lymphoma",
+      "Metastatic cancer"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Eumycetoma",
+      "Actinomycetoma",
+      "Chromoblastomycosis",
+      "Tuberculous gumma",
+      "Hidradenitis suppurativa"
+    ]
+  },
+  {
+    "id": "26",
+    "pmid": "33911543",
+    "image_paths": [],
+    "prompt": "Steroid-induced acne",
+    "predicted_diagnosis": "Steroid-induced acne",
+    "ground_truth_diagnosis": "Severe Acne Vulgaris, Steroid-Exacerbated",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Bacterial infections",
+        "ground_truth": "Periorificial dermatitis",
+        "similarity": 0.8014
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Steroidinduced acne",
+        "ground_truth": "Acne vulgaris",
+        "similarity": 0.8584
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Steroidinduced acne",
+      "Hormonal imbalances",
+      "Bacterial infections"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acne vulgaris",
+      "Steroidinduced acne",
+      "Gramnegative folliculitis",
+      "Periorificial dermatitis"
+    ]
+  },
+  {
+    "id": "27",
+    "pmid": "24683400",
+    "image_paths": [],
+    "prompt": "Dermatitis herpetiformis",
+    "predicted_diagnosis": "Dermatitis herpetiformis",
+    "ground_truth_diagnosis": "Pseudoporphyria induced by hemodialysis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Pemphigus vulgaris",
+        "ground_truth": "Bullous Pemphigoid",
+        "similarity": 0.8336
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Arthropod assault reactions",
+        "ground_truth": "DrugInduced Pseudoporphyria",
+        "similarity": 0.7772
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Dermatitis herpetiformis",
+      "Pemphigus vulgaris",
+      "Bullous pemphigoid",
+      "Linear IgA bullous dermatosis",
+      "Arthropod assault reactions",
+      "Porphyria cutanea tarda"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Porphyria Cutanea Tarda",
+      "Pemphigus Vulgaris",
+      "Bullous Pemphigoid",
+      "DrugInduced Pseudoporphyria",
+      "HemodialysisAssociated Pseudoporphyria"
+    ]
+  },
+  {
+    "id": "28",
+    "pmid": "21103193",
+    "image_paths": [],
+    "prompt": "Acute Generalized Exanthematous Pustulosis (AGEP) secondary to minocycline with parotid involvement",
+    "predicted_diagnosis": "Acute Generalized Exanthematous Pustulosis (AGEP) secondary to minocycline with parotid involvement",
+    "ground_truth_diagnosis": "Stevens-Johnson syndrome (Minocycline-induced)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Toxic Epidermal Necrolysis",
+        "ground_truth": "Bullous Pemphigoid",
+        "similarity": 0.7513
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Fixed Drug Eruption",
+        "ground_truth": "StevensJohnson Syndrome",
+        "similarity": 0.7026
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug Reaction with Eosinophilia",
+      "Systemic Symptoms",
+      "Sweet's Syndrome",
+      "Fixed Drug Eruption",
+      "StevensJohnson Syndrome",
+      "Toxic Epidermal Necrolysis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "StevensJohnson Syndrome",
+      "Erythema Multiforme Major",
+      "Bullous Pemphigoid",
+      "Viral Exanthem"
+    ]
+  },
+  {
+    "id": "29",
+    "pmid": "33447388",
+    "image_paths": [],
+    "prompt": "Moderate acne with scarring",
+    "predicted_diagnosis": "Moderate acne with scarring",
+    "ground_truth_diagnosis": "Acne vulgaris with acne-related scarring",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Acne vulgaris",
+        "similarity": 0.8687
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acne vulgaris",
+      "Rosacea",
+      "Bacterial folliculitis",
+      "Acneiform drug eruption"
+    ]
+  },
+  {
+    "id": "30",
+    "pmid": "29084596",
+    "image_paths": [],
+    "prompt": "Acne vulgaris",
+    "predicted_diagnosis": "Acne vulgaris",
+    "ground_truth_diagnosis": "Acne vulgaris, severe (grade 4), inflammatory subtype with scarring.",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Acne vulgaris",
+        "ground_truth": "Acne vulgaris",
+        "similarity": 1.0
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "Papular rosacea",
+        "similarity": 0.8348
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Acne vulgaris",
+      "Rosacea",
+      "Seborrheic dermatitis",
+      "Psoriasis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acne vulgaris",
+      "Papular rosacea",
+      "Hormonal acne",
+      "Perioral dermatitis"
+    ]
+  },
+  {
+    "id": "31",
+    "pmid": "38090399",
+    "image_paths": [],
+    "prompt": "Epidermoid cysts",
+    "predicted_diagnosis": "Epidermoid cysts",
+    "ground_truth_diagnosis": "Sebaceous Filaments",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Calcified epidermoid cysts",
+        "ground_truth": "Pityriasis folliculorum",
+        "similarity": 0.6482
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Epidermoid cysts",
+        "ground_truth": "Acne vulgaris",
+        "similarity": 0.795
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Fordyce spots",
+      "Epidermoid cysts",
+      "Calcified epidermoid cysts",
+      "Rare skin lesions"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Sebaceous filaments",
+      "Trichodysplasia spinulosa",
+      "Trichostasis spinulosa",
+      "Pityriasis folliculorum",
+      "Follicular hyperkeratotic spicules",
+      "Acne vulgaris"
+    ]
+  },
+  {
+    "id": "32",
+    "pmid": "26904448",
+    "image_paths": [],
+    "prompt": "Cutis marmorata telangiectatica congenita",
+    "predicted_diagnosis": "Cutis marmorata telangiectatica congenita",
+    "ground_truth_diagnosis": "Calcinosis cutis, dystrophic type, secondary to facial acne vulgaris.",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Cutis marmorata telangiectatica congenita",
+        "ground_truth": "Dystrophic Calcinosis",
+        "similarity": 0.5029
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Cutis marmorata telangiectatica congenita"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Dystrophic Calcinosis",
+      "Metastatic Calcinosis",
+      "Connective Tissue Disease",
+      "Idiopathic Calcinosis"
+    ]
+  },
+  {
+    "id": "33",
+    "pmid": "28785134",
+    "image_paths": [],
+    "prompt": "None",
+    "predicted_diagnosis": "None",
+    "ground_truth_diagnosis": "Type 2 Minocycline-Induced Hyperpigmentation",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Type 2 Minocycline hyperpigmentation",
+        "similarity": 0.7795
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Type 2 Minocycline hyperpigmentation",
+      "Postinflammatory hyperpigmentation",
+      "Erythema dyschromicum perstans",
+      "Argyria",
+      "Venous stasis pigmentation"
+    ]
+  },
+  {
+    "id": "34",
+    "pmid": "31008968",
+    "image_paths": [],
+    "prompt": "Cutaneous lymphoma",
+    "predicted_diagnosis": "Cutaneous lymphoma",
+    "ground_truth_diagnosis": "Follicular Occlusion Triad (FOT) with Scrotal Elephantiasis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Cutaneous lymphoma",
+        "ground_truth": "Cutaneous Crohn's Disease",
+        "similarity": 0.8321
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Chronic eczema",
+        "ground_truth": "Follicular Occlusion Triad",
+        "similarity": 0.795
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Cutaneous lymphoma",
+      "Chronic eczema",
+      "Chronic inflammatory skin disease"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Follicular Occlusion Triad",
+      "Severe Acne Inversa",
+      "Cutaneous Crohn's Disease",
+      "Nodulocystic Acne",
+      "Lymphogranuloma Venereum"
+    ]
+  },
+  {
+    "id": "35",
+    "pmid": "27530224",
+    "image_paths": [],
+    "prompt": "Microscopic polyangiitis associated with ulcerative colitis",
+    "predicted_diagnosis": "Microscopic polyangiitis associated with ulcerative colitis",
+    "ground_truth_diagnosis": "PAPASH syndrome",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Microscopic polyangiitis",
+        "ground_truth": "PAPASH syndrome",
+        "similarity": 0.7391
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Systemic vasculitis",
+        "ground_truth": "Rheumatoid arthritis",
+        "similarity": 0.7878
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Microscopic polyangiitis",
+      "Systemic vasculitis",
+      "Inflammatory bowel disease",
+      "Ulcerative colitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "PAPASH syndrome",
+      "Ulcerative colitis with extraintestinal manifestations",
+      "Behçet's disease",
+      "Rheumatoid arthritis",
+      "Granulomatosis with polyangiitis"
+    ]
+  },
+  {
+    "id": "36",
+    "pmid": "39712431",
+    "image_paths": [],
+    "prompt": "Pernicious anemia",
+    "predicted_diagnosis": "Pernicious anemia",
+    "ground_truth_diagnosis": "Vitamin B12–induced acneiform eruption",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Vitamin B12–induced acneiform eruption",
+        "similarity": 0.6651
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Vitamin B12–induced acneiform eruption",
+      "Rosacea",
+      "Steroid acne",
+      "Acne vulgaris"
+    ]
+  },
+  {
+    "id": "37",
+    "pmid": "35350599",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Demodicosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Eczema",
+        "ground_truth": "Seborrheic dermatitis",
+        "similarity": 0.8882
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scabies",
+        "ground_truth": "Rosacea",
+        "similarity": 0.815
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Contact dermatitis",
+      "Atopic dermatitis",
+      "Eczema"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Demodicosis",
+      "Irritant contact dermatitis",
+      "Rosacea",
+      "Perioral dermatitis",
+      "Seborrheic dermatitis"
+    ]
+  },
+  {
+    "id": "38",
+    "pmid": "30210724",
+    "image_paths": [],
+    "prompt": "Severe acne",
+    "predicted_diagnosis": "Severe acne",
+    "ground_truth_diagnosis": "Nodulocystic Acne (with Isotretinoin-Induced Flare)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Severe acne",
+        "ground_truth": "Nodulocystic Acne",
+        "similarity": 0.9025
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Nodular acne",
+        "ground_truth": "GramNegative Folliculitis",
+        "similarity": 0.7747
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Severe acne",
+      "Nodular acne"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Nodulocystic Acne",
+      "Acne Fulminans",
+      "GramNegative Folliculitis"
+    ]
+  },
+  {
+    "id": "39",
+    "pmid": "39624566",
+    "image_paths": [],
+    "prompt": "Drug reaction",
+    "predicted_diagnosis": "Drug reaction",
+    "ground_truth_diagnosis": "Severe EGFR inhibitor-induced papulopustular eruption (acneiform rash)  \n*(ICD-10: L27.0 - Drug-induced eruption)*",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Drug Reaction",
+        "ground_truth": "Bacterial folliculitis",
+        "similarity": 0.8024
+      },
+      {
+        "pair_id": "B",
+        "predicted": "CancerRelated Skin Changes",
+        "ground_truth": "Other drug eruptions",
+        "similarity": 0.8698
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug Reaction",
+      "Infection",
+      "Autoimmune Disorders",
+      "CancerRelated Skin Changes",
+      "Paraneoplastic Syndrome"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "EGFRiinduced papulopustular eruption",
+      "Acne vulgaris",
+      "Rosacea",
+      "Bacterial folliculitis",
+      "Other drug eruptions",
+      "Pustular psoriasis"
+    ]
+  },
+  {
+    "id": "40",
+    "pmid": "35340734",
+    "image_paths": [],
+    "prompt": "Demodex hypersensitivity dermatitis",
+    "predicted_diagnosis": "Demodex hypersensitivity dermatitis",
+    "ground_truth_diagnosis": "Demodicosis (folliculitis-like type)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Demodicosis",
+        "similarity": 0.7412
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Demodicosis",
+      "Acne vulgaris",
+      "Perioral dermatitis",
+      "Rosacea"
+    ]
+  },
+  {
+    "id": "41",
+    "pmid": "33796557",
+    "image_paths": [],
+    "prompt": "Acne fulminans",
+    "predicted_diagnosis": "Acne fulminans",
+    "ground_truth_diagnosis": "Isotretinoin-Induced Acne Fulminans (IIAF) with Systemic Symptoms",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "IsotretinoinInduced Acne Fulminans with Systemic Symptoms",
+        "similarity": 0.7422
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "IsotretinoinInduced Acne Fulminans with Systemic Symptoms",
+      "Severe bacterial superinfection",
+      "Abscess",
+      "Cellulitis",
+      "Staphylococcal scalded skin",
+      "Autoinflammatory syndrome",
+      "PAPA",
+      "PASH",
+      "SAPHO",
+      "Severe drug reaction",
+      "AGEP",
+      "DRESS"
+    ]
+  },
+  {
+    "id": "42",
+    "pmid": "20602651",
+    "image_paths": [],
+    "prompt": "Acne Vulgaris with bacterial superinfection by Staphylococcus aureus",
+    "predicted_diagnosis": "Acne Vulgaris with bacterial superinfection by Staphylococcus aureus",
+    "ground_truth_diagnosis": "Acne fulminans",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Acne Vulgaris with bacterial superinfection",
+        "ground_truth": "Acne Fulminans",
+        "similarity": 0.8192
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Acne Vulgaris with bacterial superinfection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acne Fulminans",
+      "Pyoderma Gangrenosum",
+      "Acne Conglobata",
+      "Hidradenitis Suppurativa",
+      "Deep Fungal Infection"
+    ]
+  },
+  {
+    "id": "43",
+    "pmid": "37250640",
+    "image_paths": [],
+    "prompt": "Severe inflammatory skin condition with infectious component",
+    "predicted_diagnosis": "Severe inflammatory skin condition with infectious component",
+    "ground_truth_diagnosis": "Acne vulgaris, severe nodulocystic variant",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Acne vulgaris",
+        "similarity": 0.8687
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acne vulgaris",
+      "Acne fulminans",
+      "Gramnegative folliculitis",
+      "Steroidinduced acne flare"
+    ]
+  },
+  {
+    "id": "44",
+    "pmid": "28831424",
+    "image_paths": [],
+    "prompt": "Acne vulgaris",
+    "predicted_diagnosis": "Acne vulgaris",
+    "ground_truth_diagnosis": "Acne Conglobata",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Acne vulgaris flareup",
+        "ground_truth": "Hidradenitis Suppurativa",
+        "similarity": 0.7598
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Dermatitis",
+        "ground_truth": "Acne Conglobata",
+        "similarity": 0.7968
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Acne vulgaris flareup",
+      "Rosacea",
+      "Dermatitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acne Conglobata",
+      "Pyoderma Faciale",
+      "Hidradenitis Suppurativa"
+    ]
+  },
+  {
+    "id": "45",
+    "pmid": "40007815",
+    "image_paths": [],
+    "prompt": "Acne vulgaris",
+    "predicted_diagnosis": "Acne vulgaris",
+    "ground_truth_diagnosis": "Facial multiple melanocytic nevus-like dark macules secondary to severe acne vulgaris.",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Postinflammatory hyperpigmentation",
+        "similarity": 0.7693
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Postinflammatory hyperpigmentation",
+      "Melanocytic nevi",
+      "Dermatosis papulosa nigra",
+      "Lentigines",
+      "Acneassociated melanocytic nevuslike macules"
+    ]
+  },
+  {
+    "id": "46",
+    "pmid": "32180982",
+    "image_paths": [],
+    "prompt": "Osteoma cutis",
+    "predicted_diagnosis": "Osteoma cutis",
+    "ground_truth_diagnosis": "Multiple Miliary Osteoma Cutis (MMOC)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Rosacea",
+        "ground_truth": "Secondary Osteoma Cutis",
+        "similarity": 0.7891
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Acne",
+        "ground_truth": "Syringomas",
+        "similarity": 0.7764
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Acne",
+      "Rosacea",
+      "Seborrheic keratosis",
+      "Basal cell carcinoma"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Multiple Miliary Osteoma Cutis",
+      "Acne Vulgaris",
+      "Trichoepitheliomas",
+      "Syringomas",
+      "Eruptive Milia",
+      "Secondary Osteoma Cutis"
+    ]
+  },
+  {
+    "id": "47",
+    "pmid": "37288194",
+    "image_paths": [],
+    "prompt": "Seborrheic dermatitis",
+    "predicted_diagnosis": "Seborrheic dermatitis",
+    "ground_truth_diagnosis": "Seborrheic dermatitis-like eruption induced by isotretinoin",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Inflammatory skin disorders",
+        "ground_truth": "Atopic dermatitis flare",
+        "similarity": 0.801
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Seborrheic dermatitis",
+        "ground_truth": "Perioral dermatitis",
+        "similarity": 0.8153
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Acne vulgaris",
+      "Seborrheic dermatitis",
+      "Inflammatory skin disorders"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Isotretinoininduced seborrheic dermatitislike eruption",
+      "Classic seborrheic dermatitis",
+      "Atopic dermatitis flare",
+      "Perioral dermatitis",
+      "Acne fulminans"
+    ]
+  },
+  {
+    "id": "48",
+    "pmid": "33655144",
+    "image_paths": [],
+    "prompt": "Psoriatic arthritis",
+    "predicted_diagnosis": "Psoriatic arthritis",
+    "ground_truth_diagnosis": "Acne Fulminans",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Acne Fulminans",
+        "similarity": 0.765
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acne Fulminans",
+      "Acne Conglobata",
+      "Hidradenitis Suppurativa",
+      "GramNegative Folliculitis",
+      "Behçet's Disease"
+    ]
+  },
+  {
+    "id": "49",
+    "pmid": "36843835",
+    "image_paths": [],
+    "prompt": "Lipoma",
+    "predicted_diagnosis": "Lipoma",
+    "ground_truth_diagnosis": "Giant epidermal cyst",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Lipoma",
+        "ground_truth": "Acute Abscess",
+        "similarity": 0.7675
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Dermoid cyst",
+        "ground_truth": "Giant Epidermal Cyst",
+        "similarity": 0.823
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Lipoma",
+      "Dermoid cyst"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Giant Epidermal Cyst",
+      "Giant Lipoma",
+      "Acute Abscess",
+      "Pilar Cyst"
+    ]
+  },
+  {
+    "id": "50",
+    "pmid": "24278083",
+    "image_paths": [],
+    "prompt": "Seborrheic keratosis",
+    "predicted_diagnosis": "Seborrheic keratosis",
+    "ground_truth_diagnosis": "Nevus comedonicus",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Nevus comedonicus",
+        "similarity": 0.747
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Nevus comedonicus",
+      "Acne vulgaris",
+      "Dilated pore of Winer",
+      "Comedonal nevus"
+    ]
+  },
+  {
+    "id": "51",
+    "pmid": "33786241",
+    "image_paths": [],
+    "prompt": "Polycystic Ovary Syndrome with Thyroid Dysfunction",
+    "predicted_diagnosis": "Polycystic Ovary Syndrome with Thyroid Dysfunction",
+    "ground_truth_diagnosis": "Malassezia (Pityrosporum) Folliculitis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Polycystic Ovary Syndrome",
+        "ground_truth": "Follicular eczema",
+        "similarity": 0.7706
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Thyroid dysfunction",
+        "ground_truth": "Steroid acne",
+        "similarity": 0.756
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Polycystic Ovary Syndrome",
+      "Thyroid dysfunction",
+      "Fungal infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Malassezia folliculitis",
+      "Acne vulgaris",
+      "Bacterial folliculitis",
+      "Steroid acne",
+      "Follicular eczema"
+    ]
+  },
+  {
+    "id": "52",
+    "pmid": "32269695",
+    "image_paths": [],
+    "prompt": "Rosai-Dorfman disease",
+    "predicted_diagnosis": "Rosai-Dorfman disease",
+    "ground_truth_diagnosis": "Extranodal Rosai-Dorfman Disease** (Cutaneous and systemic involvement)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Extranodal RDD",
+        "similarity": 0.6529
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Extranodal RDD",
+      "Granulomatous rosacea",
+      "Acne vulgaris",
+      "Pityrosporum folliculitis",
+      "Langerhans cell histiocytosis"
+    ]
+  },
+  {
+    "id": "53",
+    "pmid": "24350014",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Bullous scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Psoriasis",
+        "ground_truth": "Bullous scabies",
+        "similarity": 0.768
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scabies",
+        "ground_truth": "Dyshidrotic eczema",
+        "similarity": 0.7823
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Contact dermatitis",
+      "Psoriasis",
+      "Pemphigus vulgaris"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Bullous scabies",
+      "Bullous pemphigoid",
+      "Dyshidrotic eczema",
+      "Bullous impetigo"
+    ]
+  },
+  {
+    "id": "54",
+    "pmid": "38971966",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Crusted Scabies (Norwegian Scabies) in an Immunosuppressed Paediatric Liver Transplant Recipient",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Scabies",
+        "ground_truth": "Psoriasis",
+        "similarity": 0.8486
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Fungal infection",
+        "ground_truth": "Crusted Scabies",
+        "similarity": 0.7714
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Fungal infection",
+      "Drug reaction"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted Scabies",
+      "Psoriasis",
+      "Eczematous Dermatitis",
+      "Drug Eruption"
+    ]
+  },
+  {
+    "id": "55",
+    "pmid": "29723368",
+    "image_paths": [],
+    "prompt": "Hypereosinophilic syndrome",
+    "predicted_diagnosis": "Hypereosinophilic syndrome",
+    "ground_truth_diagnosis": "Crusted Scabies (Norwegian Scabies)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Paraneoplastic syndromes",
+        "ground_truth": "Acquired Ichthyosis",
+        "similarity": 0.7321
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Hypereosinophilic syndrome",
+        "ground_truth": "Crusted Scabies",
+        "similarity": 0.671
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Hypereosinophilic syndrome",
+      "Chronic urticaria",
+      "Paraneoplastic syndromes"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted Scabies",
+      "Psoriasis Vulgaris",
+      "Mycosis Fungoides",
+      "Extensive Dermatophytosis",
+      "Acquired Ichthyosis"
+    ]
+  },
+  {
+    "id": "56",
+    "pmid": "31019957",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Scabies with Hemorrhagic Bullae** (Bullous Scabies Variant)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Scabies with bullae",
+        "similarity": 0.7372
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies with bullae",
+      "Bullous pemphigoid",
+      "Pemphigus vulgaris",
+      "Bullous impetigo",
+      "Acquired epidermolysis bullosa",
+      "Insect bite reaction"
+    ]
+  },
+  {
+    "id": "57",
+    "pmid": "34178521",
+    "image_paths": [],
+    "prompt": "None",
+    "predicted_diagnosis": "None",
+    "ground_truth_diagnosis": "Crusted Scabies-Induced Hypereosinophilic Syndrome",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Crusted scabies",
+        "similarity": 0.78
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted scabies",
+      "Cutaneous Tcell lymphoma",
+      "Severe eczema",
+      "Primary hypereosinophilic syndrome"
+    ]
+  },
+  {
+    "id": "58",
+    "pmid": "38385053",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Nodular Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Dermatitis",
+        "ground_truth": "Nodular Scabies",
+        "similarity": 0.8515
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scabies",
+        "ground_truth": "Allergic Contact Dermatitis",
+        "similarity": 0.8443
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Dermatitis",
+      "Fungal infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Nodular Scabies",
+      "Allergic Contact Dermatitis",
+      "Lichen Planus",
+      "Folliculitis"
+    ]
+  },
+  {
+    "id": "59",
+    "pmid": "36262356",
+    "image_paths": [],
+    "prompt": "Drug-induced eruption",
+    "predicted_diagnosis": "Drug-induced eruption",
+    "ground_truth_diagnosis": "",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Atopic dermatitis",
+        "ground_truth": "Crusted scabies",
+        "similarity": 0.8351
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "Atopic dermatitis",
+        "similarity": 0.8767
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Atopic dermatitis",
+      "Psoriasis",
+      "Pemphigus",
+      "Druginduced eruption"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted scabies",
+      "Cutaneous Tcell lymphoma",
+      "Atopic dermatitis",
+      "Psoriasis",
+      "Autoimmune connective tissue disease"
+    ]
+  },
+  {
+    "id": "60",
+    "pmid": "33258442",
+    "image_paths": [],
+    "prompt": "Scabies infestation with coexisting psoriasis and vitiligo",
+    "predicted_diagnosis": "Scabies infestation with coexisting psoriasis and vitiligo",
+    "ground_truth_diagnosis": "Scabies Infestation (Crusted Variant with Oral Involvement)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Psoriasis",
+        "ground_truth": "Scabies Infestation",
+        "similarity": 0.83
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scabies infestation",
+        "ground_truth": "Mucous Membrane Pemphigoid",
+        "similarity": 0.7242
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies infestation",
+      "Psoriasis",
+      "Vitiligo",
+      "Rheumatic fever"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies Infestation",
+      "Mucous Membrane Pemphigoid",
+      "Psoriasis",
+      "Erosive Oral Lichen Planus"
+    ]
+  },
+  {
+    "id": "61",
+    "pmid": "25798153",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Crusted Scabies (Norwegian Scabies)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Scabies",
+        "ground_truth": "Crusted scabies",
+        "similarity": 0.9362
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted scabies",
+      "Psoriasis",
+      "Eczematous dermatitis",
+      "Drug eruption"
+    ]
+  },
+  {
+    "id": "62",
+    "pmid": "26345076",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Nodular Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Eczema",
+        "ground_truth": "Papular urticaria",
+        "similarity": 0.7956
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Contact dermatitis",
+        "ground_truth": "Langerhans cell histiocytosis",
+        "similarity": 0.766
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Eczema",
+      "Contact dermatitis",
+      "Insect bites"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Nodular scabies",
+      "Atopic dermatitis",
+      "Contact dermatitis",
+      "Papular urticaria",
+      "Langerhans cell histiocytosis"
+    ]
+  },
+  {
+    "id": "63",
+    "pmid": "35111464",
+    "image_paths": [],
+    "prompt": "Scabies with possible co-infection of molluscum contagiosum",
+    "predicted_diagnosis": "Scabies with possible co-infection of molluscum contagiosum",
+    "ground_truth_diagnosis": "Concurrent Molluscum Contagiosum Infection and Scabies Infestation",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Molluscum contagiosum",
+        "ground_truth": "Scabies",
+        "similarity": 0.7641
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scabies",
+        "ground_truth": "Molluscum contagiosum",
+        "similarity": 0.7641
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Molluscum contagiosum"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "Molluscum contagiosum",
+      "Genital warts",
+      "Syphilitic papules",
+      "Folliculitis"
+    ]
+  },
+  {
+    "id": "64",
+    "pmid": "37953900",
+    "image_paths": [],
+    "prompt": "Intractable or severe scabies infestation with possible secondary bacterial infection or drug reaction",
+    "predicted_diagnosis": "Intractable or severe scabies infestation with possible secondary bacterial infection or drug reaction",
+    "ground_truth_diagnosis": "Scabies (with nodular scabies component)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Drug reaction",
+        "ground_truth": "Scabies",
+        "similarity": 0.825
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Eczema",
+        "ground_truth": "Nodular Prurigo",
+        "similarity": 0.7769
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug reaction",
+      "Contact dermatitis",
+      "Psoriasis",
+      "Eczema",
+      "Secondary bacterial infection",
+      "Mite infestation other than scabies",
+      "Neuropathic itch",
+      "Psychogenic itch",
+      "Intractable scabies",
+      "Severe scabies infestation"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "Nodular Prurigo",
+      "Allergic Contact Dermatitis",
+      "Bullous Pemphigoid"
+    ]
+  },
+  {
+    "id": "65",
+    "pmid": "38711879",
+    "image_paths": [],
+    "prompt": "Eczema",
+    "predicted_diagnosis": "Eczema",
+    "ground_truth_diagnosis": "Crusted Scabies (Norwegian Scabies)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Infectious causes",
+        "ground_truth": "Crusted Scabies",
+        "similarity": 0.7837
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "Recalcitrant Allergic Dermatitis",
+        "similarity": 0.8719
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Eczema",
+      "Psoriasis",
+      "Contact dermatitis",
+      "Drug reaction",
+      "Infectious causes"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted Scabies",
+      "Pruritus of Cirrhosis",
+      "Psoriasis",
+      "Cutaneous Tcell Lymphoma",
+      "Recalcitrant Allergic Dermatitis"
+    ]
+  },
+  {
+    "id": "66",
+    "pmid": "33708329",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Crusted Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Psoriasis",
+        "ground_truth": "Eczema",
+        "similarity": 0.8965
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Pityriasis rosea",
+        "ground_truth": "Irritant Contact Dermatitis",
+        "similarity": 0.7489
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Eczema",
+      "Psoriasis",
+      "Tinea corporis",
+      "Pityriasis rosea"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted Scabies",
+      "Psoriasis",
+      "Irritant Contact Dermatitis",
+      "Eczema"
+    ]
+  },
+  {
+    "id": "67",
+    "pmid": "27440959",
+    "image_paths": [],
+    "prompt": "Drug-induced bullous reaction",
+    "predicted_diagnosis": "Drug-induced bullous reaction",
+    "ground_truth_diagnosis": "Fixed Drug Eruption due to Levocetirizine",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Allergic reaction",
+        "ground_truth": "Fixed Drug Eruption",
+        "similarity": 0.8344
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Infection",
+        "ground_truth": "Allergic Contact Dermatitis",
+        "similarity": 0.889
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Bullous skin reaction",
+      "Dermatitis",
+      "Allergic reaction",
+      "Contact dermatitis",
+      "Infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Fixed Drug Eruption",
+      "Bullous Scabies",
+      "Allergic Contact Dermatitis",
+      "Bullous Pemphigoid",
+      "Erythema Multiforme"
+    ]
+  },
+  {
+    "id": "68",
+    "pmid": "21173918",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Psoriasis",
+        "ground_truth": "Allergic Contact Dermatitis",
+        "similarity": 0.8741
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scabies",
+        "ground_truth": "Scabies",
+        "similarity": 1.0
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Atopic dermatitis",
+      "Contact dermatitis",
+      "Psoriasis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "Dermatomyositis",
+      "Atopic Dermatitis",
+      "Allergic Contact Dermatitis"
+    ]
+  },
+  {
+    "id": "69",
+    "pmid": "33708293",
+    "image_paths": [],
+    "prompt": "Scabies infestation with secondary bacterial infection and peripheral neuropathy",
+    "predicted_diagnosis": "Scabies infestation with secondary bacterial infection and peripheral neuropathy",
+    "ground_truth_diagnosis": "Lichen Simplex Chronicus",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Contact dermatitis",
+        "ground_truth": "Lipodermatosclerosis",
+        "similarity": 0.7991
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scabies",
+        "ground_truth": "Taeniasis",
+        "similarity": 0.7849
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Contact dermatitis",
+      "Eczema",
+      "Bacterial infection",
+      "Viral infection",
+      "Peripheral neuropathy"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Lichen simplex chronicus",
+      "Prurigo nodularis",
+      "Lichen planus",
+      "Lipodermatosclerosis",
+      "Taeniasis",
+      "Scabies"
+    ]
+  },
+  {
+    "id": "70",
+    "pmid": "32615745",
+    "image_paths": [],
+    "prompt": "Sarcoptic mange",
+    "predicted_diagnosis": "Sarcoptic mange",
+    "ground_truth_diagnosis": "Sarcoptic mange",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Sarcoptic mange",
+        "ground_truth": "Allergic dermatitis",
+        "similarity": 0.7436
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Mange",
+        "ground_truth": "Demodicosis",
+        "similarity": 0.6777
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Mange",
+      "Sarcoptic mange"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Sarcoptic mange",
+      "Notoedres cati",
+      "Demodicosis",
+      "Dermatophytosis",
+      "Allergic dermatitis"
+    ]
+  },
+  {
+    "id": "71",
+    "pmid": "27190417",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Crusted Scabies (Norwegian Scabies)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Crusted Scabies",
+        "similarity": 0.78
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted Scabies",
+      "Psoriasis",
+      "Eczematous Dermatitis",
+      "Cutaneous Lymphoma"
+    ]
+  },
+  {
+    "id": "72",
+    "pmid": "36028790",
+    "image_paths": [],
+    "prompt": "Tungiasis",
+    "predicted_diagnosis": "Tungiasis",
+    "ground_truth_diagnosis": "Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Scabies",
+        "similarity": 0.8316
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "Atopic Dermatitis",
+      "Papular Urticaria",
+      "Dermatitis Herpetiformis",
+      "Folliculitis"
+    ]
+  },
+  {
+    "id": "73",
+    "pmid": "20523787",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Scabies",
+        "ground_truth": "Scabies",
+        "similarity": 1.0
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Impetigo",
+        "ground_truth": "Impetigo",
+        "similarity": 1.0
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Impetigo"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "VaricellaZoster",
+      "Impetigo",
+      "Folliculitis",
+      "Infantile Seborrheic Dermatitis",
+      "LettererSiwe Disease"
+    ]
+  },
+  {
+    "id": "74",
+    "pmid": "32905381",
+    "image_paths": [],
+    "prompt": "Acute suppurative and necrotizing dermatitis",
+    "predicted_diagnosis": "Acute suppurative and necrotizing dermatitis",
+    "ground_truth_diagnosis": "Non-Classic (Surrepticius) Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "necrotizing dermatitis",
+        "ground_truth": "Palmar Pustulosis",
+        "similarity": 0.7573
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Acute suppurative",
+        "ground_truth": "NonClassic Scabies",
+        "similarity": 0.7733
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Acute suppurative",
+      "necrotizing dermatitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Palmar Pustulosis",
+      "Bacterial Cellulitis",
+      "Sweet Syndrome",
+      "Pustular Vasculitis",
+      "NonClassic Scabies"
+    ]
+  },
+  {
+    "id": "75",
+    "pmid": "21886727",
+    "image_paths": [],
+    "prompt": "Tick-borne parasitic infection",
+    "predicted_diagnosis": "Tick-borne parasitic infection",
+    "ground_truth_diagnosis": "Norwegian (Crusted) Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Autoimmune condition",
+        "ground_truth": "Bullous impetigo",
+        "similarity": 0.7611
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Ticktransmitted helminth infection",
+        "ground_truth": "Congenital candidiasis",
+        "similarity": 0.6948
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Atopic dermatitis",
+      "Parasitic infection",
+      "Autoimmune condition",
+      "Inflammatory condition",
+      "Tickborne parasitic infection",
+      "Scabies",
+      "Ticktransmitted helminth infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted scabies",
+      "Atopic dermatitis flare",
+      "Bullous impetigo",
+      "Staphylococcal scalded skin syndrome",
+      "Congenital candidiasis"
+    ]
+  },
+  {
+    "id": "76",
+    "pmid": "18341688",
+    "image_paths": [],
+    "prompt": "Crusted scabies",
+    "predicted_diagnosis": "Crusted scabies",
+    "ground_truth_diagnosis": "Norwegian scabies (crusted scabies)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Other parasitic infestations",
+        "ground_truth": "Dermatitis herpetiformis",
+        "similarity": 0.8485
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Secondary bacterial infections",
+        "ground_truth": "Norwegian scabies",
+        "similarity": 0.7628
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Secondary bacterial infections",
+      "Drug reactions",
+      "Other parasitic infestations"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Norwegian scabies",
+      "Psoriasis",
+      "Adverse drug reaction",
+      "Dermatitis herpetiformis",
+      "Langerhans cell histiocytosis"
+    ]
+  },
+  {
+    "id": "77",
+    "pmid": "30417058",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Scabies",
+        "similarity": 0.8316
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "Allergic Contact Dermatitis",
+      "Tinea corporis/cruris",
+      "Bullous Pemphigoid",
+      "Lichen Simplex Chronicus"
+    ]
+  },
+  {
+    "id": "78",
+    "pmid": "38280082",
+    "image_paths": [],
+    "prompt": "Mange due to mite infestation",
+    "predicted_diagnosis": "Mange due to mite infestation",
+    "ground_truth_diagnosis": "Sarcoptic mange (Sarcoptes scabiei infestation) with secondary bacterial pyoderma",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Sarcoptic mange",
+        "similarity": 0.7227
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Sarcoptic mange",
+      "Psoroptic mange",
+      "Chorioptic mange",
+      "Dermatophilosis",
+      "Dermatophytosis"
+    ]
+  },
+  {
+    "id": "79",
+    "pmid": "34430105",
+    "image_paths": [],
+    "prompt": "Henoch-Schönlein Purpura",
+    "predicted_diagnosis": "Henoch-Schönlein Purpura",
+    "ground_truth_diagnosis": "Crusted Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "HenochSchönlein Purpura",
+        "ground_truth": "Crusted scabies",
+        "similarity": 0.7412
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Vasculitis",
+        "ground_truth": "Bullous pemphigoid",
+        "similarity": 0.7279
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "HenochSchönlein Purpura",
+      "Vasculitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Crusted scabies",
+      "Druginduced thrombocytopenia",
+      "Dermatomyositis",
+      "Bullous pemphigoid"
+    ]
+  },
+  {
+    "id": "80",
+    "pmid": "39575310",
+    "image_paths": [],
+    "prompt": "None",
+    "predicted_diagnosis": "None",
+    "ground_truth_diagnosis": "Genital Nodular Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Nodular Scabies",
+        "similarity": 0.8414
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Nodular Scabies",
+      "Lichen Sclerosus",
+      "Contact Dermatitis",
+      "Psoriasis",
+      "Tungiasis"
+    ]
+  },
+  {
+    "id": "81",
+    "pmid": "33457483",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Scabies (Sarcoptes scabiei infestation)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Scabies",
+        "similarity": 0.8316
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "Langerhans Cell Histiocytosis",
+      "Leukemia Cutis"
+    ]
+  },
+  {
+    "id": "82",
+    "pmid": "23197214",
+    "image_paths": [],
+    "prompt": "Cutaneous scabies",
+    "predicted_diagnosis": "Cutaneous scabies",
+    "ground_truth_diagnosis": "Norwegian Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Norwegian Scabies",
+        "similarity": 0.7775
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Norwegian Scabies",
+      "Generalized Ostraceous Psoriasis",
+      "Chronic Eczematous Dermatitis",
+      "Crusted Tinea",
+      "Cutaneous Tcell Lymphoma"
+    ]
+  },
+  {
+    "id": "83",
+    "pmid": "32944477",
+    "image_paths": [],
+    "prompt": "Atopic dermatitis",
+    "predicted_diagnosis": "Atopic dermatitis",
+    "ground_truth_diagnosis": "Pityriasis rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Atopic Dermatitis",
+        "ground_truth": "Guttate psoriasis",
+        "similarity": 0.7956
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "Secondary syphilis",
+        "similarity": 0.838
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Atopic Dermatitis",
+      "Contact Dermatitis",
+      "DrugInduced Dermatitis",
+      "Psoriasis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosea",
+      "Guttate psoriasis",
+      "Dermatophytosis",
+      "Pityriasis lichenoides chronica",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "84",
+    "pmid": "24891682",
+    "image_paths": [],
+    "prompt": "Pityriasis rosea",
+    "predicted_diagnosis": "Pityriasis rosea",
+    "ground_truth_diagnosis": "Recurrent Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Pityriasis Rosea",
+        "similarity": 0.7645
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea",
+      "Tinea Corporis",
+      "Secondary Syphilis",
+      "Pityriasis Lichenoides Chronica",
+      "Guttate Psoriasis"
+    ]
+  },
+  {
+    "id": "85",
+    "pmid": "29182459",
+    "image_paths": [],
+    "prompt": "Cutaneous adverse reaction to influenza vaccine",
+    "predicted_diagnosis": "Cutaneous adverse reaction to influenza vaccine",
+    "ground_truth_diagnosis": "Recurrent Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Autoimmune or Inflammatory Condition",
+        "ground_truth": "Tinea Corporis",
+        "similarity": 0.8163
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Infectious Etiology",
+        "ground_truth": "Guttate Psoriasis",
+        "similarity": 0.7844
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug Reaction",
+      "Infectious Etiology",
+      "Autoimmune or Inflammatory Condition",
+      "Contact dermatitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea",
+      "Secondary Syphilis",
+      "Tinea Corporis",
+      "Guttate Psoriasis",
+      "Viral Exanthem"
+    ]
+  },
+  {
+    "id": "86",
+    "pmid": "39430635",
+    "image_paths": [],
+    "prompt": "Psoriasis with superimposed allergic contact dermatitis",
+    "predicted_diagnosis": "Psoriasis with superimposed allergic contact dermatitis",
+    "ground_truth_diagnosis": "Pityriasis rosea-like drug eruption secondary to deucravacitinib.",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Secondary syphilis",
+        "ground_truth": "Classic pityriasis rosea",
+        "similarity": 0.7654
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Allergic contact dermatitis",
+        "ground_truth": "Psoriasis flare",
+        "similarity": 0.8134
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Psoriasis",
+      "Allergic contact dermatitis",
+      "Secondary syphilis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosealike drug eruption",
+      "Classic pityriasis rosea",
+      "Psoriasis flare",
+      "Nummular eczema",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "87",
+    "pmid": "23343697",
+    "image_paths": [],
+    "prompt": "Prurigo nodularis",
+    "predicted_diagnosis": "Prurigo nodularis",
+    "ground_truth_diagnosis": "Pityriasis rosea-like drug eruption secondary to nortriptyline",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Pityriasis rosealike drug eruption",
+        "similarity": 0.8069
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosealike drug eruption",
+      "Idiopathic pityriasis rosea",
+      "Phototoxic drug reaction",
+      "Nummular eczema",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "88",
+    "pmid": "23056712",
+    "image_paths": [],
+    "prompt": "Fixed drug eruption",
+    "predicted_diagnosis": "Fixed drug eruption",
+    "ground_truth_diagnosis": "Pityriasis rosea inversa",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Psoriasis",
+        "ground_truth": "Pityriasis rosea inversa",
+        "similarity": 0.7708
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Drug Reaction",
+        "ground_truth": "Cutaneous mastocytosis",
+        "similarity": 0.7534
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug Reaction",
+      "Contact Dermatitis",
+      "Psoriasis",
+      "Erythema Multiforme"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosea inversa",
+      "Guttate psoriasis",
+      "Cutaneous mastocytosis",
+      "Atypical pityriasis rosea"
+    ]
+  },
+  {
+    "id": "89",
+    "pmid": "22826716",
+    "image_paths": [],
+    "prompt": "Viral exanthem",
+    "predicted_diagnosis": "Viral exanthem",
+    "ground_truth_diagnosis": "Follicular Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Viral exanthem",
+        "ground_truth": "Secondary Syphilis",
+        "similarity": 0.7602
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Lichen planus",
+        "ground_truth": "Drug Eruption",
+        "similarity": 0.7879
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Viral exanthem",
+      "Drug reaction",
+      "Psoriasis",
+      "Lichen planus"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Follicular Pityriasis Rosea",
+      "Follicular Lichen Planus",
+      "Keratosis Pilaris",
+      "Atopic Dermatitis",
+      "Dermatophytosis",
+      "Psoriasis",
+      "Secondary Syphilis",
+      "Drug Eruption",
+      "Erythema Multiforme",
+      "Erythema Annulare Centrifugum",
+      "Acral Necrolytic Erythema"
+    ]
+  },
+  {
+    "id": "90",
+    "pmid": "34435935",
+    "image_paths": [],
+    "prompt": "Psoriasis",
+    "predicted_diagnosis": "Psoriasis",
+    "ground_truth_diagnosis": "Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Seborrheic dermatitis",
+        "ground_truth": "Drug Eruption",
+        "similarity": 0.8191
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "Nummular Eczema",
+        "similarity": 0.7679
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Psoriasis",
+      "Seborrheic dermatitis",
+      "Eczema"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea",
+      "Nummular Eczema",
+      "Guttate Psoriasis",
+      "Secondary Syphilis",
+      "Drug Eruption"
+    ]
+  },
+  {
+    "id": "91",
+    "pmid": "21712901",
+    "image_paths": [],
+    "prompt": "None",
+    "predicted_diagnosis": "None",
+    "ground_truth_diagnosis": "Pityriasis rosea (PR)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Pityriasis rosea",
+        "similarity": 0.7645
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosea",
+      "Guttate psoriasis",
+      "Tinea corporis/capitis",
+      "Nummular eczema",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "92",
+    "pmid": "36828523",
+    "image_paths": [],
+    "prompt": "Bullous pemphigoid",
+    "predicted_diagnosis": "Bullous pemphigoid",
+    "ground_truth_diagnosis": "",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Bullous pemphigoid",
+        "ground_truth": "Bullous Pemphigoid",
+        "similarity": 1.0
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Bullous pemphigoid"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Bullous Pemphigoid",
+      "Psoriasis Pustulosa",
+      "Pemphigus Vulgaris",
+      "DrugInduced Bullous Pemphigoid",
+      "Eczema Herpeticum"
+    ]
+  },
+  {
+    "id": "93",
+    "pmid": "25302254",
+    "image_paths": [],
+    "prompt": "Drug-induced hypersensitivity reaction",
+    "predicted_diagnosis": "Drug-induced hypersensitivity reaction",
+    "ground_truth_diagnosis": "Pityriasis Rosea-Like Drug Rash",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Druginduced hypersensitivity reaction",
+        "ground_truth": "Pityriasis Lichenoides",
+        "similarity": 0.7181
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Bacterial infection",
+        "ground_truth": "Nummular Dermatitis",
+        "similarity": 0.749
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Druginduced hypersensitivity reaction",
+      "Viral exanthem",
+      "Bacterial infection",
+      "Erythema multiforme",
+      "StevensJohnson syndrome"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea",
+      "Drug Eruption",
+      "Guttate Psoriasis",
+      "Secondary Syphilis",
+      "Pityriasis Lichenoides",
+      "Nummular Dermatitis"
+    ]
+  },
+  {
+    "id": "94",
+    "pmid": "29520857",
+    "image_paths": [],
+    "prompt": "Pityriasis rosea",
+    "predicted_diagnosis": "Pityriasis rosea",
+    "ground_truth_diagnosis": "Pityriasis rosea‐like eruption secondary to ondansetron",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Drug reaction",
+        "ground_truth": "Druginduced PRlike eruption",
+        "similarity": 0.787
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Pityriasis rosea",
+        "ground_truth": "Pityriasis lichenoides chronica",
+        "similarity": 0.7859
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Pityriasis rosea",
+      "Drug reaction",
+      "Psoriasis",
+      "Eczema",
+      "Contact dermatitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Druginduced PRlike eruption",
+      "Classic pityriasis rosea",
+      "Guttate psoriasis",
+      "Secondary syphilis",
+      "Pityriasis lichenoides chronica"
+    ]
+  },
+  {
+    "id": "95",
+    "pmid": "33832113",
+    "image_paths": [],
+    "prompt": "COVID-19 skin manifestation",
+    "predicted_diagnosis": "COVID-19 skin manifestation",
+    "ground_truth_diagnosis": "Pityriasis Rosea Gibert triggered by SARS-CoV-2 infection",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Pityriasis rosea",
+        "ground_truth": "Tinea Corporis",
+        "similarity": 0.7609
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Erythema multiforme",
+        "ground_truth": "Guttate Psoriasis",
+        "similarity": 0.7306
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "COVID19 skin manifestations",
+      "Drug reaction",
+      "Erythema multiforme",
+      "Pityriasis rosea"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea Gibert",
+      "Secondary Syphilis",
+      "HIV Exanthem",
+      "Drug Eruption",
+      "Guttate Psoriasis",
+      "Lichen Planus",
+      "Tinea Corporis",
+      "Parapsoriasis",
+      "Erythema Multiforme"
+    ]
+  },
+  {
+    "id": "96",
+    "pmid": "23130187",
+    "image_paths": [],
+    "prompt": "Nummular dermatitis",
+    "predicted_diagnosis": "Nummular dermatitis",
+    "ground_truth_diagnosis": "Acral Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Nummular dermatitis",
+        "ground_truth": "Pityriasis Rosea",
+        "similarity": 0.6828
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Nummular dermatitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea",
+      "Tinea Corporis",
+      "Psoriasis",
+      "Secondary Syphilis",
+      "Erythema Multiforme",
+      "Drug Eruption",
+      "Atopic Dermatitis"
+    ]
+  },
+  {
+    "id": "97",
+    "pmid": "27051725",
+    "image_paths": [],
+    "prompt": "Psoriasis",
+    "predicted_diagnosis": "Psoriasis",
+    "ground_truth_diagnosis": "Erythema Dyschromicum Perstans",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Erythema Dyschromicum Perstans",
+        "similarity": 0.7715
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Erythema Dyschromicum Perstans",
+      "Pityriasis Rosea",
+      "Lichen Planus Pigmentosus",
+      "Postinflammatory Hyperpigmentation",
+      "Secondary Syphilis"
+    ]
+  },
+  {
+    "id": "98",
+    "pmid": "36843663",
+    "image_paths": [],
+    "prompt": "Dupilumab-induced erythema multiforme-like reaction",
+    "predicted_diagnosis": "Dupilumab-induced erythema multiforme-like reaction",
+    "ground_truth_diagnosis": "Dupilumab-induced pityriasis rosea-like drug eruption",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Dupilumabinduced pityriasis rosealike drug eruption",
+        "similarity": 0.7408
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Dupilumabinduced pityriasis rosealike drug eruption",
+      "Classic pityriasis rosea",
+      "Atopic dermatitis flare",
+      "Guttate psoriasis",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "99",
+    "pmid": "29492350",
+    "image_paths": [],
+    "prompt": "Scabies infestation",
+    "predicted_diagnosis": "Scabies infestation",
+    "ground_truth_diagnosis": "Scabies",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Scabies",
+        "similarity": 0.8316
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Scabies",
+      "Pityriasis Rosea",
+      "Tinea Corporis",
+      "Nummular Eczema"
+    ]
+  },
+  {
+    "id": "100",
+    "pmid": "38628635",
+    "image_paths": [],
+    "prompt": "Psoriasis",
+    "predicted_diagnosis": "Psoriasis",
+    "ground_truth_diagnosis": "Persistent pityriasis rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Eczema",
+        "ground_truth": "Psoriasis",
+        "similarity": 0.8965
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Inflammatory skin disorders",
+        "ground_truth": "Lichen planus",
+        "similarity": 0.8368
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Psoriasis",
+      "Eczema",
+      "Inflammatory skin disorders"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Persistent pityriasis rosea",
+      "Nummular eczema",
+      "Psoriasis",
+      "Tinea corporis",
+      "Lichen planus"
+    ]
+  },
+  {
+    "id": "101",
+    "pmid": "39669865",
+    "image_paths": [],
+    "prompt": "Atopic dermatitis",
+    "predicted_diagnosis": "Atopic dermatitis",
+    "ground_truth_diagnosis": "Pityriasis rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Atopic Dermatitis",
+        "ground_truth": "Pityriasis rosea",
+        "similarity": 0.7761
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Contact Dermatitis",
+        "ground_truth": "Contact dermatitis",
+        "similarity": 1.0
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Atopic Dermatitis",
+      "Contact Dermatitis",
+      "Heat rash",
+      "Viral exanthem",
+      "Fungal infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosea",
+      "Viral exanthem",
+      "Contact dermatitis",
+      "Atopic dermatitis",
+      "Guttate psoriasis",
+      "Molluscum contagiosum",
+      "Lichen planus",
+      "Seborrheic dermatitis",
+      "Dermatofibromas"
+    ]
+  },
+  {
+    "id": "102",
+    "pmid": "22346278",
+    "image_paths": [],
+    "prompt": "Drug reaction to imatinib mesylate",
+    "predicted_diagnosis": "Drug reaction to imatinib mesylate",
+    "ground_truth_diagnosis": "Pityriasis rosea-like drug eruption induced by imatinib mesylate",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Imatinibinduced dermatological side effects",
+        "ground_truth": "Secondary syphilis",
+        "similarity": 0.7537
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Infections",
+        "ground_truth": "Classic pityriasis rosea",
+        "similarity": 0.7933
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug reaction",
+      "Imatinibinduced dermatological side effects",
+      "Infections",
+      "Autoimmune conditions"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosealike drug eruption",
+      "Classic pityriasis rosea",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "103",
+    "pmid": "24452984",
+    "image_paths": [],
+    "prompt": "Pityriasis rosea",
+    "predicted_diagnosis": "Pityriasis rosea",
+    "ground_truth_diagnosis": "Recurrent and Persistent Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Atypical Pityriasis Rosea",
+        "similarity": 0.7464
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Atypical Pityriasis Rosea",
+      "Pityriasis Lichenoides et Varioliformis Acuta",
+      "Secondary Syphilis",
+      "Subacute Cutaneous Lupus Erythematosus"
+    ]
+  },
+  {
+    "id": "104",
+    "pmid": "35518792",
+    "image_paths": [],
+    "prompt": "Psoriasis",
+    "predicted_diagnosis": "Psoriasis",
+    "ground_truth_diagnosis": "Inverse Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Drug reaction",
+        "ground_truth": "Subacute/Chronic Eczema",
+        "similarity": 0.8224
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "Contact Dermatitis",
+        "similarity": 0.8952
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Psoriasis",
+      "Drug reaction",
+      "Infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Inverse Pityriasis Rosea",
+      "Psoriasis",
+      "Subacute/Chronic Eczema",
+      "Contact Dermatitis",
+      "Pityriasis Rubra Pilaris"
+    ]
+  },
+  {
+    "id": "105",
+    "pmid": "38628985",
+    "image_paths": [],
+    "prompt": "Vaccine-induced fixed drug eruption",
+    "predicted_diagnosis": "Vaccine-induced fixed drug eruption",
+    "ground_truth_diagnosis": "Pityriasis rosea (vaccine-triggered)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Vaccineinduced fixed drug eruption",
+        "ground_truth": "Pityriasis versicolor",
+        "similarity": 0.723
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Fixed drug eruption",
+        "ground_truth": "Guttate psoriasis",
+        "similarity": 0.7147
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Fixed drug eruption",
+      "Vaccineinduced fixed drug eruption"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosea",
+      "Pityriasis versicolor",
+      "Guttate psoriasis",
+      "Drug eruption",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "106",
+    "pmid": "28203625",
+    "image_paths": [],
+    "prompt": "Psoriasis",
+    "predicted_diagnosis": "Psoriasis",
+    "ground_truth_diagnosis": "Cutaneous plasmacytosis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Erythema Multiforme",
+        "ground_truth": "Cutaneous sarcoidosis",
+        "similarity": 0.7226
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Pityriasis Rosea",
+        "ground_truth": "Mycosis fungoides",
+        "similarity": 0.7303
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Psoriasis",
+      "Lichen Planus",
+      "Pityriasis Rosea",
+      "Erythema Multiforme"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Cutaneous plasmacytosis",
+      "Pityriasis rosea",
+      "Secondary syphilis",
+      "Mycosis fungoides",
+      "Cutaneous sarcoidosis"
+    ]
+  },
+  {
+    "id": "107",
+    "pmid": "35012825",
+    "image_paths": [],
+    "prompt": "Acute generalized exanthematous pustulosis",
+    "predicted_diagnosis": "Acute generalized exanthematous pustulosis",
+    "ground_truth_diagnosis": "Pityriasis Rosea-like Eruptions** (secondary to COVID-19 mRNA-1273 vaccine hypersensitivity)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Pityriasis Rosea",
+        "similarity": 0.7645
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea",
+      "PRlike Drug Hypersensitivity",
+      "Secondary Syphilis",
+      "Nummular Eczema",
+      "Guttate Psoriasis"
+    ]
+  },
+  {
+    "id": "108",
+    "pmid": "21886752",
+    "image_paths": [],
+    "prompt": "Pityriasis rosea",
+    "predicted_diagnosis": "Pityriasis rosea",
+    "ground_truth_diagnosis": "Pityriasis rosea (unilateral variant)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Pityriasis rosea",
+        "ground_truth": "Secondary syphilis",
+        "similarity": 0.7574
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Atopic dermatitis",
+        "ground_truth": "Nummular eczema",
+        "similarity": 0.7564
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Pityriasis rosea",
+      "Atopic dermatitis",
+      "Psoriasis",
+      "Seborrheic dermatitis",
+      "Contact dermatitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis rosea",
+      "Tinea corporis",
+      "Nummular eczema",
+      "Secondary syphilis"
+    ]
+  },
+  {
+    "id": "109",
+    "pmid": "20181179",
+    "image_paths": [],
+    "prompt": "Scabies",
+    "predicted_diagnosis": "Scabies",
+    "ground_truth_diagnosis": "Atypical Pityriasis Rosea",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Fungal infection",
+        "ground_truth": "Guttate Psoriasis",
+        "similarity": 0.7883
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Eczema",
+        "ground_truth": "Pityriasis Lichenoides",
+        "similarity": 0.7448
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Scabies",
+      "Eczema",
+      "Psoriasis",
+      "Contact dermatitis",
+      "Fungal infection",
+      "Syphilis",
+      "Viral exanthem",
+      "Bacterial infection"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Pityriasis Rosea",
+      "Guttate Psoriasis",
+      "Tinea Corporis",
+      "Secondary Syphilis",
+      "Pityriasis Lichenoides"
+    ]
+  },
+  {
+    "id": "110",
+    "pmid": "26729964",
+    "image_paths": [],
+    "prompt": "Drug reaction",
+    "predicted_diagnosis": "Drug reaction",
+    "ground_truth_diagnosis": "Terbinafine-induced pityriasis rosea-like eruption",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Drug reaction",
+        "ground_truth": "Terbinafineinduced pityriasis rosealike eruption",
+        "similarity": 0.7542
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Allergic contact dermatitis",
+        "ground_truth": "Viral exanthem",
+        "similarity": 0.785
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug reaction",
+      "Allergic contact dermatitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Terbinafineinduced pityriasis rosealike eruption",
+      "Classic pityriasis rosea",
+      "Secondary syphilis",
+      "Pityriasiform seborrheic dermatitis",
+      "Viral exanthem"
+    ]
+  },
+  {
+    "id": "111",
+    "pmid": "33614717",
+    "image_paths": [],
+    "prompt": "Androgenetic alopecia",
+    "predicted_diagnosis": "Androgenetic alopecia",
+    "ground_truth_diagnosis": "Alopecia Areata Universalis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Telogen effluvium",
+        "ground_truth": "Syphilis",
+        "similarity": 0.715
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Androgenetic alopecia",
+        "ground_truth": "Telogen Effluvium",
+        "similarity": 0.7334
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Androgenetic alopecia",
+      "Telogen effluvium"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Areata Universalis",
+      "Telogen Effluvium",
+      "Androgenetic Alopecia",
+      "Scarring Alopecia",
+      "Syphilis"
+    ]
+  },
+  {
+    "id": "112",
+    "pmid": "38765728",
+    "image_paths": [],
+    "prompt": "Alopecia areata",
+    "predicted_diagnosis": "Alopecia areata",
+    "ground_truth_diagnosis": "Alopecia areata incognita",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia Areata",
+        "ground_truth": "Nutritional deficiency",
+        "similarity": 0.8084
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Lichen Planopilaris",
+        "ground_truth": "Androgenetic alopecia",
+        "similarity": 0.7893
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Alopecia Areata",
+      "Lichen Planopilaris"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia areata incognita",
+      "Androgenetic alopecia",
+      "Telogen effluvium",
+      "Vitiligoassociated leukotrichia",
+      "Nutritional deficiency"
+    ]
+  },
+  {
+    "id": "113",
+    "pmid": "35531489",
+    "image_paths": [],
+    "prompt": "Alopecia Areata",
+    "predicted_diagnosis": "Alopecia Areata",
+    "ground_truth_diagnosis": "Alopecia Areata (Ophiasis Pattern)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Androgenetic Alopecia",
+        "ground_truth": "Tinea Capitis",
+        "similarity": 0.7962
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Alopecia Areata",
+        "ground_truth": "Androgenetic Alopecia",
+        "similarity": 0.8871
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Androgenetic Alopecia",
+      "Alopecia Areata",
+      "Tinea Capitis",
+      "Scarring Alopecia",
+      "Lichen planopilaris",
+      "Discoid lupus erythematosus"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Areata (Ophiasis)",
+      "Androgenetic Alopecia",
+      "Trichotillomania",
+      "Tinea Capitis",
+      "Secondary Syphilis"
+    ]
+  },
+  {
+    "id": "114",
+    "pmid": "38585501",
+    "image_paths": [],
+    "prompt": "Atopic dermatitis",
+    "predicted_diagnosis": "Atopic dermatitis",
+    "ground_truth_diagnosis": "Severe Atopic Dermatitis with Comorbid Mild Alopecia Areata",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Severe Atopic Dermatitis",
+        "similarity": 0.8626
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Severe Atopic Dermatitis",
+      "Alopecia Areata",
+      "Tinea Capitis",
+      "Tinea Corporis",
+      "Psoriasis",
+      "Cutaneous TCell Lymphoma"
+    ]
+  },
+  {
+    "id": "115",
+    "pmid": "28761264",
+    "image_paths": [],
+    "prompt": "Alopecia areata with associated psoriatic changes",
+    "predicted_diagnosis": "Alopecia areata with associated psoriatic changes",
+    "ground_truth_diagnosis": "Verruca Vulgaris and Alopecia Areata",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia Areata",
+        "ground_truth": "Alopecia Areata",
+        "similarity": 1.0
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Ectodermal Dysplasia",
+        "ground_truth": "Periungual SCC",
+        "similarity": 0.7019
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Alopecia Areata",
+      "Lichen Planopilaris",
+      "Psoriasis",
+      "Verrucous Carcinoma",
+      "Ectodermal Dysplasia"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Areata",
+      "Verruca Vulgaris",
+      "Tinea Capitis",
+      "Trichotillomania",
+      "Lichen Planopilaris",
+      "Periungual SCC"
+    ]
+  },
+  {
+    "id": "116",
+    "pmid": "31523109",
+    "image_paths": [],
+    "prompt": "Post-surgical scarring alopecia",
+    "predicted_diagnosis": "Post-surgical scarring alopecia",
+    "ground_truth_diagnosis": "Acute Diffuse and Total Alopecia (ADTA)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Acute Diffuse & Total Alopecia",
+        "similarity": 0.8261
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acute Diffuse & Total Alopecia",
+      "Acute Telogen Effluvium",
+      "Female Pattern Hair Loss"
+    ]
+  },
+  {
+    "id": "117",
+    "pmid": "33304703",
+    "image_paths": [],
+    "prompt": "Nutritional deficiency-induced alopecia",
+    "predicted_diagnosis": "Nutritional deficiency-induced alopecia",
+    "ground_truth_diagnosis": "Alopecia areata",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Tinea capitis",
+        "ground_truth": "Telogen Effluvium",
+        "similarity": 0.7395
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Nutritional deficiencies",
+        "ground_truth": "Androgenetic Alopecia",
+        "similarity": 0.7813
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Tinea capitis",
+      "Alopecia areata",
+      "Nutritional deficiencies"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Areata",
+      "Trichotillomania",
+      "Tinea Capitis",
+      "Androgenetic Alopecia",
+      "Telogen Effluvium"
+    ]
+  },
+  {
+    "id": "118",
+    "pmid": "34786445",
+    "image_paths": [],
+    "prompt": "Lichen planopilaris",
+    "predicted_diagnosis": "Lichen planopilaris",
+    "ground_truth_diagnosis": "Paraneoplastic alopecia areata associated with a low-grade cutaneous carcinoma exhibiting squamous and trichoblastic features",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Paraneoplastic alopecia areata",
+        "similarity": 0.9709
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scarring alopecia",
+        "ground_truth": "Basal cell carcinoma variants",
+        "similarity": 0.7787
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Lichen planopilaris",
+      "Androgenetic alopecia",
+      "Alopecia areata",
+      "Scarring alopecia"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Paraneoplastic alopecia areata",
+      "Primary alopecia areata",
+      "Neoplasminduced cicatricial alopecia",
+      "Basal cell carcinoma variants"
+    ]
+  },
+  {
+    "id": "119",
+    "pmid": "25878446",
+    "image_paths": [],
+    "prompt": "Lyme disease with alopecia areata and vitamin D deficiency",
+    "predicted_diagnosis": "Lyme disease with alopecia areata and vitamin D deficiency",
+    "ground_truth_diagnosis": "Acute diffuse and total alopecia of the female scalp associated with Borrelia-infection (acrodermatitis chronica atrophicans)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Lichen planopilaris",
+        "similarity": 0.8131
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Vascular malformation",
+        "ground_truth": "Discoid lupus",
+        "similarity": 0.7488
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Alopecia areata",
+      "Lichen planopilaris",
+      "Traction alopecia",
+      "Deep vein thrombosis",
+      "Lymphedema",
+      "Vascular malformation",
+      "Hashimoto's thyroiditis",
+      "Lyme disease"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Acrodermatitis chronica atrophicans with alopecia",
+      "Alopecia areata",
+      "Telogen effluvium",
+      "Lichen planopilaris",
+      "Discoid lupus"
+    ]
+  },
+  {
+    "id": "120",
+    "pmid": "27127375",
+    "image_paths": [],
+    "prompt": "Androgenetic Alopecia",
+    "predicted_diagnosis": "Androgenetic Alopecia",
+    "ground_truth_diagnosis": "Alopecia Areata Coexisting with Trichotillomania",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Telogen Effluvium",
+        "ground_truth": "Traction alopecia",
+        "similarity": 0.6069
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Scalp Ringworm",
+        "ground_truth": "Alopecia areata",
+        "similarity": 0.8629
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Androgenetic Alopecia",
+      "Traction Alopecia",
+      "Scalp Ringworm",
+      "Alopecia Areata",
+      "Telogen Effluvium"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia areata",
+      "Trichotillomania",
+      "Tinea capitis",
+      "Traction alopecia"
+    ]
+  },
+  {
+    "id": "121",
+    "pmid": "22546914",
+    "image_paths": [],
+    "prompt": "B-cell lymphoma",
+    "predicted_diagnosis": "B-cell lymphoma",
+    "ground_truth_diagnosis": "Epidermotropic Cutaneous B-Cell Lymphoma",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Epitheliotropic Tcell lymphoma",
+        "similarity": 0.807
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Epitheliotropic Tcell lymphoma",
+      "Bacterial dermatitis",
+      "Autoimmune dermatosis",
+      "Pemphigus",
+      "Cutaneous Bcell lymphoma"
+    ]
+  },
+  {
+    "id": "122",
+    "pmid": "34804525",
+    "image_paths": [],
+    "prompt": "Alopecia areata",
+    "predicted_diagnosis": "Alopecia areata",
+    "ground_truth_diagnosis": "Alopecia Universalis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Alopecia Universalis",
+        "similarity": 0.9276
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Alopecia areata"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Universalis",
+      "Androgenetic Alopecia",
+      "Telogen Effluvium",
+      "Syphilitic Alopecia",
+      "Trichotillomania"
+    ]
+  },
+  {
+    "id": "123",
+    "pmid": "37014268",
+    "image_paths": [],
+    "prompt": "Alopecia areata",
+    "predicted_diagnosis": "Alopecia areata",
+    "ground_truth_diagnosis": "Alopecia Universalis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Alopecia Universalis",
+        "similarity": 0.9276
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Alopecia areata"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Universalis",
+      "Androgenetic Alopecia",
+      "Telogen Effluvium",
+      "Trichotillomania",
+      "Tinea Capitis"
+    ]
+  },
+  {
+    "id": "124",
+    "pmid": "35036501",
+    "image_paths": [],
+    "prompt": "Alopecia universalis secondary to plaque psoriasis",
+    "predicted_diagnosis": "Alopecia universalis secondary to plaque psoriasis",
+    "ground_truth_diagnosis": "Alopecia universalis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Alopecia Totalis",
+        "similarity": 0.9079
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Alopecia universalis",
+        "ground_truth": "Androgenetic Alopecia",
+        "similarity": 0.8985
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Alopecia areata",
+      "Alopecia universalis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Universalis",
+      "Alopecia Totalis",
+      "Androgenetic Alopecia",
+      "Telogen Effluvium",
+      "Scarring Alopecia",
+      "Syphilitic Alopecia"
+    ]
+  },
+  {
+    "id": "125",
+    "pmid": "25672312",
+    "image_paths": [],
+    "prompt": "Congenital alopecia areata",
+    "predicted_diagnosis": "Congenital alopecia areata",
+    "ground_truth_diagnosis": "Temporal Triangular Alopecia",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Nevus Sebaceous",
+        "similarity": 0.7889
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Congenital alopecia areata",
+        "ground_truth": "Aplasia Cutis Congenita",
+        "similarity": 0.7799
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Congenital alopecia areata",
+      "Congenital trichorrhexis",
+      "Congenital alopecia universalis",
+      "Alopecia areata",
+      "Androgenetic alopecia",
+      "Traction alopecia"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Temporal Triangular Alopecia",
+      "Alopecia Areata",
+      "Aplasia Cutis Congenita",
+      "Nevus Sebaceous"
+    ]
+  },
+  {
+    "id": "126",
+    "pmid": "32684683",
+    "image_paths": [],
+    "prompt": "Androgenetic alopecia",
+    "predicted_diagnosis": "Androgenetic alopecia",
+    "ground_truth_diagnosis": "Congenital triangular alopecia",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Androgenetic alopecia",
+        "ground_truth": "Congenital triangular alopecia",
+        "similarity": 0.8792
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Androgenetic alopecia"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Congenital triangular alopecia",
+      "Alopecia areata",
+      "Traction alopecia",
+      "Trichotillomania",
+      "Tinea capitis",
+      "Aplasia cutis congenita"
+    ]
+  },
+  {
+    "id": "127",
+    "pmid": "36968986",
+    "image_paths": [],
+    "prompt": "Alopecia areata",
+    "predicted_diagnosis": "Alopecia areata",
+    "ground_truth_diagnosis": "Alopecia Universalis** (as progression of alopecia areata) in the context of **Crohn’s disease** and **adalimumab therapy**.",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Alopecia areata",
+        "similarity": 1.0
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Alopecia areata"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia areata",
+      "Adalimumabinduced alopecia",
+      "Telogen effluvium",
+      "Tinea capitis",
+      "Syphilitic alopecia"
+    ]
+  },
+  {
+    "id": "128",
+    "pmid": "36578312",
+    "image_paths": [],
+    "prompt": "Alopecia universalis",
+    "predicted_diagnosis": "Alopecia universalis",
+    "ground_truth_diagnosis": "Alopecia Universalis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Alopecia Universalis",
+        "similarity": 0.8529
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Universalis",
+      "Androgenetic Alopecia",
+      "Telogen Effluvium",
+      "Syphilitic Alopecia",
+      "Cicatricial Alopecia"
+    ]
+  },
+  {
+    "id": "129",
+    "pmid": "23130264",
+    "image_paths": [],
+    "prompt": "Ichthyosis Vulgaris",
+    "predicted_diagnosis": "Ichthyosis Vulgaris",
+    "ground_truth_diagnosis": "Keratitis-Ichthyosis-Deafness (KID) Syndrome",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Ichthyosis Vulgaris",
+        "ground_truth": "Netherton Syndrome",
+        "similarity": 0.7631
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Psoriasis",
+        "ground_truth": "KID Syndrome",
+        "similarity": 0.8462
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Ichthyosis Vulgaris",
+      "Psoriasis",
+      "Lichen planopilaris"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "KID Syndrome",
+      "IFAP Syndrome",
+      "Congenital Ichthyosiform Erythroderma",
+      "Netherton Syndrome"
+    ]
+  },
+  {
+    "id": "130",
+    "pmid": "36624889",
+    "image_paths": [],
+    "prompt": "Vaccine-induced hypersensitivity reaction",
+    "predicted_diagnosis": "Vaccine-induced hypersensitivity reaction",
+    "ground_truth_diagnosis": "Leukocytoclastic vasculitis (LCV)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Vaccineinduced hypersensitivity reaction",
+        "ground_truth": "Leukocytoclastic Vasculitis",
+        "similarity": 0.7602
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Vaccineinduced hypersensitivity reaction"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Leukocytoclastic Vasculitis",
+      "IgA Vasculitis",
+      "ANCAAssociated Vasculitis",
+      "InfectionTriggered Vasculitis",
+      "Pigmented Purpuric Dermatosis"
+    ]
+  },
+  {
+    "id": "131",
+    "pmid": "30560185",
+    "image_paths": [],
+    "prompt": "Lupus Panniculitis",
+    "predicted_diagnosis": "Lupus Panniculitis",
+    "ground_truth_diagnosis": "Drug-induced alopecia after dupilumab therapy",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "None",
+        "ground_truth": "Druginduced alopecia",
+        "similarity": 0.7829
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "None"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Druginduced alopecia",
+      "Alopecia areata",
+      "Androgenetic alopecia"
+    ]
+  },
+  {
+    "id": "132",
+    "pmid": "28971137",
+    "image_paths": [],
+    "prompt": "Psoriasis with vitiligo and alopecia areata",
+    "predicted_diagnosis": "Psoriasis with vitiligo and alopecia areata",
+    "ground_truth_diagnosis": "Concomitant **Chronic Plaque Psoriasis**, **Nonsegmental Vitiligo**, and **Alopecia Areata**.",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Vitiligo",
+        "ground_truth": "Nonsegmental Vitiligo",
+        "similarity": 0.9426
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Alopecia areata",
+        "ground_truth": "Postinflammatory Hypopigmentation",
+        "similarity": 0.686
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Psoriasis",
+      "Vitiligo",
+      "Alopecia areata"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Chronic Plaque Psoriasis",
+      "Nonsegmental Vitiligo",
+      "Alopecia Areata",
+      "Psoriatic Alopecia",
+      "Postinflammatory Hypopigmentation",
+      "Tinea Capitis"
+    ]
+  },
+  {
+    "id": "133",
+    "pmid": "33754093",
+    "image_paths": [],
+    "prompt": "Telogen effluvium",
+    "predicted_diagnosis": "Telogen effluvium",
+    "ground_truth_diagnosis": "Alopecia areata** (with coexisting female pattern hair loss)",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Androgenetic alopecia",
+        "ground_truth": "Androgenetic Alopecia",
+        "similarity": 1.0
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Telogen effluvium",
+        "ground_truth": "Alopecia Areata",
+        "similarity": 0.7407
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Androgenetic alopecia",
+      "Telogen effluvium"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Alopecia Areata",
+      "Frontal Fibrosing Alopecia",
+      "Telogen Effluvium",
+      "Androgenetic Alopecia"
+    ]
+  },
+  {
+    "id": "134",
+    "pmid": "34703429",
+    "image_paths": [],
+    "prompt": "PsA with associated psoriatic skin lesions",
+    "predicted_diagnosis": "PsA with associated psoriatic skin lesions",
+    "ground_truth_diagnosis": "Secukinumab-associated vitiligo with repigmentation",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Psoriasis",
+        "ground_truth": "Albinism",
+        "similarity": 0.7923
+      },
+      {
+        "pair_id": "B",
+        "predicted": "PsA",
+        "ground_truth": "Vitiligo",
+        "similarity": 0.7445
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "PsA",
+      "Psoriasis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Vitiligo",
+      "Chemical leukoderma",
+      "Postinflammatory hypopigmentation",
+      "Albinism",
+      "Piebaldism"
+    ]
+  },
+  {
+    "id": "135",
+    "pmid": "28405087",
+    "image_paths": [],
+    "prompt": "Erythema nodosum",
+    "predicted_diagnosis": "Erythema nodosum",
+    "ground_truth_diagnosis": "Leukocytoclastic vasculitis induced by certolizumab pegol",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Vasculitis",
+        "ground_truth": "Psoriatic flare",
+        "similarity": 0.7621
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Erythema nodosum",
+        "ground_truth": "Druginduced leukocytoclastic vasculitis",
+        "similarity": 0.7742
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Erythema nodosum",
+      "Vasculitis",
+      "Drug reaction"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Druginduced leukocytoclastic vasculitis",
+      "Cutaneous Crohn's disease",
+      "Psoriatic flare",
+      "Idiopathic leukocytoclastic vasculitis",
+      "Dermatophyte infection"
+    ]
+  },
+  {
+    "id": "136",
+    "pmid": "38464573",
+    "image_paths": [],
+    "prompt": "Drug reaction",
+    "predicted_diagnosis": "Drug reaction",
+    "ground_truth_diagnosis": "Rituximab-induced Psoriasis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Psoriasis",
+        "ground_truth": "Pemphigus Vulgaris Recurrence",
+        "similarity": 0.8469
+      },
+      {
+        "pair_id": "B",
+        "predicted": "Contact dermatitis",
+        "ground_truth": "Steroidinduced Psoriasis Flare",
+        "similarity": 0.7821
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Drug reaction",
+      "Eczema",
+      "Psoriasis",
+      "Contact dermatitis",
+      "Pemphigus vulgaris flare"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Rituximabinduced Psoriasis",
+      "Pemphigus Vulgaris Recurrence",
+      "Steroidinduced Psoriasis Flare",
+      "Drug Eruption",
+      "Seborrheic Dermatitis"
+    ]
+  },
+  {
+    "id": "137",
+    "pmid": "39483704",
+    "image_paths": [],
+    "prompt": "Necrotizing fasciitis",
+    "predicted_diagnosis": "Necrotizing fasciitis",
+    "ground_truth_diagnosis": "Sphingobacterium multivorum cellulitis",
+    "task3_pairs": [
+      {
+        "pair_id": "A",
+        "predicted": "Necrotizing fasciitis",
+        "ground_truth": "Bacterial Cellulitis",
+        "similarity": 0.768
+      }
+    ],
+    "predicted_differential_diagnosis_full": [
+      "Necrotizing fasciitis"
+    ],
+    "ground_truth_differential_diagnosis_full": [
+      "Bacterial Cellulitis",
+      "Pseudomonas aeruginosa",
+      "Sphingobacterium spp.",
+      "Psoriatic Arthritis Flare",
+      "Deep Vein Thrombosis"
+    ]
   }
+  
 ]
