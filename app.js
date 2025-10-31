@@ -9,7 +9,6 @@ const state = {
         task2: {}, // 诊断相似度评分
         task3: {}  // 诊断排序选择
     },
-    currentTask: 'task1',
     currentImageIndex: 0,
     googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbxzuzjBZjQWS3IY886QC_3F2n4ED5V0S-01nr4DV3JmbMx0dywaEcQzZb9J64FGHudt/exec' // 在这里填入你的Google Apps Script Web App URL
 };
@@ -54,13 +53,6 @@ async function init() {
 
 // 设置事件监听器
 function setupEventListeners() {
-    // 任务切换
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            switchTask(e.target.dataset.task);
-        });
-    });
-
     // 任务1评分按钮
     document.querySelectorAll('#ratingButtons1 .rating-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -78,8 +70,9 @@ function setupEventListeners() {
     });
 
     // 任务3选择按钮
-    document.querySelectorAll('#ratingButtons3 .choice-btn').forEach(btn => {
+    document.querySelectorAll('.choice-select-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
+            e.stopPropagation();
             const choice = e.currentTarget.dataset.choice;
             setRating('task3', choice);
         });
@@ -88,10 +81,8 @@ function setupEventListeners() {
     // 排序选项整体点击
     document.querySelectorAll('.ranking-option').forEach(option => {
         option.addEventListener('click', (e) => {
-            if (!e.target.closest('.choice-btn')) {
-                const choice = option.dataset.choice;
-                setRating('task3', choice);
-            }
+            const choice = option.dataset.choice;
+            setRating('task3', choice);
         });
     });
 
@@ -108,29 +99,9 @@ function setupEventListeners() {
     document.getElementById('saveConfigBtn').addEventListener('click', saveConfig);
     document.getElementById('submitAllBtn').addEventListener('click', submitAllCompletedRatings);
 
-    // 图片导航 (任务1)
-    document.getElementById('prevImageBtn1')?.addEventListener('click', () => navigateImage(-1));
-    document.getElementById('nextImageBtn1')?.addEventListener('click', () => navigateImage(1));
-}
-
-// 切换任务
-function switchTask(taskId) {
-    state.currentTask = taskId;
-    
-    // 更新选项卡状态
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.task === taskId);
-    });
-    
-    // 更新面板显示
-    document.querySelectorAll('.task-panel').forEach(panel => {
-        panel.classList.toggle('active', panel.id === taskId + 'Panel');
-    });
-    
-    // 如果切换到任务1，重新加载图片
-    if (taskId === 'task1') {
-        loadImagesForTask1();
-    }
+    // 图片导航
+    document.getElementById('prevImageBtn')?.addEventListener('click', () => navigateImage(-1));
+    document.getElementById('nextImageBtn')?.addEventListener('click', () => navigateImage(1));
 }
 
 // 加载病例
@@ -154,7 +125,6 @@ function loadCase(index) {
     // 更新进度
     updateProgress();
     updateNavigationButtons();
-    updateCompletionStatus();
     
     // 恢复当前病例的评分
     restoreRatings();
@@ -162,7 +132,7 @@ function loadCase(index) {
 
 // 加载任务1
 function loadTask1(caseData) {
-    const textElement = document.getElementById('displayText1');
+    const textElement = document.getElementById('displayText');
     textElement.textContent = caseData.prompt || caseData.description || '暂无描述';
     
     loadImagesForTask1();
@@ -174,14 +144,14 @@ function loadImagesForTask1() {
     const images = caseData.image_paths || [];
     
     if (images.length === 0) {
-        document.getElementById('displayImage1').src = '';
-        document.getElementById('displayImage1').alt = '无图片';
+        document.getElementById('displayImage').src = '';
+        document.getElementById('displayImage').alt = '无图片';
         return;
     }
     
     // 更新图片计数
-    document.getElementById('imageCount1').textContent = `(${images.length}张)`;
-    document.getElementById('totalImages1').textContent = images.length;
+    document.getElementById('imageCount').textContent = `(${images.length}张)`;
+    document.getElementById('totalImages').textContent = images.length;
     
     // 加载主图片
     updateMainImage(images[state.currentImageIndex]);
@@ -195,14 +165,14 @@ function loadImagesForTask1() {
 
 // 更新主图片
 function updateMainImage(imagePath) {
-    const imgElement = document.getElementById('displayImage1');
+    const imgElement = document.getElementById('displayImage');
     imgElement.src = imagePath;
-    document.getElementById('currentImageIndex1').textContent = state.currentImageIndex + 1;
+    document.getElementById('currentImageIndex').textContent = state.currentImageIndex + 1;
 }
 
 // 加载缩略图
 function loadThumbnails(images) {
-    const container = document.getElementById('thumbnailContainer1');
+    const container = document.getElementById('thumbnailContainer');
     container.innerHTML = '';
     
     images.forEach((path, index) => {
@@ -239,8 +209,8 @@ function navigateImage(direction) {
 
 // 更新图片导航按钮
 function updateImageNavigation(totalImages) {
-    const prevBtn = document.getElementById('prevImageBtn1');
-    const nextBtn = document.getElementById('nextImageBtn1');
+    const prevBtn = document.getElementById('prevImageBtn');
+    const nextBtn = document.getElementById('nextImageBtn');
     
     prevBtn.disabled = state.currentImageIndex === 0;
     nextBtn.disabled = state.currentImageIndex === totalImages - 1;
@@ -256,7 +226,6 @@ function loadTask2(caseData) {
 
 // 加载任务3
 function loadTask3(caseData, currentIndex) {
-    // 获取配对数据
     // 选项A: 当前病例
     document.getElementById('pairA_predicted').textContent = 
         caseData.predicted_diagnosis || '暂无预测诊断';
@@ -276,10 +245,6 @@ function setRating(taskId, value) {
     const caseId = state.cases[state.currentIndex].pmid || state.cases[state.currentIndex].id;
     
     // 保存评分
-    if (!state.ratings[taskId][caseId]) {
-        state.ratings[taskId][caseId] = {};
-    }
-    
     state.ratings[taskId][caseId] = {
         value: value,
         timestamp: new Date().toISOString()
@@ -291,32 +256,29 @@ function setRating(taskId, value) {
     // 保存到localStorage
     saveRatings();
     
-    // 更新完成状态
-    updateCompletionStatus();
-    
     // 检查是否可以进入下一个病例
     updateNavigationButtons();
     
     // 显示通知
-    showNotification(`${getTaskName(taskId)}已评分: ${value}`, 'success');
+    const taskNames = {
+        'task1': '任务1',
+        'task2': '任务2',
+        'task3': '任务3'
+    };
+    showNotification(`${taskNames[taskId]}已评分: ${value}`, 'success');
 }
 
 // 更新评分按钮状态
 function updateRatingButtons(taskId, value) {
-    const buttonsContainer = document.getElementById(`ratingButtons${taskId.slice(-1)}`);
-    
     if (taskId === 'task3') {
         // 排序任务
-        buttonsContainer.querySelectorAll('.choice-btn').forEach(btn => {
-            btn.classList.toggle('selected', btn.dataset.choice === value);
-        });
-        
-        // 同时更新选项卡
         document.querySelectorAll('.ranking-option').forEach(option => {
             option.classList.toggle('selected', option.dataset.choice === value);
         });
     } else {
         // 评分任务
+        const buttonId = taskId === 'task1' ? 'ratingButtons1' : 'ratingButtons2';
+        const buttonsContainer = document.getElementById(buttonId);
         buttonsContainer.querySelectorAll('.rating-btn').forEach(btn => {
             btn.classList.toggle('selected', parseInt(btn.dataset.score) === value);
         });
@@ -339,38 +301,17 @@ function restoreRatings() {
 
 // 清除评分按钮
 function clearRatingButtons(taskId) {
-    const buttonsContainer = document.getElementById(`ratingButtons${taskId.slice(-1)}`);
-    
     if (taskId === 'task3') {
-        buttonsContainer.querySelectorAll('.choice-btn').forEach(btn => {
-            btn.classList.remove('selected');
-        });
         document.querySelectorAll('.ranking-option').forEach(option => {
             option.classList.remove('selected');
         });
     } else {
+        const buttonId = taskId === 'task1' ? 'ratingButtons1' : 'ratingButtons2';
+        const buttonsContainer = document.getElementById(buttonId);
         buttonsContainer.querySelectorAll('.rating-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
     }
-}
-
-// 更新完成状态
-function updateCompletionStatus() {
-    const caseId = state.cases[state.currentIndex].pmid || state.cases[state.currentIndex].id;
-    
-    ['task1', 'task2', 'task3'].forEach((taskId, index) => {
-        const statusElement = document.getElementById(`status${index + 1}`);
-        const tabBtn = document.querySelector(`.tab-btn[data-task="${taskId}"]`);
-        const isCompleted = state.ratings[taskId][caseId] !== undefined;
-        
-        statusElement.classList.toggle('completed', isCompleted);
-        if (isCompleted) {
-            tabBtn.classList.add('completed');
-        } else {
-            tabBtn.classList.remove('completed');
-        }
-    });
 }
 
 // 检查当前病例是否全部完成
@@ -403,10 +344,7 @@ async function navigateCase(direction) {
         
         // 如果是前进到下一病例，提交当前病例数据到Google表格
         if (direction > 0 && isCurrentCaseCompleted()) {
-            const success = await submitToGoogleSheets();
-            if (!success) {
-                showNotification('数据提交失败，但已保存到本地', 'warning');
-            }
+            await submitToGoogleSheets();
         }
         
         loadCase(newIndex);
@@ -458,8 +396,8 @@ function downloadCSV() {
                 task1Rating.value,
                 task2Rating.value,
                 task3Rating.value,
-                task3Rating.timestamp, // 使用最后一次评分的时间
-                (caseData.prompt || caseData.description || '').substring(0, 100) // 截取前100字符
+                task3Rating.timestamp,
+                (caseData.prompt || caseData.description || '').substring(0, 100)
             ]);
         }
     });
@@ -481,36 +419,6 @@ function downloadCSV() {
     link.click();
     
     showNotification('CSV文件已下载', 'success');
-}
-
-// 获取任务名称
-function getTaskName(taskId) {
-    const names = {
-        'task1': '图文相似度',
-        'task2': '诊断相似度',
-        'task3': '诊断排序'
-    };
-    return names[taskId] || taskId;
-}
-
-// 显示通知
-function showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = message;
-    
-    if (type === 'error') {
-        notification.style.background = '#dc3545';
-    } else if (type === 'warning') {
-        notification.style.background = '#ffc107';
-        notification.style.color = '#000';
-    }
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
 }
 
 // 显示配置弹窗
@@ -576,13 +484,13 @@ async function submitToGoogleSheets() {
         task2Score: task2Rating.value,
         task3Choice: task3Rating.value,
         timestamp: new Date().toISOString(),
-        prompt: caseData.prompt || caseData.description || ''
+        prompt: (caseData.prompt || caseData.description || '').substring(0, 500)
     };
     
     try {
         const response = await fetch(state.googleSheetsUrl, {
             method: 'POST',
-            mode: 'no-cors', // Google Apps Script需要no-cors模式
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -594,6 +502,7 @@ async function submitToGoogleSheets() {
         return true;
     } catch (error) {
         console.error('提交到Google表格失败:', error);
+        showNotification('云端保存失败，已保存到本地', 'warning');
         return false;
     }
 }
@@ -624,8 +533,8 @@ async function submitAllCompletedRatings() {
                 task1Score: task1Rating.value,
                 task2Score: task2Rating.value,
                 task3Choice: task3Rating.value,
-                timestamp: task3Rating.timestamp, // 使用最后一次评分的时间
-                prompt: caseData.prompt || caseData.description || ''
+                timestamp: task3Rating.timestamp,
+                prompt: (caseData.prompt || caseData.description || '').substring(0, 500)
             };
             
             try {
@@ -638,7 +547,7 @@ async function submitAllCompletedRatings() {
                     body: JSON.stringify(payload)
                 });
                 successCount++;
-                await new Promise(resolve => setTimeout(resolve, 500)); // 延迟避免请求过快
+                await new Promise(resolve => setTimeout(resolve, 500));
             } catch (error) {
                 console.error(`提交病例 ${caseId} 失败:`, error);
                 failCount++;
@@ -647,6 +556,26 @@ async function submitAllCompletedRatings() {
     }
     
     showNotification(`成功提交 ${successCount} 条记录${failCount > 0 ? `，失败 ${failCount} 条` : ''}`, 'success');
+}
+
+// 显示通知
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    
+    if (type === 'error') {
+        notification.style.background = '#dc3545';
+    } else if (type === 'warning') {
+        notification.style.background = '#ffc107';
+        notification.style.color = '#000';
+    }
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
 }
 
 // 页面加载完成后初始化

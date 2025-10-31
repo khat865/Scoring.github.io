@@ -1,0 +1,37 @@
+[
+  {
+    "id": "0",
+    "pmid": "38865572",
+    "image_paths": [
+      "images/38865572_full_text_figure_10.jpg",
+      "images/38865572_full_text_figure_09.jpg",
+      "images/38865572_full_text_figure_11.jpg"
+    ],
+    "prompt": "A 61-year-old male with a history of kidney transplantation (on prednisone and azathioprine) presents with a 1-year history of progressive skin lesion growth on the left foot following plant trauma. Physical exam reveals serosanguineous drainage from fistulous ostia. Please refer to images for cutaneous findings. Diagnostic workup shows septate hyaline hyphae on KOH preparation (foot), dematiaceous fungi on microculture (forearm), and MRI of the affected foot. How would you approach the diagnosis step by step, and what is your final diagnosis?",
+    "predicted_diagnosis": "Chromoblastomycosis or phaeohyphomycosis",
+    "ground_truth_diagnosis": "Hyalohyphomycosis (left foot) and Phaeohyphomycosis (right forearm)"
+  },
+  {
+    "id": "1",
+    "pmid": "32047088",
+    "image_paths": [
+      "images/32047088_full_text_figure_10.jpg",
+      "images/32047088_full_text_figure_09.jpg",
+      "images/32047088_full_text_figure_11.jpg"
+    ],
+    "prompt": "A 71-year-old woman with metastatic squamous cell carcinoma of the lung and insulin-dependent type 2 diabetes mellitus presents with a necrotic lesion on her lower abdomen at the site of repeat insulin injections with needle reuse. Physical exam reveals no systemic signs. Please refer to images for cutaneous findings. Diagnostic workup shows wound culture positive for Mucor and methicillin-resistant Staphylococcus aureus. How would you approach the diagnosis step by step, and what is your final diagnosis?",
+    "predicted_diagnosis": "Diabetic necrobiosis lipoidica with Mucor and MRSA infection",
+    "ground_truth_diagnosis": "Primary cutaneous mucormycosis"
+  },
+  {
+    "id": "2",
+    "pmid": "28955441",
+    "image_paths": [
+      "images/28955441_full_text_figure_10.jpg",
+      "images/28955441_full_text_figure_09.jpg"
+    ],
+    "prompt": "A 58-year-old male with HIV on ART presents with a 2-week history of pruritic skin lesions progressing from macules to ulcerated nodules. Physical exam reveals no systemic findings. Please refer to images for cutaneous manifestations. Testing shows positive RPR (1:256) and skin biopsy demonstrating dermal lymphoplasmacytic infiltrates. What is your step-by-step diagnostic approach and final diagnosis?",
+    "predicted_diagnosis": "Secondary syphilis",
+    "ground_truth_diagnosis": "Secondary syphilis with nodular lesions"
+  }
+]

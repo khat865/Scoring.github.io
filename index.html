@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>医学图文诊断评分系统</title>
+    <title>图文相似度评分</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,64 +27,54 @@
     
     <div class="container">
         <div class="header">
-            <h1>医学图文诊断评分系统</h1>
-            <p>包含三项评分任务</p>
+            <h1>图文相似度评分</h1>
+            <p>请完成以下三项评分任务</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <p class="progress-text">
-                病例进度: <span id="currentIndex">0</span> / <span id="totalItems">0</span>
+                <span id="currentIndex">0</span> / <span id="totalItems">0</span>
             </p>
         </div>
 
         <div class="content" id="mainContent">
-            <!-- 任务选项卡 -->
-            <div class="task-tabs">
-                <button class="tab-btn active" data-task="task1">任务1: 图文相似度</button>
-                <button class="tab-btn" data-task="task2">任务2: 诊断相似度</button>
-                <button class="tab-btn" data-task="task3">任务3: 诊断排序</button>
-            </div>
-
             <!-- 任务1: 图文相似度评分 -->
-            <div class="task-panel active" id="task1Panel">
-                <div class="task-header">
-                    <h2>任务1: 图文相似度评分</h2>
-                    <p>请根据图片和文本描述的相关程度进行评分 (1-7分)</p>
-                </div>
-
+            <div class="task-section">
+                <div class="task-number">任务 1</div>
+                <div class="task-title">图文相似度评分 (1-7分)</div>
+                
                 <div class="pair-container">
                     <div class="image-section">
                         <div class="section-title">
-                            医学图片 
-                            <span class="image-count" id="imageCount1"></span>
+                            图片 
+                            <span class="image-count" id="imageCount"></span>
                         </div>
                         <div class="image-gallery">
-                            <div class="main-image-container" id="mainImageContainer1">
-                                <img id="displayImage1" src="" alt="医学图片">
+                            <div class="main-image-container" id="mainImageContainer">
+                                <img id="displayImage" src="" alt="医学图片">
                             </div>
-                            <div class="image-navigation" id="imageNavigation1">
-                                <button class="nav-btn" id="prevImageBtn1">◀</button>
+                            <div class="image-navigation" id="imageNavigation">
+                                <button class="nav-btn" id="prevImageBtn">◀</button>
                                 <span class="image-indicator">
-                                    <span id="currentImageIndex1">1</span> / <span id="totalImages1">1</span>
+                                    <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
                                 </span>
-                                <button class="nav-btn" id="nextImageBtn1">▶</button>
+                                <button class="nav-btn" id="nextImageBtn">▶</button>
                             </div>
-                            <div class="thumbnail-container" id="thumbnailContainer1">
+                            <div class="thumbnail-container" id="thumbnailContainer">
                                 <!-- 缩略图将动态加载 -->
                             </div>
                         </div>
                     </div>
                     <div class="text-section">
-                        <div class="section-title">临床描述</div>
-                        <div class="text-content" id="displayText1">
+                        <div class="section-title">描述</div>
+                        <div class="text-content" id="displayText">
                             正在加载数据...
                         </div>
                     </div>
                 </div>
 
                 <div class="rating-section">
-                    <div class="rating-title">图文相似度评分</div>
-                    <div class="rating-buttons likert-7" id="ratingButtons1">
+                    <div class="rating-buttons" id="ratingButtons1">
                         <button class="rating-btn" data-score="1">
                             <span class="score-num">1</span>
                             <span class="score-label">完全不相关</span>
@@ -117,23 +107,24 @@
                 </div>
             </div>
 
-            <!-- 任务2: 诊断相似度评分 -->
-            <div class="task-panel" id="task2Panel">
-                <div class="task-header">
-                    <h2>任务2: 诊断相似度评分</h2>
-                    <p>请评估预测诊断与真实诊断的相似程度 (1-7分)</p>
-                </div>
+            <!-- 分隔线 -->
+            <div class="divider"></div>
 
+            <!-- 任务2: 诊断相似度评分 -->
+            <div class="task-section">
+                <div class="task-number">任务 2</div>
+                <div class="task-title">诊断相似度评分 (1-7分)</div>
+                
                 <div class="diagnosis-comparison">
                     <div class="diagnosis-box predicted">
-                        <div class="diagnosis-label">预测诊断</div>
+                        <div class="diagnosis-label">预测诊断 (Predicted)</div>
                         <div class="diagnosis-content" id="predictedDiagnosis">
                             加载中...
                         </div>
                     </div>
                     <div class="vs-divider">VS</div>
                     <div class="diagnosis-box ground-truth">
-                        <div class="diagnosis-label">真实诊断</div>
+                        <div class="diagnosis-label">真实诊断 (Ground Truth)</div>
                         <div class="diagnosis-content" id="groundTruthDiagnosis">
                             加载中...
                         </div>
@@ -141,8 +132,7 @@
                 </div>
 
                 <div class="rating-section">
-                    <div class="rating-title">诊断相似度评分</div>
-                    <div class="rating-buttons likert-7" id="ratingButtons2">
+                    <div class="rating-buttons" id="ratingButtons2">
                         <button class="rating-btn" data-score="1">
                             <span class="score-num">1</span>
                             <span class="score-label">完全不同</span>
@@ -175,80 +165,55 @@
                 </div>
             </div>
 
-            <!-- 任务3: 诊断排序 -->
-            <div class="task-panel" id="task3Panel">
-                <div class="task-header">
-                    <h2>任务3: 诊断相似度排序</h2>
-                    <p>请选择哪一对诊断更加相似</p>
-                </div>
+            <!-- 分隔线 -->
+            <div class="divider"></div>
 
+            <!-- 任务3: 诊断排序 -->
+            <div class="task-section">
+                <div class="task-number">任务 3</div>
+                <div class="task-title">诊断相似度排序 - 请选择更相似的一对</div>
+                
                 <div class="ranking-container">
                     <div class="ranking-option" data-choice="A">
-                        <div class="choice-label">选项 A</div>
+                        <div class="choice-header">
+                            <div class="choice-label">选项 A</div>
+                            <button class="choice-select-btn" data-choice="A">选择 A</button>
+                        </div>
                         <div class="diagnosis-comparison compact">
-                            <div class="diagnosis-box predicted">
-                                <div class="diagnosis-label">预测诊断</div>
-                                <div class="diagnosis-content" id="pairA_predicted">
-                                    加载中...
-                                </div>
+                            <div class="diagnosis-box predicted small">
+                                <div class="diagnosis-label">预测</div>
+                                <div class="diagnosis-content" id="pairA_predicted">加载中...</div>
                             </div>
                             <div class="vs-divider-small">VS</div>
-                            <div class="diagnosis-box ground-truth">
-                                <div class="diagnosis-label">真实诊断</div>
-                                <div class="diagnosis-content" id="pairA_groundTruth">
-                                    加载中...
-                                </div>
+                            <div class="diagnosis-box ground-truth small">
+                                <div class="diagnosis-label">真实</div>
+                                <div class="diagnosis-content" id="pairA_groundTruth">加载中...</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="ranking-option" data-choice="B">
-                        <div class="choice-label">选项 B</div>
+                        <div class="choice-header">
+                            <div class="choice-label">选项 B</div>
+                            <button class="choice-select-btn" data-choice="B">选择 B</button>
+                        </div>
                         <div class="diagnosis-comparison compact">
-                            <div class="diagnosis-box predicted">
-                                <div class="diagnosis-label">预测诊断</div>
-                                <div class="diagnosis-content" id="pairB_predicted">
-                                    加载中...
-                                </div>
+                            <div class="diagnosis-box predicted small">
+                                <div class="diagnosis-label">预测</div>
+                                <div class="diagnosis-content" id="pairB_predicted">加载中...</div>
                             </div>
                             <div class="vs-divider-small">VS</div>
-                            <div class="diagnosis-box ground-truth">
-                                <div class="diagnosis-label">真实诊断</div>
-                                <div class="diagnosis-content" id="pairB_groundTruth">
-                                    加载中...
-                                </div>
+                            <div class="diagnosis-box ground-truth small">
+                                <div class="diagnosis-label">真实</div>
+                                <div class="diagnosis-content" id="pairB_groundTruth">加载中...</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="rating-section">
-                    <div class="rating-title">请选择更相似的一对</div>
-                    <div class="rating-buttons ranking-choice" id="ratingButtons3">
-                        <button class="choice-btn" data-choice="A">
-                            <span class="choice-text">选择 A</span>
-                        </button>
-                        <button class="choice-btn" data-choice="B">
-                            <span class="choice-text">选择 B</span>
-                        </button>
-                    </div>
-                </div>
             </div>
 
-            <!-- 任务完成状态指示器 -->
-            <div class="task-completion-status">
-                <div class="status-item" id="status1">
-                    <span class="status-icon">○</span> 任务1
-                </div>
-                <div class="status-item" id="status2">
-                    <span class="status-icon">○</span> 任务2
-                </div>
-                <div class="status-item" id="status3">
-                    <span class="status-icon">○</span> 任务3
-                </div>
-            </div>
-
-            <!-- 导航按钮 -->
+            <div class="case-progress-container" id="caseProgressContainer"></div>
+            
             <div class="action-buttons">
                 <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
                 <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
