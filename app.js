@@ -82,12 +82,15 @@ function setupEventListeners() {
         });
     });
 
-    // 排序选项整体点击
-    document.querySelectorAll('.diagnosis-single-option').forEach(option => {
-        option.addEventListener('click', (e) => {
-            const choice = option.dataset.choice;
+    // 任务3诊断框点击（使用新的样式）
+    document.querySelectorAll('.task-section:nth-child(6) .diagnosis-box').forEach((box, index) => {
+        box.addEventListener('click', (e) => {
+            // 如果点击的是按钮，不处理
+            if (e.target.classList.contains('choice-btn-large')) return;
+            const choice = index === 0 ? 'A' : 'B';
             setRating('task3', choice);
         });
+        box.style.cursor = 'pointer';
     });
 
     // 导航按钮
@@ -266,6 +269,9 @@ function setRating(taskId, value) {
         submitToGoogleSheets();
     }
     
+    // 更新进度条显示
+    renderCaseProgress();
+    
     // 显示通知
     const taskNames = {
         'task1': '任务1',
@@ -279,11 +285,21 @@ function setRating(taskId, value) {
 function updateRatingButtons(taskId, value) {
     if (taskId === 'task3') {
         // 鉴别诊断选择
-        document.querySelectorAll('.diagnosis-single-option').forEach(option => {
-            option.classList.toggle('selected', option.dataset.choice === value);
-        });
         document.querySelectorAll('.choice-btn-large').forEach(btn => {
             btn.classList.toggle('selected', btn.dataset.choice === value);
+        });
+        // 高亮选中的诊断框
+        document.querySelectorAll('.task-section:nth-child(6) .diagnosis-box').forEach((box, index) => {
+            const choice = index === 0 ? 'A' : 'B';
+            if (choice === value) {
+                box.style.borderWidth = '3px';
+                box.style.transform = 'scale(1.02)';
+                box.style.boxShadow = '0 6px 20px rgba(33, 147, 176, 0.3)';
+            } else {
+                box.style.borderWidth = '0';
+                box.style.transform = 'scale(1)';
+                box.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+            }
         });
     } else {
         // 评分任务
@@ -312,11 +328,14 @@ function restoreRatings() {
 // 清除评分按钮
 function clearRatingButtons(taskId) {
     if (taskId === 'task3') {
-        document.querySelectorAll('.diagnosis-single-option').forEach(option => {
-            option.classList.remove('selected');
-        });
         document.querySelectorAll('.choice-btn-large').forEach(btn => {
             btn.classList.remove('selected');
+        });
+        // 重置诊断框样式
+        document.querySelectorAll('.task-section:nth-child(6) .diagnosis-box').forEach(box => {
+            box.style.borderWidth = '0';
+            box.style.transform = 'scale(1)';
+            box.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
         });
     } else {
         const buttonId = taskId === 'task1' ? 'ratingButtons1' : 'ratingButtons2';
@@ -367,6 +386,57 @@ function updateProgress() {
     
     const progress = ((state.currentIndex + 1) / state.cases.length) * 100;
     document.getElementById('progressFill').style.width = progress + '%';
+    
+    // 渲染病例进度条
+    renderCaseProgress();
+}
+
+// 渲染病例进度条
+function renderCaseProgress() {
+    const container = document.getElementById('caseProgressContainer');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    state.cases.forEach((caseItem, index) => {
+        const ball = document.createElement('div');
+        ball.className = 'case-progress-item';
+        ball.textContent = index + 1;
+        ball.title = `病例 ${index + 1}`;
+        
+        // 检查该病例是否完成
+        const caseId = caseItem.pmid || caseItem.id;
+        const isCompleted = ['task1', 'task2', 'task3'].every(taskId => 
+            state.ratings[taskId][caseId] !== undefined
+        );
+        
+        if (isCompleted) {
+            ball.classList.add('rated');
+        }
+        
+        if (index === state.currentIndex) {
+            ball.classList.add('active');
+            // 滚动到当前激活的球
+            setTimeout(() => {
+                ball.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }, 100);
+        }
+        
+        // 点击跳转到对应病例
+        ball.addEventListener('click', () => {
+            if (index !== state.currentIndex) {
+                // 如果要跳转到后面的病例，检查当前病例是否完成
+                if (index > state.currentIndex && !isCurrentCaseCompleted()) {
+                    showNotification('请完成当前病例的所有任务后再跳转', 'warning');
+                    return;
+                }
+                loadCase(index);
+                window.scrollTo(0, 0);
+            }
+        });
+        
+        container.appendChild(ball);
+    });
 }
 
 // 保存评分到localStorage
