@@ -173,41 +173,42 @@
                 <div class="task-number">任务 3</div>
                 <div class="task-title">鉴别诊断相似度对比 - 请选择相似度更高的诊断对</div>
                 
-                <!-- 对A -->
-                <div style="margin-bottom: 25px;">
-                    <div style="text-align: center; margin-bottom: 10px; font-weight: 600; color: #2193b0; font-size: 16px;">对 A</div>
-                    <div class="diagnosis-comparison compact">
-                        <div class="diagnosis-box predicted small">
-                            <div class="diagnosis-label">预测诊断</div>
-                            <div class="diagnosis-content" id="task3_pairA_predicted">
-                                加载中...
+                <!-- 两对诊断的对比 -->
+                <div class="pair-comparison-container">
+                    <!-- 对A -->
+                    <div class="pair-column">
+                        <div class="pair-header">对 A</div>
+                        <div class="pair-content">
+                            <div class="diag-item predicted-item">
+                                <div class="diag-item-label">预测诊断</div>
+                                <div class="diag-item-content" id="task3_pairA_predicted">
+                                    加载中...
+                                </div>
                             </div>
-                        </div>
-                        <div class="vs-divider-small">VS</div>
-                        <div class="diagnosis-box ground-truth small">
-                            <div class="diagnosis-label">真实诊断</div>
-                            <div class="diagnosis-content" id="task3_pairA_truth">
-                                加载中...
+                            <div class="diag-item truth-item">
+                                <div class="diag-item-label">真实诊断</div>
+                                <div class="diag-item-content" id="task3_pairA_truth">
+                                    加载中...
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- 对B -->
-                <div style="margin-bottom: 20px;">
-                    <div style="text-align: center; margin-bottom: 10px; font-weight: 600; color: #2193b0; font-size: 16px;">对 B</div>
-                    <div class="diagnosis-comparison compact">
-                        <div class="diagnosis-box predicted small">
-                            <div class="diagnosis-label">预测诊断</div>
-                            <div class="diagnosis-content" id="task3_pairB_predicted">
-                                加载中...
+                    <!-- 对B -->
+                    <div class="pair-column">
+                        <div class="pair-header">对 B</div>
+                        <div class="pair-content">
+                            <div class="diag-item predicted-item">
+                                <div class="diag-item-label">预测诊断</div>
+                                <div class="diag-item-content" id="task3_pairB_predicted">
+                                    加载中...
+                                </div>
                             </div>
-                        </div>
-                        <div class="vs-divider-small">VS</div>
-                        <div class="diagnosis-box ground-truth small">
-                            <div class="diagnosis-label">真实诊断</div>
-                            <div class="diagnosis-content" id="task3_pairB_truth">
-                                加载中...
+                            <div class="diag-item truth-item">
+                                <div class="diag-item-label">真实诊断</div>
+                                <div class="diag-item-content" id="task3_pairB_truth">
+                                    加载中...
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -224,6 +225,42 @@
             <div class="case-progress-container" id="caseProgressContainer"></div>
             
             <div class="action-buttons">
+
+        <!-- 结束页面 -->
+        <div class="completion-page" id="completionPage" style="display: none;">
+            <div class="completion-content">
+                <div class="completion-icon">🎉</div>
+                <h2 class="completion-title">恭喜完成所有评分！</h2>
+                <p class="completion-text">您已经完成了所有 <span id="totalCompletedCases">0</span> 个病例的评分</p>
+                
+                <div class="completion-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="task1AvgScore">-</div>
+                        <div class="stat-label">任务1平均分</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="task2AvgScore">-</div>
+                        <div class="stat-label">任务2平均分</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="task3AccuracyRate">-</div>
+                        <div class="stat-label">任务3准确率</div>
+                    </div>
+                </div>
+
+                <div class="completion-actions">
+                    <button class="btn btn-primary btn-large" id="downloadCsvBtnFinal">
+                        <span>📊</span> 下载 CSV 文件
+                    </button>
+                    <button class="btn btn-info btn-large" id="downloadJsonBtn">
+                        <span>📄</span> 下载 JSON 文件
+                    </button>
+                    <button class="btn btn-secondary btn-large" id="restartBtn">
+                        <span>🔄</span> 重新开始
+                    </button>
+                </div>
+            </div>
+        </div>
                 <button class="btn btn-secondary" id="prevBtn">上一个病例</button>
                 <button class="btn btn-primary" id="nextBtn" disabled>下一个病例</button>
             </div>

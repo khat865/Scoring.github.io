@@ -739,3 +739,178 @@ function showNotification(message, type = 'success') {
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', init);
+// 检查是否完成所有评分
+function checkIfAllCompleted() {
+    let completedCount = 0;
+    
+    state.cases.forEach(caseData => {
+        const caseId = caseData.pmid || caseData.id;
+        const task1 = state.ratings.task1[caseId];
+        const task2 = state.ratings.task2[caseId];
+        const task3 = state.ratings.task3[caseId];
+        
+        if (task1 && task2 && task3) {
+            completedCount++;
+        }
+    });
+    
+    if (completedCount === state.cases.length && state.cases.length > 0) {
+        showCompletionPage();
+    }
+}
+
+// 显示结束页面
+function showCompletionPage() {
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('completionPage').style.display = 'block';
+    
+    // 计算统计数据
+    calculateAndDisplayStats();
+}
+
+// 计算并显示统计数据
+function calculateAndDisplayStats() {
+    let task1Sum = 0, task1Count = 0;
+    let task2Sum = 0, task2Count = 0;
+    let task3Correct = 0, task3Total = 0;
+    
+    state.cases.forEach(caseData => {
+        const caseId = caseData.pmid || caseData.id;
+        
+        const task1 = state.ratings.task1[caseId];
+        const task2 = state.ratings.task2[caseId];
+        const task3 = state.ratings.task3[caseId];
+        
+        if (task1) {
+            task1Sum += task1.value;
+            task1Count++;
+        }
+        
+        if (task2) {
+            task2Sum += task2.value;
+            task2Count++;
+        }
+        
+        if (task3) {
+            task3Total++;
+            const similarityData = state.similarityData[caseId];
+            if (similarityData) {
+                const pairA_sim = similarityData.pairA_similarity || 0;
+                const pairB_sim = similarityData.pairB_similarity || 0;
+                
+                if (pairA_sim !== pairB_sim) {
+                    const correctChoice = pairA_sim > pairB_sim ? 'A' : 'B';
+                    if (task3.value === correctChoice) {
+                        task3Correct++;
+                    }
+                }
+            }
+        }
+    });
+    
+    // 显示统计数据
+    document.getElementById('totalCompletedCases').textContent = task3Total;
+    document.getElementById('task1AvgScore').textContent = task1Count > 0 ? (task1Sum / task1Count).toFixed(2) : '-';
+    document.getElementById('task2AvgScore').textContent = task2Count > 0 ? (task2Sum / task2Count).toFixed(2) : '-';
+    document.getElementById('task3AccuracyRate').textContent = task3Total > 0 ? ((task3Correct / task3Total) * 100).toFixed(1) + '%' : '-';
+}
+
+// 下载JSON文件
+function downloadJSON() {
+    const exportData = {
+        userId: state.userId,
+        sessionId: state.sessionId,
+        exportTime: new Date().toISOString(),
+        totalCases: state.cases.length,
+        ratings: state.ratings,
+        similarityData: state.similarityData,
+        cases: []
+    };
+    
+    // 添加每个病例的详细信息
+    state.cases.forEach(caseData => {
+        const caseId = caseData.pmid || caseData.id;
+        const task1 = state.ratings.task1[caseId];
+        const task2 = state.ratings.task2[caseId];
+        const task3 = state.ratings.task3[caseId];
+        
+        if (task1 && task2 && task3) {
+            const similarityData = state.similarityData[caseId] || {};
+            
+            exportData.cases.push({
+                caseId: caseId,
+                pmid: caseData.pmid,
+                task1_score: task1.value,
+                task1_timestamp: task1.timestamp,
+                task2_score: task2.value,
+                task2_timestamp: task2.timestamp,
+                task3_choice: task3.value,
+                task3_timestamp: task3.timestamp,
+                pairA_similarity: similarityData.pairA_similarity,
+                pairB_similarity: similarityData.pairB_similarity,
+                prompt: caseData.prompt
+            });
+        }
+    });
+    
+    const jsonStr = JSON.stringify(exportData, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `ratings_${state.userId}_${new Date().toISOString().slice(0, 10)}.json`;
+    link.click();
+    
+    showNotification('JSON文件已下载', 'success');
+}
+
+// 重新开始（清空数据）
+function restartRating() {
+    if (!confirm('确定要清空所有评分数据并重新开始吗？此操作不可恢复！')) {
+        return;
+    }
+    
+    // 清空localStorage
+    localStorage.removeItem('ratings_' + state.userId);
+    localStorage.removeItem('submitted_' + state.userId);
+    
+    // 重置状态
+    state.ratings = {
+        task1: {},
+        task2: {},
+        task3: {}
+    };
+    state.similarityData = {};
+    state.submittedCases = new Set();
+    state.currentIndex = 0;
+    
+    // 隐藏结束页面
+    document.getElementById('completionPage').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    
+    // 重新加载第一个病例
+    loadCase(0);
+    
+    showNotification('已清空所有数据，重新开始评分', 'success');
+}
+
+// 修改原有的 setupEventListeners 函数
+const originalSetupEventListeners = setupEventListeners;
+setupEventListeners = function() {
+    originalSetupEventListeners();
+    
+    // 添加结束页面的事件监听
+    document.getElementById('downloadCsvBtnFinal').addEventListener('click', downloadCSV);
+    document.getElementById('downloadJsonBtn').addEventListener('click', downloadJSON);
+    document.getElementById('restartBtn').addEventListener('click', restartRating);
+};
+
+// 修改任务完成后的检查
+const originalSetRating = setRating;
+setRating = function(taskId, value) {
+    originalSetRating(taskId, value);
+    
+    // 检查是否完成所有评分
+    setTimeout(() => {
+        checkIfAllCompleted();
+    }, 500);
+};
