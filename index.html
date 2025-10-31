@@ -117,14 +117,14 @@
                 
                 <div class="diagnosis-comparison">
                     <div class="diagnosis-box predicted">
-                        <div class="diagnosis-label">预测诊断 (Predicted)</div>
+                        <div class="diagnosis-label">预测诊断 (PREDICTED)</div>
                         <div class="diagnosis-content" id="predictedDiagnosis">
                             加载中...
                         </div>
                     </div>
                     <div class="vs-divider">VS</div>
                     <div class="diagnosis-box ground-truth">
-                        <div class="diagnosis-label">真实诊断 (Ground Truth)</div>
+                        <div class="diagnosis-label">真实诊断 (GROUND TRUTH)</div>
                         <div class="diagnosis-content" id="groundTruthDiagnosis">
                             加载中...
                         </div>
@@ -168,46 +168,33 @@
             <!-- 分隔线 -->
             <div class="divider"></div>
 
-            <!-- 任务3: 诊断排序 -->
+            <!-- 任务3: 鉴别诊断选择 -->
             <div class="task-section">
                 <div class="task-number">任务 3</div>
-                <div class="task-title">诊断相似度排序 - 请选择更相似的一对</div>
+                <div class="task-title">鉴别诊断选择 - 请选择更相关的诊断</div>
                 
-                <div class="ranking-container">
-                    <div class="ranking-option" data-choice="A">
-                        <div class="choice-header">
-                            <div class="choice-label">选项 A</div>
-                            <button class="choice-select-btn" data-choice="A">选择 A</button>
-                        </div>
-                        <div class="diagnosis-comparison compact">
-                            <div class="diagnosis-box predicted small">
-                                <div class="diagnosis-label">预测</div>
-                                <div class="diagnosis-content" id="pairA_predicted">加载中...</div>
-                            </div>
-                            <div class="vs-divider-small">VS</div>
-                            <div class="diagnosis-box ground-truth small">
-                                <div class="diagnosis-label">真实</div>
-                                <div class="diagnosis-content" id="pairA_groundTruth">加载中...</div>
-                            </div>
+                <div class="differential-diagnosis-container">
+                    <div class="diagnosis-single-option" data-choice="A">
+                        <div class="option-label">选项 A</div>
+                        <div class="diagnosis-single-content" id="task3_optionA">
+                            加载中...
                         </div>
                     </div>
 
-                    <div class="ranking-option" data-choice="B">
-                        <div class="choice-header">
-                            <div class="choice-label">选项 B</div>
-                            <button class="choice-select-btn" data-choice="B">选择 B</button>
+                    <div class="vs-or">或</div>
+
+                    <div class="diagnosis-single-option" data-choice="B">
+                        <div class="option-label">选项 B</div>
+                        <div class="diagnosis-single-content" id="task3_optionB">
+                            加载中...
                         </div>
-                        <div class="diagnosis-comparison compact">
-                            <div class="diagnosis-box predicted small">
-                                <div class="diagnosis-label">预测</div>
-                                <div class="diagnosis-content" id="pairB_predicted">加载中...</div>
-                            </div>
-                            <div class="vs-divider-small">VS</div>
-                            <div class="diagnosis-box ground-truth small">
-                                <div class="diagnosis-label">真实</div>
-                                <div class="diagnosis-content" id="pairB_groundTruth">加载中...</div>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="rating-section">
+                    <div class="choice-buttons">
+                        <button class="choice-btn-large" data-choice="A">选择 A</button>
+                        <button class="choice-btn-large" data-choice="B">选择 B</button>
                     </div>
                 </div>
             </div>
