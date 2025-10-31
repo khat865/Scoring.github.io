@@ -10,7 +10,8 @@ const state = {
         task3: {}  // 诊断排序选择
     },
     currentImageIndex: 0,
-    googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbxzuzjBZjQWS3IY886QC_3F2n4ED5V0S-01nr4DV3JmbMx0dywaEcQzZb9J64FGHudt/exec' // 在这里填入你的Google Apps Script Web App URL
+    googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbxzuzjBZjQWS3IY886QC_3F2n4ED5V0S-01nr4DV3JmbMx0dywaEcQzZb9J64FGHudt/exec', // 在这里填入你的Google Apps Script Web App URL
+    submittedCases: new Set() // 记录已提交的病例，避免重复提交
 };
 
 // 生成唯一用户ID
@@ -37,6 +38,9 @@ async function init() {
         // 加载数据
         const response = await fetch('data.json');
         state.cases = await response.json();
+        
+        // 加载已提交记录
+        loadSubmittedCases();
         
         // 初始化界面
         updateProgress();
@@ -70,7 +74,7 @@ function setupEventListeners() {
     });
 
     // 任务3选择按钮
-    document.querySelectorAll('.choice-select-btn').forEach(btn => {
+    document.querySelectorAll('.choice-btn-large').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const choice = e.currentTarget.dataset.choice;
@@ -79,7 +83,7 @@ function setupEventListeners() {
     });
 
     // 排序选项整体点击
-    document.querySelectorAll('.ranking-option').forEach(option => {
+    document.querySelectorAll('.diagnosis-single-option').forEach(option => {
         option.addEventListener('click', (e) => {
             const choice = option.dataset.choice;
             setRating('task3', choice);
@@ -119,8 +123,8 @@ function loadCase(index) {
     // 加载任务2: 诊断相似度
     loadTask2(caseData);
     
-    // 加载任务3: 诊断排序
-    loadTask3(caseData, index);
+    // 加载任务3: 鉴别诊断选择
+    loadTask3(caseData);
     
     // 更新进度
     updateProgress();
@@ -224,20 +228,15 @@ function loadTask2(caseData) {
         caseData.ground_truth_diagnosis || '暂无真实诊断';
 }
 
-// 加载任务3
-function loadTask3(caseData, currentIndex) {
-    // 选项A: 当前病例
-    document.getElementById('pairA_predicted').textContent = 
-        caseData.predicted_diagnosis || '暂无预测诊断';
-    document.getElementById('pairA_groundTruth').textContent = 
-        caseData.ground_truth_diagnosis || '暂无真实诊断';
+// 加载任务3 - 鉴别诊断选择
+function loadTask3(caseData) {
+    // 选项A：从predicted_differential_diagnosis随机选择
+    const optionA = caseData.task3_option_a || '无预测鉴别诊断';
+    document.getElementById('task3_optionA').textContent = optionA;
     
-    // 选项B: 下一个病例（如果存在）
-    const nextCase = state.cases[currentIndex + 1] || state.cases[0];
-    document.getElementById('pairB_predicted').textContent = 
-        nextCase.predicted_diagnosis || '暂无预测诊断';
-    document.getElementById('pairB_groundTruth').textContent = 
-        nextCase.ground_truth_diagnosis || '暂无真实诊断';
+    // 选项B：从ground_truth_differential_diagnosis随机选择
+    const optionB = caseData.task3_option_b || '无真实鉴别诊断';
+    document.getElementById('task3_optionB').textContent = optionB;
 }
 
 // 设置评分
@@ -256,8 +255,16 @@ function setRating(taskId, value) {
     // 保存到localStorage
     saveRatings();
     
-    // 检查是否可以进入下一个病例
+    // 检查是否完成所有三个任务
+    const allCompleted = isCurrentCaseCompleted();
+    
+    // 更新导航按钮
     updateNavigationButtons();
+    
+    // 如果三个任务都完成了，自动提交到Google Sheets
+    if (allCompleted && !state.submittedCases.has(caseId)) {
+        submitToGoogleSheets();
+    }
     
     // 显示通知
     const taskNames = {
@@ -271,9 +278,12 @@ function setRating(taskId, value) {
 // 更新评分按钮状态
 function updateRatingButtons(taskId, value) {
     if (taskId === 'task3') {
-        // 排序任务
-        document.querySelectorAll('.ranking-option').forEach(option => {
+        // 鉴别诊断选择
+        document.querySelectorAll('.diagnosis-single-option').forEach(option => {
             option.classList.toggle('selected', option.dataset.choice === value);
+        });
+        document.querySelectorAll('.choice-btn-large').forEach(btn => {
+            btn.classList.toggle('selected', btn.dataset.choice === value);
         });
     } else {
         // 评分任务
@@ -302,8 +312,11 @@ function restoreRatings() {
 // 清除评分按钮
 function clearRatingButtons(taskId) {
     if (taskId === 'task3') {
-        document.querySelectorAll('.ranking-option').forEach(option => {
+        document.querySelectorAll('.diagnosis-single-option').forEach(option => {
             option.classList.remove('selected');
+        });
+        document.querySelectorAll('.choice-btn-large').forEach(btn => {
+            btn.classList.remove('selected');
         });
     } else {
         const buttonId = taskId === 'task1' ? 'ratingButtons1' : 'ratingButtons2';
@@ -332,7 +345,7 @@ function updateNavigationButtons() {
 }
 
 // 导航病例
-async function navigateCase(direction) {
+function navigateCase(direction) {
     const newIndex = state.currentIndex + direction;
     
     if (newIndex >= 0 && newIndex < state.cases.length) {
@@ -340,11 +353,6 @@ async function navigateCase(direction) {
         if (direction > 0 && !isCurrentCaseCompleted()) {
             showNotification('请完成所有三项任务后再进入下一病例', 'warning');
             return;
-        }
-        
-        // 如果是前进到下一病例，提交当前病例数据到Google表格
-        if (direction > 0 && isCurrentCaseCompleted()) {
-            await submitToGoogleSheets();
         }
         
         loadCase(newIndex);
@@ -372,6 +380,19 @@ function loadSavedRatings() {
     if (saved) {
         state.ratings = JSON.parse(saved);
     }
+}
+
+// 加载已提交记录
+function loadSubmittedCases() {
+    const saved = localStorage.getItem('submitted_' + state.userId);
+    if (saved) {
+        state.submittedCases = new Set(JSON.parse(saved));
+    }
+}
+
+// 保存已提交记录
+function saveSubmittedCases() {
+    localStorage.setItem('submitted_' + state.userId, JSON.stringify([...state.submittedCases]));
 }
 
 // 下载CSV
@@ -457,7 +478,7 @@ function loadConfig() {
     }
 }
 
-// 提交数据到Google表格
+// 提交数据到Google表格 - 只在完成所有3个任务后调用一次
 async function submitToGoogleSheets() {
     if (!state.googleSheetsUrl) {
         console.warn('Google Sheets URL未配置');
@@ -467,13 +488,19 @@ async function submitToGoogleSheets() {
     const caseData = state.cases[state.currentIndex];
     const caseId = caseData.pmid || caseData.id;
     
+    // 检查是否已提交过
+    if (state.submittedCases.has(caseId)) {
+        console.log(`病例 ${caseId} 已提交过，跳过重复提交`);
+        return true;
+    }
+    
     // 获取三个任务的评分
     const task1Rating = state.ratings.task1[caseId];
     const task2Rating = state.ratings.task2[caseId];
     const task3Rating = state.ratings.task3[caseId];
     
     if (!task1Rating || !task2Rating || !task3Rating) {
-        console.error('评分数据不完整');
+        console.error('评分数据不完整，无法提交');
         return false;
     }
     
@@ -497,8 +524,12 @@ async function submitToGoogleSheets() {
             body: JSON.stringify(payload)
         });
         
-        console.log('数据已提交到Google表格');
-        showNotification('评分已保存到云端', 'success');
+        // 标记为已提交
+        state.submittedCases.add(caseId);
+        saveSubmittedCases();
+        
+        console.log(`病例 ${caseId} 数据已提交到Google表格`);
+        showNotification('评分已自动保存到云端', 'success');
         return true;
     } catch (error) {
         console.error('提交到Google表格失败:', error);
@@ -516,10 +547,17 @@ async function submitAllCompletedRatings() {
     
     let successCount = 0;
     let failCount = 0;
+    let skippedCount = 0;
     
     for (let i = 0; i < state.cases.length; i++) {
         const caseData = state.cases[i];
         const caseId = caseData.pmid || caseData.id;
+        
+        // 跳过已提交的
+        if (state.submittedCases.has(caseId)) {
+            skippedCount++;
+            continue;
+        }
         
         // 检查该病例是否完成所有三个任务
         const task1Rating = state.ratings.task1[caseId];
@@ -546,6 +584,9 @@ async function submitAllCompletedRatings() {
                     },
                     body: JSON.stringify(payload)
                 });
+                
+                // 标记为已提交
+                state.submittedCases.add(caseId);
                 successCount++;
                 await new Promise(resolve => setTimeout(resolve, 500));
             } catch (error) {
@@ -555,7 +596,14 @@ async function submitAllCompletedRatings() {
         }
     }
     
-    showNotification(`成功提交 ${successCount} 条记录${failCount > 0 ? `，失败 ${failCount} 条` : ''}`, 'success');
+    // 保存已提交记录
+    saveSubmittedCases();
+    
+    let message = `成功提交 ${successCount} 条记录`;
+    if (skippedCount > 0) message += `，跳过 ${skippedCount} 条已提交`;
+    if (failCount > 0) message += `，失败 ${failCount} 条`;
+    
+    showNotification(message, 'success');
 }
 
 // 显示通知
