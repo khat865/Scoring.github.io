@@ -10,7 +10,7 @@ const state = {
         task3: {}  // 诊断排序选择
     },
     currentImageIndex: 0,
-    googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbzYFpftuMZc4_otcdBc7bxnva68NHte8cGHqtJ51sRu1Fu3JQIyL3S4y_t7WCWh0mSU/exec', // 在这里填入你的Google Apps Script Web App URL
+    googleSheetsUrl: localStorage.getItem('googleSheetsUrl') || 'https://script.google.com/macros/s/AKfycbzYFpftuMZc4_otcdBc7bxnva68NHte8cGHqtJ51sRu1Fu3JQIyL3S4y_t7WCWh0mSU/exec', // 从localStorage读取配置 // 在这里填入你的Google Apps Script Web App URL
     submittedCases: new Set() // 记录已提交的病例，避免重复提交
 };
 
@@ -549,8 +549,13 @@ function loadConfig() {
 
 // 提交数据到Google表格 - 只在完成所有3个任务后调用一次
 async function submitToGoogleSheets() {
-    if (!state.googleSheetsUrl) {
-        console.warn('Google Sheets URL未配置');
+    if (!state.googleSheetsUrl || state.googleSheetsUrl.length < 10) {
+        console.log('Google Sheets同步未启用（未配置URL）');
+        return false;
+    }
+    
+    if (!state.googleSheetsUrl.includes('script.google.com')) {
+        console.warn('Google Sheets URL格式不正确');
         return false;
     }
     
@@ -575,7 +580,7 @@ async function submitToGoogleSheets() {
     
     const payload = {
         userId: state.userId,
-        caseId: caseId,
+        caseIndex: state.currentIndex + 1,
         task1Score: task1Rating.value,
         task2Score: task2Rating.value,
         task3Choice: task3Rating.value,
@@ -636,7 +641,7 @@ async function submitAllCompletedRatings() {
         if (task1Rating && task2Rating && task3Rating) {
             const payload = {
                 userId: state.userId,
-                caseId: caseId,
+                caseIndex: i + 1,
                 task1Score: task1Rating.value,
                 task2Score: task2Rating.value,
                 task3Choice: task3Rating.value,
