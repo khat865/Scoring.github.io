@@ -10,7 +10,7 @@ const state = {
         task3: {}  // 诊断排序选择
     },
     currentImageIndex: 0,
-    googleSheetsUrl: localStorage.getItem('googleSheetsUrl') || 'https://script.google.com/macros/s/AKfycbzYFpftuMZc4_otcdBc7bxnva68NHte8cGHqtJ51sRu1Fu3JQIyL3S4y_t7WCWh0mSU/exec', // 从localStorage读取配置 // 在这里填入你的Google Apps Script Web App URL
+    googleSheetsUrl: localStorage.getItem('googleSheetsUrl') || 'https://script.google.com/macros/s/AKfycbzYFpftuMZc4_otcdBc7bxnva68NHte8cGHqtJ51sRu1Fu3JQIyL3S4y_t7WCWh0mSU/exechttps://script.google.com/macros/s/AKfycbw1Ak7TjFe6ryuWXGr42bnel-GT-URqvTPwA8D9-YOmbm4Ft6PmEQDrSlG02fYoFTDf/exec', // 从localStorage读取配置 // 在这里填入你的Google Apps Script Web App URL
     submittedCases: new Set() // 记录已提交的病例，避免重复提交
 };
 
