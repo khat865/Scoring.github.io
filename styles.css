@@ -939,4 +939,128 @@ body {
         padding: 15px 30px;
         font-size: 16px;
     }
+    .instruction-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 12px;
+    margin: 20px 0 25px 0;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.instruction-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 18px 0;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.instruction-content {
+    background: rgba(255, 255, 255, 0.97);
+    color: #333;
+    padding: 25px;
+    border-radius: 10px;
+    line-height: 1.7;
+}
+
+.instruction-content p {
+    margin: 0 0 14px 0;
+    font-size: 15px;
+}
+
+.instruction-content strong {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.instruction-highlight {
+    background: #fff9e6;
+    border-left: 4px solid #ffc107;
+    padding: 18px 20px;
+    margin: 18px 0;
+    border-radius: 6px;
+}
+
+.instruction-highlight p {
+    margin: 0 0 12px 0;
+}
+
+.instruction-highlight p:last-child {
+    margin-bottom: 0;
+}
+
+.instruction-highlight ul {
+    margin: 12px 0 0 0;
+    padding-left: 24px;
+}
+
+.instruction-highlight li {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.instruction-footer {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 2px solid #e9ecef;
+    font-size: 15px;
+    color: #495057;
+}
+
+.task-instruction {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 15px;
+    color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .instruction-section {
+        padding: 20px;
+        margin: 15px 0 20px 0;
+    }
+    
+    .instruction-section h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .instruction-content {
+        padding: 18px;
+    }
+    
+    .instruction-content p,
+    .instruction-footer {
+        font-size: 14px;
+    }
+    
+    .instruction-highlight {
+        padding: 15px;
+    }
+    
+    .instruction-highlight li {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .instruction-section {
+        padding: 15px;
+    }
+    
+    .instruction-section h2 {
+        font-size: 16px;
+    }
+    
+    .instruction-content {
+        padding: 15px;
+    }
+    
+    .instruction-content p {
+        font-size: 13px;
+    }
+}
 }

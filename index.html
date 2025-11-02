@@ -26,13 +26,35 @@
     
     <div class="container">
         <div class="header">
-            <h1>Image-text similarity score</h1>
-            <p>Please complete the following three scoring tasks</p>
+            <h1>Image-Text Similarity Evaluation</h1>
+            
+            <!-- 任务说明部分 -->
+            <div class="instruction-section">
+                <h2>📋 Important: This is a Similarity Evaluation Study</h2>
+                <div class="instruction-content">
+                    <p><strong>Dear Medical Professional,</strong></p>
+                    <p>Thank you for participating in this research study. We need your expertise to evaluate the <strong>similarity and relevance</strong> between medical images and diagnostic texts.</p>
+                    
+                    <div class="instruction-highlight">
+                        <p><strong>⚠️ Please Note:</strong> This is <strong>NOT a diagnostic task</strong>. You are not being asked to diagnose patients or verify the accuracy of diagnoses.</p>
+                        <p><strong>Instead, we need you to assess:</strong></p>
+                        <ul>
+                            <li>✓ How well the diagnostic text <strong>matches and describes</strong> the medical images</li>
+                            <li>✓ The degree of <strong>semantic similarity</strong> between different diagnostic descriptions</li>
+                            <li>✓ Which pairs of diagnoses are <strong>more similar</strong> to each other in meaning and content</li>
+                        </ul>
+                    </div>
+                    
+                    <p class="instruction-footer">Your role is to evaluate <strong>relevance, consistency, and similarity</strong> based on your medical knowledge, not to provide clinical diagnoses or medical advice.</p>
+                </div>
+            </div>
+            
+            <p class="task-instruction">Please complete the following three evaluation tasks for each case</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <p class="progress-text">
-                <span id="currentIndex">0</span> / <span id="totalItems">0</span>
+                Case <span id="currentIndex">0</span> / <span id="totalItems">0</span>
             </p>
         </div>
 
