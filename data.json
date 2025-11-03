@@ -3,7 +3,7 @@
     "id": "case_1225",
     "pmid": "case_1225",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-744540709937657593.png"
+      "images/SCIN/images/-744540709937657593.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 30 TO 39 and the sex at birth is FEMALE.\n    The patient's race is lack or african american.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include . Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Seborrheic dermatitis",
@@ -42,7 +42,7 @@
     "id": "case_462",
     "pmid": "case_462",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/8274826488534529432.png"
+      "images/SCIN/images/8274826488534529432.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is foot top or side\n    According to the patient, the condition symptoms include darkening. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Melanoma",
@@ -82,7 +82,7 @@
     "id": "case_244",
     "pmid": "case_244",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/2643554524048425352.png"
+      "images/SCIN/images/2643554524048425352.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 60 TO 69 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST1.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is back of hand\n    According to the patient, the condition symptoms include bothersome appearance, bleeding, itching. Other symptoms include fatigue.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -120,7 +120,7 @@
     "id": "case_843",
     "pmid": "case_843",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/5248741536150247988.png"
+      "images/SCIN/images/5248741536150247988.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -158,7 +158,7 @@
     "id": "case_481",
     "pmid": "case_481",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/6016814389373084192.png"
+      "images/SCIN/images/6016814389373084192.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Linear erythema",
@@ -196,7 +196,7 @@
     "id": "case_424",
     "pmid": "case_424",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/8275515946446493351.png"
+      "images/SCIN/images/8275515946446493351.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 40 TO 49 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Acne vulgaris",
@@ -235,7 +235,7 @@
     "id": "case_33",
     "pmid": "case_33",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-2367385470888041402.png"
+      "images/SCIN/images/-2367385470888041402.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 30 TO 39 and the sex at birth is FEMALE.\n    The patient's race is lack or african american.\n    The patient's Fitzpatrick Skin Type is FST5.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Acne",
@@ -273,7 +273,7 @@
     "id": "case_417",
     "pmid": "case_417",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/7560947283816492463.png"
+      "images/SCIN/images/7560947283816492463.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -313,7 +313,7 @@
     "id": "case_407",
     "pmid": "case_407",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-1466847537458498864.png"
+      "images/SCIN/images/-1466847537458498864.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching, burning, pain. Other symptoms include chills, fatigue, joint pain.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Seborrheic dermatitis",
@@ -351,7 +351,7 @@
     "id": "case_409",
     "pmid": "case_409",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-6341643470693260621.png"
+      "images/SCIN/images/-6341643470693260621.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 30 TO 39 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, pain. Other symptoms include joint pain.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -391,7 +391,7 @@
     "id": "case_1124",
     "pmid": "case_1124",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-4852970400573238570.png"
+      "images/SCIN/images/-4852970400573238570.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Folliculitis",
@@ -431,7 +431,7 @@
     "id": "case_1089",
     "pmid": "case_1089",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/5387719994505219906.png"
+      "images/SCIN/images/5387719994505219906.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Cellulitis",
@@ -470,7 +470,7 @@
     "id": "case_1282",
     "pmid": "case_1282",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/7958401754757491846.png"
+      "images/SCIN/images/7958401754757491846.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include pain. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Folliculitis",
@@ -510,7 +510,7 @@
     "id": "case_1205",
     "pmid": "case_1205",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/2575487238866216554.png"
+      "images/SCIN/images/2575487238866216554.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Contact dermatitis",
@@ -552,7 +552,7 @@
     "id": "case_325",
     "pmid": "case_325",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/3590489756829695100.png"
+      "images/SCIN/images/3590489756829695100.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Acne",
@@ -592,7 +592,7 @@
     "id": "case_476",
     "pmid": "case_476",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/5871876348246844415.png"
+      "images/SCIN/images/5871876348246844415.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching. Other symptoms include fatigue.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Psoriasis",
@@ -631,7 +631,7 @@
     "id": "case_209",
     "pmid": "case_209",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/3870864391545738942.png"
+      "images/SCIN/images/3870864391545738942.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 60 TO 69 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Actinic keratosis",
@@ -671,7 +671,7 @@
     "id": "case_119",
     "pmid": "case_119",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-3075979742684785566.png"
+      "images/SCIN/images/-3075979742684785566.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Impetigo",
@@ -708,7 +708,7 @@
     "id": "case_1296",
     "pmid": "case_1296",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-8931670759211244706.png"
+      "images/SCIN/images/-8931670759211244706.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Impetigo",
@@ -748,7 +748,7 @@
     "id": "case_382",
     "pmid": "case_382",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-4140668389295807345.png"
+      "images/SCIN/images/-4140668389295807345.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include darkening, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Post-inflammatory hyperpigmentation",
@@ -786,7 +786,7 @@
     "id": "case_978",
     "pmid": "case_978",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/8260247420339367690.png"
+      "images/SCIN/images/8260247420339367690.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is buttocks\n    According to the patient, the condition symptoms include itching. Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Psoriasis",
@@ -826,7 +826,7 @@
     "id": "case_324",
     "pmid": "case_324",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-7937865557030767709.png"
+      "images/SCIN/images/-7937865557030767709.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Acne",
@@ -865,7 +865,7 @@
     "id": "case_164",
     "pmid": "case_164",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-5267733977306402762.png"
+      "images/SCIN/images/-5267733977306402762.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 30 TO 39 and the sex at birth is MALE.\n    The patient's race is ispanic latino or spanish origin.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Papular urticaria",
@@ -905,7 +905,7 @@
     "id": "case_35",
     "pmid": "case_35",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-5521011744040552037.png"
+      "images/SCIN/images/-5521011744040552037.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Impetigo",
@@ -943,7 +943,7 @@
     "id": "case_393",
     "pmid": "case_393",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/3091327595194968859.png"
+      "images/SCIN/images/3091327595194968859.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include . Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Erythema nodosum",
@@ -980,7 +980,7 @@
     "id": "case_247",
     "pmid": "case_247",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/5730797698644603292.png"
+      "images/SCIN/images/5730797698644603292.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is buttocks\n    According to the patient, the condition symptoms include increasing size, itching, burning, pain. Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Contact dermatitis",
@@ -1019,7 +1019,7 @@
     "id": "case_129",
     "pmid": "case_129",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-1714274861495761199.png"
+      "images/SCIN/images/-1714274861495761199.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Impetigo",
@@ -1057,7 +1057,7 @@
     "id": "case_427",
     "pmid": "case_427",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/6742355207405930185.png"
+      "images/SCIN/images/6742355207405930185.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include . Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Boil",
@@ -1095,7 +1095,7 @@
     "id": "case_1170",
     "pmid": "case_1170",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-3074087608497358223.png"
+      "images/SCIN/images/-3074087608497358223.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema or Contact Dermatitis",
@@ -1135,7 +1135,7 @@
     "id": "case_380",
     "pmid": "case_380",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/8001060908848253948.png"
+      "images/SCIN/images/8001060908848253948.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 60 TO 69 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is torso front\n    According to the patient, the condition symptoms include increasing size, itching, burning. Other symptoms include fatigue, joint pain.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Seborrheic dermatitis",
@@ -1174,7 +1174,7 @@
     "id": "case_597",
     "pmid": "case_597",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-7228030522436577946.png"
+      "images/SCIN/images/-7228030522436577946.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is sian.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -1214,7 +1214,7 @@
     "id": "case_32",
     "pmid": "case_32",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/2299496467473665582.png"
+      "images/SCIN/images/2299496467473665582.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Papules",
@@ -1253,7 +1253,7 @@
     "id": "case_683",
     "pmid": "case_683",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/8192112349385344921.png"
+      "images/SCIN/images/8192112349385344921.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is lack or african american.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is torso back\n    According to the patient, the condition symptoms include itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Seborrheic dermatitis",
@@ -1291,7 +1291,7 @@
     "id": "case_604",
     "pmid": "case_604",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/6426235072748873062.png"
+      "images/SCIN/images/6426235072748873062.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 40 TO 49 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Contact dermatitis",
@@ -1331,7 +1331,7 @@
     "id": "case_1175",
     "pmid": "case_1175",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/374094817098102978.png"
+      "images/SCIN/images/374094817098102978.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Erythema Multiforme",
@@ -1370,7 +1370,7 @@
     "id": "case_780",
     "pmid": "case_780",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/1918021157952556881.png"
+      "images/SCIN/images/1918021157952556881.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching. Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Keratosis pilaris",
@@ -1411,7 +1411,7 @@
     "id": "case_30",
     "pmid": "case_30",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/4991002573292821657.png"
+      "images/SCIN/images/4991002573292821657.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 50 TO 59 and the sex at birth is FEMALE.\n    The patient's race is ispanic latino or spanish origin.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching, burning, pain. Other symptoms include joint pain.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Psoriasis",
@@ -1448,7 +1448,7 @@
     "id": "case_116",
     "pmid": "case_116",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-532249905180848227.png"
+      "images/SCIN/images/-532249905180848227.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -1487,7 +1487,7 @@
     "id": "case_368",
     "pmid": "case_368",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-9216107315378408480.png"
+      "images/SCIN/images/-9216107315378408480.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 60 TO 69 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, increasing size. Other symptoms include fatigue, joint pain.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Squamous cell carcinoma",
@@ -1525,7 +1525,7 @@
     "id": "case_375",
     "pmid": "case_375",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-5509163907473104731.png"
+      "images/SCIN/images/-5509163907473104731.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Papular urticaria",
@@ -1565,7 +1565,7 @@
     "id": "case_19",
     "pmid": "case_19",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/8992004962400932960.png"
+      "images/SCIN/images/8992004962400932960.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include bothersome appearance, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Contact dermatitis",
@@ -1602,7 +1602,7 @@
     "id": "case_350",
     "pmid": "case_350",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/1657919391725224335.png"
+      "images/SCIN/images/1657919391725224335.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 40 TO 49 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is palm\n    According to the patient, the condition symptoms include bothersome appearance, burning. Other symptoms include shortness of breath.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Systemic autoimmune disorder",
@@ -1641,7 +1641,7 @@
     "id": "case_1297",
     "pmid": "case_1297",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/3460061151460537360.png"
+      "images/SCIN/images/3460061151460537360.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Impetigo",
@@ -1682,7 +1682,7 @@
     "id": "case_1113",
     "pmid": "case_1113",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/6721682859208353419.png"
+      "images/SCIN/images/6721682859208353419.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Seborrheic keratosis",
@@ -1721,7 +1721,7 @@
     "id": "case_214",
     "pmid": "case_214",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-7847308518165789474.png"
+      "images/SCIN/images/-7847308518165789474.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 50 TO 59 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Keratosis pilaris",
@@ -1760,7 +1760,7 @@
     "id": "case_582",
     "pmid": "case_582",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/1206575948315751880.png"
+      "images/SCIN/images/1206575948315751880.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is torso back\n    According to the patient, the condition symptoms include bothersome appearance, itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -1799,7 +1799,7 @@
     "id": "case_799",
     "pmid": "case_799",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-7642186112997314297.png"
+      "images/SCIN/images/-7642186112997314297.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Folliculitis",
@@ -1839,7 +1839,7 @@
     "id": "case_736",
     "pmid": "case_736",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/4379277506717534872.png"
+      "images/SCIN/images/4379277506717534872.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Melanocytic lesion",
@@ -1879,7 +1879,7 @@
     "id": "case_135",
     "pmid": "case_135",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/-405278788109911439.png"
+      "images/SCIN/images/-405278788109911439.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is buttocks\n    According to the patient, the condition symptoms include bothersome appearance, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
@@ -1919,7 +1919,7 @@
     "id": "case_257",
     "pmid": "case_257",
     "image_paths": [
-      "/gpfs/radev/pi/q_chen/zq65/Research/Data/DermDPO/datasets/eval/SCIN/images/5196281337693505833.png"
+      "images/SCIN/images/5196281337693505833.png"
     ],
     "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 50 TO 59 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST5.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is back of hand\n    According to the patient, the condition symptoms include bleeding, itching, burning, pain. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
     "predicted_diagnosis": "Eczema",
