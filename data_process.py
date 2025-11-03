@@ -450,24 +450,93 @@ def create_default_pairs(
     return pairs
 
 
+def load_mismatch_case_ids_from_folder(folder_path: str, target_file: Optional[str] = None) -> set:
+    """
+    扫描文件夹下 JSON 文件（或指定的单个文件），收集那些 predicted_diagnosis 与 ground_truth_diagnosis 不一致的 case_id 集合。
+    如果指定 target_file，则只扫描该文件，避免把脚本生成的 data_filtered.json / data_temp.json 等也算进去。
+    """
+    mismatch_ids = set()
+    if not folder_path:
+        return mismatch_ids
+
+    # 只读取指定文件（优先）
+    files_to_scan = []
+    if target_file:
+        target_path = os.path.join(folder_path, target_file)
+        if not os.path.isfile(target_path):
+            print(f"  ⚠️ 指定的文件不存在: {target_path}")
+            return mismatch_ids
+        files_to_scan = [target_file]
+    else:
+        # 忽略脚本生成的临时/结果文件，避免自污染
+        ignore = {'data_temp.json', 'data_filtered.json'}
+        files_to_scan = [fn for fn in os.listdir(folder_path)
+                         if fn.lower().endswith('.json') and fn not in ignore]
+
+    for fn in files_to_scan:
+        path = os.path.join(folder_path, fn)
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except Exception:
+            continue
+
+        # 支持 per_sample_results 列表 或 文件本身就是列表
+        samples = []
+        if isinstance(data, dict) and 'per_sample_results' in data:
+            samples = data.get('per_sample_results', [])
+        elif isinstance(data, list):
+            samples = data
+        else:
+            samples = [data]
+
+        for entry in samples:
+            if not isinstance(entry, dict):
+                continue
+            # 支持多种字段名
+            pred = entry.get('predicted_diagnosis') or entry.get('predicted') or ''
+            truth = entry.get('ground_truth_diagnosis') or entry.get('ground_truth') or ''
+            # 只在两个都非空且不实质相同的情况下加入
+            if pred and truth and not diagnoses_are_same(pred, truth):
+                cid = entry.get('case_id') or entry.get('case_id'.replace('_','')) or entry.get('id') or entry.get('pmid')
+                # 有些文件使用 "case_id" 字段
+                if not cid:
+                    cid = entry.get('case_id') or entry.get('case_id'.upper()) or None
+                if cid:
+                    mismatch_ids.add(cid)
+    print(f"  从文件/文件夹 '{folder_path}' (target={target_file}) 中找到 {len(mismatch_ids)} 个预测与真实不一致的 case_id")
+    return mismatch_ids
+
+
 def process_evaluation_data(
     eval_file: str,
     medical_file: str,
     output_file: str,
-    use_dermlip: bool = True
+    use_dermlip: bool = True,
+    case_id_filter: Optional[set] = None
 ) -> List[Dict]:
-    """
-    处理评估数据，匹配图片路径，生成标准格式
-    """
+    """处理评估数据，匹配图片路径，生成标准格式"""
     print(f"读取评估数据: {eval_file}")
     with open(eval_file, 'r', encoding='utf-8') as f:
         eval_data = json.load(f)
-    
+
+    # 获取并过滤 per_sample_results
+    per_sample_results = eval_data.get('per_sample_results', [])
+    if case_id_filter is not None:
+        original_len = len(per_sample_results)
+        filtered = []
+        for sample in per_sample_results:
+            cid = sample.get('case_id') or sample.get('id') or sample.get('pmid')
+            if cid and cid in case_id_filter:
+                filtered.append(sample)
+        per_sample_results = filtered
+        print(f"  应用 case_id_filter: 从 {original_len} 条样本中筛选出 {len(per_sample_results)} 条用于后续处理")
+
     print(f"读取医疗数据: {medical_file}")
     with open(medical_file, 'r', encoding='utf-8') as f:
         medical_data = json.load(f)
     
-    print(f"评估数据: {len(eval_data.get('per_sample_results', []))} 个病例")
+    print(f"评估数据: {len(per_sample_results)} 个病例")  # 改为显示过滤后的数量
     print(f"医疗数据: {len(medical_data)} 个病例")
     
     # 统计变量
@@ -477,10 +546,8 @@ def process_evaluation_data(
     no_image_count = 0
     total_path_replaced = 0
     
-    per_sample_results = eval_data.get('per_sample_results', [])
-    
     print(f"\n{'='*70}")
-    print(f"开始处理病例(共 {len(per_sample_results)} 个)...")
+    print(f"开始处理病例(共 {len(per_sample_results)} 个)...")  # 这里会显示正确的数量
     print(f"{'='*70}")
     
     start_time = datetime.now()
@@ -977,6 +1044,17 @@ def main():
     temp_output = "data_temp.json"
     final_output = "data_filtered.json"
     
+    # 步骤0: 从指定的 scin_final_diagnosis_evaluation.json 中获取诊断不一致的case_ids（避免读取脚本输出文件）
+    print("\n📋 步骤0: 获取诊断不一致的病例ID")
+    print("-" * 70)
+    mismatch_case_ids = load_mismatch_case_ids_from_folder(".", target_file="scin_final_diagnosis_evaluation.json")
+    if not mismatch_case_ids:
+        print("⚠️ 未找到诊断不一致的病例，将处理所有数据")
+    else:
+        # 调试输出，确认 id 列表没有异常
+        sample_ids = list(mismatch_case_ids)[:20]
+        print(f"  已收集不一致的 case_id 共 {len(mismatch_case_ids)} 个，前20个示例: {sample_ids}")
+    
     # 步骤1: 处理和匹配数据
     print("\n📋 步骤1: 处理评估数据并匹配图片路径")
     print("-" * 70)
@@ -985,13 +1063,12 @@ def main():
             eval_file=eval_file,
             medical_file=medical_file,
             output_file=temp_output,
-            use_dermlip=True
+            use_dermlip=True,
+            case_id_filter=mismatch_case_ids  # 添加这个参数
         )
     except Exception as e:
         print(f"\n❌ 错误: 步骤1处理失败")
         print(f"错误信息: {str(e)}")
-        import traceback
-        traceback.print_exc()
         return
     
     # 步骤2: 筛选数据
@@ -1009,8 +1086,6 @@ def main():
     except Exception as e:
         print(f"\n❌ 错误: 步骤2筛选失败")
         print(f"错误信息: {str(e)}")
-        import traceback
-        traceback.print_exc()
         return
     
     # 显示示例
@@ -1063,4 +1138,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main() 
+    main()

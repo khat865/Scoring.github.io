@@ -1,374 +1,158 @@
-#!/usr/bin/env python3
-"""
-医学数据处理工具 - 改进版
-支持添加PMID或唯一ID避免文件名冲突
-"""
-
 import json
-import os
-import shutil
+import random
 from pathlib import Path
-import hashlib
 
-def extract_pmid_from_path(path):
-    """
-    从路径中提取PMID
-    例如: E:/medical/.../38865572/images/figure.jpg -> 38865572
-    """
-    parts = Path(path).parts
-    for part in parts:
-        # 查找像PMID的数字（通常是8位数字）
-        if part.isdigit() and len(part) >= 6:
-            return part
-    return None
-
-
-def process_medical_data(input_file='your_data.json', output_file='medical_data.json', 
-                         copy_images=True, add_prefix=True):
-    """
-    处理医学数据并复制图片到项目目录
+def add_case_ids(input_file, output_file):
+    """给输入文件添加case_id"""
+    with open(input_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
     
-    参数:
-        input_file: 输入的原始数据文件
-        output_file: 输出的处理后数据文件
-        copy_images: 是否复制图片到项目images目录
-        add_prefix: 是否添加前缀避免重名（PMID或索引）
-    """
-    print("=" * 60)
-    print("医学数据处理工具 - 改进版")
-    print("=" * 60)
+    for idx, item in enumerate(data):
+        item['case_id'] = f"case_{idx}"
     
-    # 读取原始数据
-    print(f"\n📖 正在读取数据文件: {input_file}")
-    try:
-        with open(input_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        print(f"❌ 错误: 找不到文件 {input_file}")
-        return False
-    except json.JSONDecodeError as e:
-        print(f"❌ 错误: JSON 格式错误 - {e}")
-        return False
-    
-    print(f"✓ 成功加载 {len(data)} 个病例")
-    
-    # 创建images目录
-    images_dir = Path('images')
-    if copy_images:
-        images_dir.mkdir(exist_ok=True)
-        print(f"\n📁 图片目录: {images_dir.absolute()}")
-    
-    # 处理数据
-    processed_data = []
-    total_images = 0
-    copied_images = 0
-    missing_images = []
-    renamed_map = {}  # 记录重命名映射
-    
-    print(f"\n🔄 开始处理数据...")
-    if add_prefix:
-        print("✓ 启用前缀模式，避免文件名冲突")
-    
-    for idx, item in enumerate(data, 1):
-        if 'image_paths' not in item or 'prompt' not in item:
-            print(f"⚠️  病例 {idx}: 缺少必需字段，跳过")
-            continue
-        
-        new_image_paths = []
-        
-        # 尝试从第一个图片路径提取PMID
-        pmid = None
-        if item['image_paths'] and add_prefix:
-            pmid = extract_pmid_from_path(item['image_paths'][0])
-        
-        # 如果没有找到PMID，使用索引
-        if not pmid and add_prefix:
-            pmid = f"case{idx:04d}"
-        
-        for img_path in item['image_paths']:
-            total_images += 1
-            
-            if copy_images:
-                src_path = Path(img_path)
-                
-                if not src_path.exists():
-                    print(f"⚠️  图片不存在: {img_path}")
-                    missing_images.append(img_path)
-                    # 仍然生成目标路径
-                    if add_prefix:
-                        new_filename = f"{pmid}_{src_path.name}"
-                    else:
-                        new_filename = src_path.name
-                    new_image_paths.append(f"images/{new_filename}")
-                    continue
-                
-                # 生成新的文件名
-                if add_prefix:
-                    new_filename = f"{pmid}_{src_path.name}"
-                else:
-                    new_filename = src_path.name
-                
-                dst_path = images_dir / new_filename
-                
-                # 记录重命名
-                if src_path.name != new_filename:
-                    renamed_map[str(src_path)] = new_filename
-                
-                try:
-                    shutil.copy2(src_path, dst_path)
-                    copied_images += 1
-                    new_image_paths.append(f"images/{new_filename}")
-                except Exception as e:
-                    print(f"❌ 复制失败 {src_path.name}: {e}")
-                    new_image_paths.append(img_path)
-            else:
-                # 不复制图片，只转换路径格式
-                filename = Path(img_path).name
-                if add_prefix:
-                    new_filename = f"{pmid}_{filename}"
-                else:
-                    new_filename = filename
-                new_image_paths.append(f"images/{new_filename}")
-        
-        processed_item = {
-            'image_paths': new_image_paths,
-            'prompt': item['prompt']
-        }
-        
-        # 保留PMID信息（可选）
-        if pmid and pmid.startswith('case'):
-            processed_item['case_id'] = pmid
-        elif pmid:
-            processed_item['pmid'] = pmid
-        
-        processed_data.append(processed_item)
-        
-        if idx % 10 == 0:
-            print(f"  处理进度: {idx}/{len(data)}")
-    
-    # 保存处理后的数据
-    print(f"\n💾 保存处理后的数据到: {output_file}")
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(processed_data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, indent=2, ensure_ascii=False)
     
-    # 输出统计信息
-    print("\n" + "=" * 60)
-    print("📊 处理完成！统计信息:")
-    print("=" * 60)
-    print(f"✓ 处理病例数: {len(processed_data)}")
-    print(f"✓ 总图片数: {total_images}")
-    
-    if copy_images:
-        print(f"✓ 成功复制图片: {copied_images}")
-        if add_prefix:
-            print(f"✓ 添加前缀避免重名: {len(renamed_map)} 个文件")
-        if missing_images:
-            print(f"⚠️  缺失图片: {len(missing_images)}")
-            print(f"\n缺失图片列表保存到: missing_images.txt")
-            with open('missing_images.txt', 'w', encoding='utf-8') as f:
-                for img in missing_images:
-                    f.write(f"{img}\n")
-    
-    if renamed_map and copy_images:
-        print(f"\n✓ 重命名映射保存到: renamed_files.txt")
-        with open('renamed_files.txt', 'w', encoding='utf-8') as f:
-            f.write("原始路径 -> 新文件名\n")
-            f.write("=" * 80 + "\n")
-            for orig, new in renamed_map.items():
-                f.write(f"{orig}\n  -> {new}\n\n")
-    
-    print(f"\n✓ 输出文件: {output_file}")
-    print("=" * 60)
-    
-    return True
+    return data
 
+def load_evaluation_data(eval_file):
+    """加载评估数据文件"""
+    with open(eval_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    return data
 
-def check_duplicates(input_file='your_data.json'):
-    """检查数据中是否有重复的图片文件名"""
-    print("\n" + "=" * 60)
-    print("检查重复文件名")
-    print("=" * 60)
+def load_template_data(template_file):
+    """加载模板数据文件"""
+    with open(template_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    return data
+
+def merge_and_filter(cases_with_ids, eval_data, template_data, n_samples=50, output_file='output_filtered.json'):
+    """
+    从模板中随机选择n个样本，仅替换指定字段
+    
+    Args:
+        cases_with_ids: 带有case_id的案例数据
+        eval_data: 评估数据
+        template_data: 模板数据（保留task3_pairs及之后的所有内容）
+        n_samples: 要选择的样本数量
+        output_file: 输出文件路径
+    """
+    # 创建案例数据字典，方便查找
+    cases_dict = {case['case_id']: case for case in cases_with_ids}
+    
+    # 创建评估数据的字典，方便查找
+    eval_dict = {}
+    if 'per_sample_results' in eval_data:
+        for item in eval_data['per_sample_results']:
+            eval_dict[item['case_id']] = item
+    
+    # 随机选择n个模板案例
+    if len(template_data) < n_samples:
+        print(f"警告: 模板案例数({len(template_data)})少于请求数({n_samples})")
+        selected_templates = template_data
+    else:
+        selected_templates = random.sample(template_data, n_samples)
+    
+    # 构建输出数据
+    output_data = []
+    
+    for template_item in selected_templates:
+        template_case_id = template_item['id']
+        
+        # 查找对应的案例数据
+        case_data = cases_dict.get(template_case_id, {})
+        
+        # 查找对应的评估数据
+        eval_item = eval_dict.get(template_case_id, {})
+        
+        # 创建新条目，从模板复制所有内容
+        new_item = template_item.copy()
+        
+        # 仅替换指定的字段
+        if case_data:
+            new_item['image_paths'] = case_data.get('image_paths', template_item.get('image_paths', []))
+            new_item['prompt'] = case_data.get('prompt', template_item.get('prompt', ''))
+        
+        if eval_item:
+            new_item['predicted_diagnosis'] = eval_item.get('predicted_diagnosis', template_item.get('predicted_diagnosis', ''))
+            new_item['ground_truth_diagnosis'] = eval_item.get('ground_truth_diagnosis', template_item.get('ground_truth_diagnosis', ''))
+        elif case_data and 'GT' in case_data:
+            # 如果评估数据中没有，尝试从案例数据的GT字段获取
+            new_item['ground_truth_diagnosis'] = case_data['GT'].get('label_1', template_item.get('ground_truth_diagnosis', ''))
+        
+        # id和pmid保持不变（使用模板中的值）
+        # task3_pairs及之后的所有内容自动保留（因为使用了copy()）
+        
+        output_data.append(new_item)
+    
+    # 保存输出文件
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(output_data, f, indent=2, ensure_ascii=False)
+    
+    print(f"成功生成 {len(output_data)} 个案例到 {output_file}")
+    print(f"选中的案例ID: {[item['id'] for item in output_data[:10]]}...")
+    return output_data
+
+# 主执行流程
+if __name__ == "__main__":
+    # 设置随机种子以便结果可复现（可选）
+    random.seed(42)
+    
+    # 文件路径
+    INPUT_CASES_FILE = "SCIN_no_DD_input.json"  # 需要添加case_id的原始文件
+    CASES_WITH_IDS_FILE = "cases_with_ids.json"  # 添加case_id后的临时文件
+    EVAL_DATA_FILE = "scin_final_diagnosis_evaluation.json"  # 第一个文档的内容
+    TEMPLATE_FILE = "data_filtered.json"  # 第二个文档的内容（模板）
+    OUTPUT_FILE = "output_filtered.json"  # 最终输出文件
     
     try:
-        with open(input_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        # 步骤1: 给原始案例添加case_id
+        print("步骤1: 添加case_id...")
+        cases_with_ids = add_case_ids(INPUT_CASES_FILE, CASES_WITH_IDS_FILE)
+        print(f"已添加case_id，共 {len(cases_with_ids)} 个案例")
+        
+        # 步骤2: 加载评估数据
+        print("\n步骤2: 加载评估数据...")
+        eval_data = load_evaluation_data(EVAL_DATA_FILE)
+        print("评估数据加载完成")
+        
+        # 步骤3: 加载模板数据
+        print("\n步骤3: 加载模板数据...")
+        template_data = load_template_data(TEMPLATE_FILE)
+        print(f"模板数据加载完成，共 {len(template_data)} 个模板")
+        
+        # 步骤4: 从模板中随机选择50个案例，仅替换指定字段
+        print("\n步骤4: 随机选择50个模板案例并替换指定字段...")
+        output_data = merge_and_filter(
+            cases_with_ids, 
+            eval_data, 
+            template_data, 
+            n_samples=50, 
+            output_file=OUTPUT_FILE
+        )
+        
+        print(f"\n完成! 输出文件: {OUTPUT_FILE}")
+        print("\n注意: 仅替换了以下字段:")
+        print("  - image_paths")
+        print("  - prompt")
+        print("  - predicted_diagnosis")
+        print("  - ground_truth_diagnosis")
+        print("\n保留了模板中的所有其他字段，包括:")
+        print("  - id, pmid")
+        print("  - task3_pairs")
+        print("  - predicted_differential_diagnosis_full")
+        print("  - ground_truth_differential_diagnosis_full")
+        print("  - similarity_variance")
+        print("  - similarity_range")
+        
+    except FileNotFoundError as e:
+        print(f"错误: 找不到文件 - {e}")
+        print("\n请确保以下文件存在:")
+        print(f"  - {INPUT_CASES_FILE}")
+        print(f"  - {EVAL_DATA_FILE}")
+        print(f"  - {TEMPLATE_FILE}")
     except Exception as e:
-        print(f"❌ 读取文件失败: {e}")
-        return
-    
-    all_filenames = []
-    for item in data:
-        if 'image_paths' in item:
-            for path in item['image_paths']:
-                filename = Path(path).name
-                all_filenames.append(filename)
-    
-    # 统计重复
-    from collections import Counter
-    filename_counts = Counter(all_filenames)
-    duplicates = {name: count for name, count in filename_counts.items() if count > 1}
-    
-    print(f"\n总文件数: {len(all_filenames)}")
-    print(f"唯一文件名: {len(filename_counts)}")
-    print(f"重复文件名: {len(duplicates)}")
-    
-    if duplicates:
-        print(f"\n⚠️  发现 {len(duplicates)} 个重复的文件名:")
-        print("-" * 60)
-        for name, count in sorted(duplicates.items(), key=lambda x: x[1], reverse=True)[:20]:
-            print(f"  {name}: 出现 {count} 次")
-        if len(duplicates) > 20:
-            print(f"  ... 还有 {len(duplicates)-20} 个重复文件名")
-        
-        print(f"\n💡 建议: 使用 'process' 命令并启用前缀模式")
-        print("   python medical_data_tools.py process your_data.json")
-    else:
-        print("\n✓ 没有发现重复的文件名")
-    
-    print("=" * 60)
-
-
-def validate_medical_data(data_file='medical_data.json'):
-    """验证医学数据格式"""
-    print("\n" + "=" * 60)
-    print("验证医学数据格式")
-    print("=" * 60)
-    
-    try:
-        with open(data_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        print(f"❌ 错误: 找不到文件 {data_file}")
-        return False
-    except json.JSONDecodeError as e:
-        print(f"❌ 错误: JSON 格式错误 - {e}")
-        return False
-    
-    errors = []
-    warnings = []
-    
-    print(f"\n📊 数据统计:")
-    print(f"  总病例数: {len(data)}")
-    
-    total_images = 0
-    for idx, item in enumerate(data, 1):
-        if 'image_paths' not in item:
-            errors.append(f"病例 {idx}: 缺少 'image_paths' 字段")
-        elif not isinstance(item['image_paths'], list):
-            errors.append(f"病例 {idx}: 'image_paths' 应该是数组")
-        else:
-            total_images += len(item['image_paths'])
-            if len(item['image_paths']) == 0:
-                warnings.append(f"病例 {idx}: 没有图片")
-        
-        if 'prompt' not in item:
-            errors.append(f"病例 {idx}: 缺少 'prompt' 字段")
-        elif not isinstance(item['prompt'], str):
-            errors.append(f"病例 {idx}: 'prompt' 应该是字符串")
-    
-    print(f"  总图片数: {total_images}")
-    if len(data) > 0:
-        print(f"  平均每病例图片数: {total_images/len(data):.1f}")
-    
-    if errors:
-        print(f"\n❌ 发现 {len(errors)} 个错误:")
-        for error in errors[:10]:
-            print(f"  {error}")
-        if len(errors) > 10:
-            print(f"  ... 还有 {len(errors)-10} 个错误")
-        return False
-    
-    if warnings:
-        print(f"\n⚠️  发现 {len(warnings)} 个警告:")
-        for warning in warnings[:10]:
-            print(f"  {warning}")
-    
-    print("\n✓ 数据格式验证通过")
-    print("=" * 60)
-    return True
-
-
-def create_sample_medical_data(num_cases=5, output_file='medical_data.json'):
-    """创建示例医学数据"""
-    print(f"创建 {num_cases} 个示例病例...")
-    
-    sample_prompts = [
-        "A 45-year-old patient presents with skin lesions. Please evaluate the clinical presentation.",
-        "Dermatological findings in a 32-year-old female with autoimmune condition.",
-        "Chronic skin manifestation in immunocompromised patient. Diagnostic approach needed.",
-        "Pediatric case: 8-year-old with progressive rash. Please provide differential diagnosis.",
-        "Elderly patient with atypical dermatitis. Consider systemic factors."
-    ]
-    
-    data = []
-    for i in range(num_cases):
-        # 使用PMID风格的ID
-        pmid = f"{30000000 + i}"
-        item = {
-            "image_paths": [
-                f"images/{pmid}_figure_01.jpg",
-                f"images/{pmid}_figure_02.jpg",
-                f"images/{pmid}_figure_03.jpg"
-            ],
-            "prompt": sample_prompts[i % len(sample_prompts)],
-            "pmid": pmid
-        }
-        data.append(item)
-    
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    
-    print(f"✓ 示例数据已创建: {output_file}")
-    print(f"✓ 包含 {num_cases} 个病例，每个病例 3 张图片")
-    print(f"✓ 图片文件名已添加PMID前缀避免冲突")
-
-
-def main():
-    import sys
-    
-    if len(sys.argv) < 2:
-        print("=" * 60)
-        print("医学数据处理工具 - 改进版")
-        print("=" * 60)
-        print("\n使用方法:")
-        print("  python medical_data_tools.py process <输入文件> [输出文件]")
-        print("    - 处理数据并复制图片，自动添加PMID前缀避免重名")
-        print("\n  python medical_data_tools.py check <输入文件>")
-        print("    - 检查是否有重复的文件名")
-        print("\n  python medical_data_tools.py validate [数据文件]")
-        print("    - 验证数据格式")
-        print("\n  python medical_data_tools.py sample [数量]")
-        print("    - 创建示例数据")
-        print("\n示例:")
-        print("  python medical_data_tools.py check your_data.json")
-        print("  python medical_data_tools.py process your_data.json")
-        print("  python medical_data_tools.py validate medical_data.json")
-        print("=" * 60)
-        return
-    
-    command = sys.argv[1]
-    
-    if command == 'process':
-        input_file = sys.argv[2] if len(sys.argv) > 2 else 'your_data.json'
-        output_file = sys.argv[3] if len(sys.argv) > 3 else 'medical_data.json'
-        process_medical_data(input_file, output_file, copy_images=True, add_prefix=True)
-    
-    elif command == 'check':
-        input_file = sys.argv[2] if len(sys.argv) > 2 else 'your_data.json'
-        check_duplicates(input_file)
-    
-    elif command == 'validate':
-        data_file = sys.argv[2] if len(sys.argv) > 2 else 'medical_data.json'
-        validate_medical_data(data_file)
-    
-    elif command == 'sample':
-        num_cases = int(sys.argv[2]) if len(sys.argv) > 2 else 5
-        create_sample_medical_data(num_cases)
-    
-    else:
-        print(f"❌ 未知命令: {command}")
-        print("运行 'python medical_data_tools.py' 查看帮助")
-
-
-if __name__ == '__main__':
-    main()
+        print(f"发生错误: {e}")
+        import traceback
+        traceback.print_exc()

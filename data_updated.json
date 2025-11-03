@@ -1,0 +1,1953 @@
+[
+    {
+        "id": "case_761",
+        "pmid": "case_761",
+        "image_paths": [
+            "images/SCIN/images/4990802128833526700.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include burning, pain. Other symptoms include chills, fatigue.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Eczema",
+        "ground_truth_diagnosis": "Eczema",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "meningococcemia",
+                "ground_truth": "irritant contact dermatitis",
+                "similarity": 0.0212,
+                "similarity_original": 0.8594
+            },
+            {
+                "pair_id": "B",
+                "predicted": "drug reaction",
+                "ground_truth": "hypersensitivity",
+                "similarity": 1.0,
+                "similarity_original": 0.9426
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "erythema multiforme",
+            "contact dermatitis",
+            "herpes zoster",
+            "meningococcemia",
+            "drug reaction"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "hypersensitivity",
+            "urticaria",
+            "irritant contact dermatitis"
+        ],
+        "similarity_variance": 0.4894,
+        "similarity_range": 0.9788
+    },
+    {
+        "id": "case_2929",
+        "pmid": "case_2929",
+        "image_paths": [
+            "images/SCIN/images/-236243587506471173.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Seborrheic Keratosis | Actinic Keratosis | Psoriasis | Lichen Planus",
+        "ground_truth_diagnosis": "darier's disease | hailey hailey disease | eczema",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "seborrheic keratosis",
+                "ground_truth": "hailey hailey disease",
+                "similarity": 0.0,
+                "similarity_original": 0.852
+            },
+            {
+                "pair_id": "B",
+                "predicted": "psoriasis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9606
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "seborrheic keratosis",
+            "actinic keratosis",
+            "psoriasis",
+            "lichen planus"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "darier's disease",
+            "hailey hailey disease",
+            "eczema"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2640",
+        "pmid": "case_2640",
+        "image_paths": [
+            "images/SCIN/images/5595150567654673913.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Folliculitis | Cystic acne | Boil | Abscess",
+        "ground_truth_diagnosis": "impetigo | psoriasis | tinea",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "folliculitis",
+                "ground_truth": "psoriasis",
+                "similarity": 1.0,
+                "similarity_original": 0.9333
+            },
+            {
+                "pair_id": "B",
+                "predicted": "cystic acne",
+                "ground_truth": "tinea",
+                "similarity": 0.0,
+                "similarity_original": 0.875
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "folliculitis",
+            "cystic acne",
+            "boil",
+            "abscess"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "impetigo",
+            "psoriasis",
+            "tinea"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_1741",
+        "pmid": "case_1741",
+        "image_paths": [
+            "images/SCIN/images/-2307387288352361738.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 40 TO 49 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST1.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching, burning, pain. Other symptoms include fatigue.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne vulgaris | Folliculitis | Impetigo | Eczema",
+        "ground_truth_diagnosis": "allergic contact dermatitis | phytophotodermatitis | insect bite",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne vulgaris",
+                "ground_truth": "phytophotodermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.8576
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9599
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne vulgaris",
+            "folliculitis",
+            "impetigo",
+            "eczema"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "allergic contact dermatitis",
+            "phytophotodermatitis",
+            "insect bite"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_291",
+        "pmid": "case_291",
+        "image_paths": [
+            "images/SCIN/images/-1064371581402118828.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include itching, burning, pain. Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Impetigo",
+        "ground_truth_diagnosis": "Herpes Zoster",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne",
+                "ground_truth": "tinea",
+                "similarity": 0.0,
+                "similarity_original": 0.9066
+            },
+            {
+                "pair_id": "B",
+                "predicted": "seborrheic dermatitis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9473
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "folliculitis",
+            "seborrheic dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "seborrheic dermatitis",
+            "tinea",
+            "eczema"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_715",
+        "pmid": "case_715",
+        "image_paths": [
+            "images/SCIN/images/-4572694283367066772.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 60 TO 69 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Psoriasis",
+        "ground_truth_diagnosis": "Prurigo nodularis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "eczema",
+                "ground_truth": "impetigo",
+                "similarity": 1.0,
+                "similarity_original": 0.932
+            },
+            {
+                "pair_id": "B",
+                "predicted": "vitiligo",
+                "ground_truth": "infected eczema",
+                "similarity": 0.0,
+                "similarity_original": 0.8635
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "xeroderma",
+            "contact dermatitis",
+            "vitiligo"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "impetigo",
+            "herpes zoster",
+            "infected eczema"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_3621",
+        "pmid": "case_3621",
+        "image_paths": [
+            "images/SCIN/images/-8145244033534164482.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is genitalia or groin\n    According to the patient, the condition symptoms include bothersome appearance, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Genital Herpes | Genital Warts | Lichen Planus | Contact Dermatitis | Erythema Multiforme | Pyoderma Gangrenosum",
+        "ground_truth_diagnosis": "folliculitis | acute and chronic dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "genital herpes",
+                "ground_truth": "acute and chronic dermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.861
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "folliculitis",
+                "similarity": 0.7825,
+                "similarity_original": 0.9297
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "genital herpes",
+            "genital warts",
+            "lichen planus",
+            "contact dermatitis",
+            "erythema multiforme",
+            "pyoderma gangrenosum"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "folliculitis",
+            "acute and chronic dermatitis"
+        ],
+        "similarity_variance": 0.39125,
+        "similarity_range": 0.7825
+    },
+    {
+        "id": "case_2514",
+        "pmid": "case_2514",
+        "image_paths": [
+            "images/SCIN/images/-2016873216642501222.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is foot top or side\n    According to the patient, the condition symptoms include bothersome appearance, darkening, itching. Other symptoms include fatigue.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Psoriasis | Tinea pedis | Seborrheic dermatitis | Xerosis",
+        "ground_truth_diagnosis": "lichen planus/lichenoid eruption | chronic dermatitis, nos | drug rash",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "psoriasis",
+                "ground_truth": "drug rash",
+                "similarity": 1.0,
+                "similarity_original": 0.9443
+            },
+            {
+                "pair_id": "B",
+                "predicted": "tinea pedis",
+                "ground_truth": "lichen planus/lichenoid eruption",
+                "similarity": 0.0,
+                "similarity_original": 0.8625
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "tinea pedis",
+            "seborrheic dermatitis",
+            "xerosis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "lichen planus/lichenoid eruption",
+            "chronic dermatitis, nos",
+            "drug rash"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2656",
+        "pmid": "case_2656",
+        "image_paths": [
+            "images/SCIN/images/6098172650793747623.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne | Erythema | Contact dermatitis | Insect bites | Erythema multiforme",
+        "ground_truth_diagnosis": "insect bite | geographic tongue | cd - contact dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "erythema",
+                "ground_truth": "cd - contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9291
+            },
+            {
+                "pair_id": "B",
+                "predicted": "insect bites",
+                "ground_truth": "geographic tongue",
+                "similarity": 0.0,
+                "similarity_original": 0.8446
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "erythema",
+            "contact dermatitis",
+            "insect bites",
+            "erythema multiforme"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "insect bite",
+            "geographic tongue",
+            "cd - contact dermatitis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2973",
+        "pmid": "case_2973",
+        "image_paths": [
+            "images/SCIN/images/-5760737638341676163.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 70 TO 79 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, bleeding, itching, burning. Other symptoms include fatigue, mouth sores.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Pressure ulcers | Diabetic dermopathy | Psoriasis | Eczema | Verruca vulgaris | Herpes zoster | Lymphedema",
+        "ground_truth_diagnosis": "lichen simplex chronicus | lichen planus/lichenoid eruption | chronic dermatitis, nos",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "pressure ulcers",
+                "ground_truth": "chronic dermatitis, nos",
+                "similarity": 0.0,
+                "similarity_original": 0.8271
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "lichen simplex chronicus",
+                "similarity": 1.0,
+                "similarity_original": 0.9033
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "pressure ulcers",
+            "diabetic dermopathy",
+            "psoriasis",
+            "eczema",
+            "verruca vulgaris",
+            "herpes zoster",
+            "lymphedema"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "lichen simplex chronicus",
+            "lichen planus/lichenoid eruption",
+            "chronic dermatitis, nos"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_3958",
+        "pmid": "case_3958",
+        "image_paths": [
+            "images/SCIN/images/-5877528973360474863.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 50 TO 59 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is foot top or side\n    According to the patient, the condition symptoms include bothersome appearance, itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Plantar warts | Eczema | Fungal infection",
+        "ground_truth_diagnosis": "impetigo | folliculitis | allergic contact dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "plantar warts",
+                "ground_truth": "folliculitis",
+                "similarity": 0.0526,
+                "similarity_original": 0.8716
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9599
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "plantar warts",
+            "eczema",
+            "fungal infection"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "impetigo",
+            "folliculitis",
+            "allergic contact dermatitis"
+        ],
+        "similarity_variance": 0.4737,
+        "similarity_range": 0.9474
+    },
+    {
+        "id": "case_380",
+        "pmid": "case_380",
+        "image_paths": [
+            "images/SCIN/images/-4878805747443599987.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is back of hand\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Seborrheic dermatitis",
+        "ground_truth_diagnosis": "Chronic dermatitis, NOS",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "eczema",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9599
+            },
+            {
+                "pair_id": "B",
+                "predicted": "psoriasis",
+                "ground_truth": "cd - contact dermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.9073
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "eczema",
+            "contact dermatitis",
+            "psoriasis",
+            "seborrheic dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "cd - contact dermatitis",
+            "allergic contact dermatitis",
+            "urticaria"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2402",
+        "pmid": "case_2402",
+        "image_paths": [
+            "images/SCIN/images/-2917349207573648398.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, bleeding, increasing size, darkening, itching, burning, pain. Other symptoms include fever, chills, fatigue, joint pain, shortness of breath.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Abscess | Cyst | Pyoderma gangrenosum | Herpes zoster | Lymphangiomatosis",
+        "ground_truth_diagnosis": "abrasion, scrape, or scab | impetigo | ecthyma",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "abscess",
+                "ground_truth": "impetigo",
+                "similarity": 1.0,
+                "similarity_original": 0.9298
+            },
+            {
+                "pair_id": "B",
+                "predicted": "lymphangiomatosis",
+                "ground_truth": "abrasion, scrape, or scab",
+                "similarity": 0.0,
+                "similarity_original": 0.838
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "abscess",
+            "cyst",
+            "pyoderma gangrenosum",
+            "herpes zoster",
+            "lymphangiomatosis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "abrasion, scrape, or scab",
+            "impetigo",
+            "ecthyma"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_3159",
+        "pmid": "case_3159",
+        "image_paths": [
+            "images/SCIN/images/-83241695443372952.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance, increasing size. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne | Erythema multiforme | Contact dermatitis | Lymphangitis | Herpes simplex virus infection | Lupus",
+        "ground_truth_diagnosis": "abrasion, scrape, or scab | skin striae | animal bite - wound",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "contact dermatitis",
+                "ground_truth": "skin striae",
+                "similarity": 1.0,
+                "similarity_original": 0.9006
+            },
+            {
+                "pair_id": "B",
+                "predicted": "lupus",
+                "ground_truth": "abrasion, scrape, or scab",
+                "similarity": 0.0,
+                "similarity_original": 0.8526
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "erythema multiforme",
+            "contact dermatitis",
+            "lymphangitis",
+            "herpes simplex virus infection",
+            "lupus"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "abrasion, scrape, or scab",
+            "skin striae",
+            "animal bite - wound"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_69",
+        "pmid": "case_69",
+        "image_paths": [
+            "images/SCIN/images/-2745158287266547055.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Eczema",
+        "ground_truth_diagnosis": "Allergic Contact Dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "keratosis pilaris",
+                "ground_truth": "insect bite",
+                "similarity": 0.0,
+                "similarity_original": 0.8497
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9599
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "keratosis pilaris",
+            "acne vulgaris",
+            "eczema"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "urticaria",
+            "insect bite",
+            "allergic contact dermatitis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2858",
+        "pmid": "case_2858",
+        "image_paths": [
+            "images/SCIN/images/-1289056757877756953.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 30 TO 39 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is foot top or side\n    According to the patient, the condition symptoms include bothersome appearance, itching, burning. Other symptoms include fatigue, joint pain.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Psoriasis | Eczema | Seborrheic dermatitis | Contact dermatitis",
+        "ground_truth_diagnosis": "psoriasis | psoriasiform dermatitis | drug rash",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "eczema",
+                "ground_truth": "psoriasiform dermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.9051
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "psoriasis",
+                "similarity": 0.7838,
+                "similarity_original": 0.9486
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "seborrheic dermatitis",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "psoriasis",
+            "psoriasiform dermatitis",
+            "drug rash"
+        ],
+        "similarity_variance": 0.3919,
+        "similarity_range": 0.7838
+    },
+    {
+        "id": "case_1034",
+        "pmid": "case_1034",
+        "image_paths": [
+            "images/SCIN/images/5519501269581081464.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is back of hand\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Eczema",
+        "ground_truth_diagnosis": "Eczema",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne",
+                "ground_truth": "melanocytic nevus",
+                "similarity": 0.0142,
+                "similarity_original": 0.8843
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "insect bite",
+                "similarity": 1.0,
+                "similarity_original": 0.9191
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "eczema",
+            "psoriasis",
+            "seborrheic dermatitis",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "insect bite",
+            "melanocytic nevus",
+            "basal cell carcinoma"
+        ],
+        "similarity_variance": 0.4929,
+        "similarity_range": 0.9858
+    },
+    {
+        "id": "case_331",
+        "pmid": "case_331",
+        "image_paths": [
+            "images/SCIN/images/-2339607898484031426.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is lack or african american.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is torso back\n    According to the patient, the condition symptoms include itching. Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Melanoma",
+        "ground_truth_diagnosis": "varicose vein",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "psoriasis",
+                "ground_truth": "drug rash",
+                "similarity": 0.9976,
+                "similarity_original": 0.9443
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "pityriasis lichenoides",
+                "similarity": 0.0,
+                "similarity_original": 0.8618
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne vulgaris",
+            "eczema",
+            "psoriasis",
+            "seborrheic dermatitis",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "erythema multiforme",
+            "pityriasis lichenoides",
+            "drug rash"
+        ],
+        "similarity_variance": 0.4988,
+        "similarity_range": 0.9976
+    },
+    {
+        "id": "case_857",
+        "pmid": "case_857",
+        "image_paths": [
+            "images/SCIN/images/-6871553402512605628.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is head or neck\n    According to the patient, the condition symptoms include itching, burning, pain. Other symptoms include joint pain, shortness of breath.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Eczema",
+        "ground_truth_diagnosis": "Eczema",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "contact dermatitis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9671
+            },
+            {
+                "pair_id": "B",
+                "predicted": "herpes zoster",
+                "ground_truth": "seborrheic dermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.896
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne vulgaris",
+            "folliculitis",
+            "contact dermatitis",
+            "eczema",
+            "herpes zoster",
+            "malignancy",
+            "lupus",
+            "sarcoidosis",
+            "infectious diseases"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "seborrheic dermatitis",
+            "eczema"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_4047",
+        "pmid": "case_4047",
+        "image_paths": [
+            "images/SCIN/images/-2702361237535417918.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is torso back\n    According to the patient, the condition symptoms include bothersome appearance, increasing size. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Seborrheic keratosis | Actinic keratosis | Moles",
+        "ground_truth_diagnosis": "acne | folliculitis | allergic contact dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "seborrheic keratosis",
+                "ground_truth": "folliculitis",
+                "similarity": 0.029,
+                "similarity_original": 0.8839
+            },
+            {
+                "pair_id": "B",
+                "predicted": "moles",
+                "ground_truth": "acne",
+                "similarity": 1.0,
+                "similarity_original": 0.9073
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "seborrheic keratosis",
+            "actinic keratosis",
+            "moles"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "acne",
+            "folliculitis",
+            "allergic contact dermatitis"
+        ],
+        "similarity_variance": 0.4855,
+        "similarity_range": 0.971
+    },
+    {
+        "id": "case_3636",
+        "pmid": "case_3636",
+        "image_paths": [
+            "images/SCIN/images/-5294812211330544722.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is palm\n    According to the patient, the condition symptoms include no relevant experience. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Contact dermatitis | Psoriasis | Eczema | Dermatitis | Fungal infection | Autoimmune condition",
+        "ground_truth_diagnosis": "viral exanthem | erythema multiforme | drug rash",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "dermatitis",
+                "ground_truth": "drug rash",
+                "similarity": 1.0,
+                "similarity_original": 0.9491
+            },
+            {
+                "pair_id": "B",
+                "predicted": "autoimmune condition",
+                "ground_truth": "erythema multiforme",
+                "similarity": 0.0,
+                "similarity_original": 0.9029
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "contact dermatitis",
+            "psoriasis",
+            "eczema",
+            "dermatitis",
+            "fungal infection",
+            "autoimmune condition"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "viral exanthem",
+            "erythema multiforme",
+            "drug rash"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_810",
+        "pmid": "case_810",
+        "image_paths": [
+            "images/SCIN/images/-88987941380934773.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 60 TO 69 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include . Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne",
+        "ground_truth_diagnosis": "Folliculitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "cellulitis",
+                "ground_truth": "urticaria",
+                "similarity": 1.0,
+                "similarity_original": 0.9354
+            },
+            {
+                "pair_id": "B",
+                "predicted": "lymphangitis",
+                "ground_truth": "erythema multiforme",
+                "similarity": 0.0,
+                "similarity_original": 0.8872
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "cellulitis",
+            "erythema multiforme",
+            "contact dermatitis",
+            "lymphangitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "urticaria",
+            "erythema multiforme"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_818",
+        "pmid": "case_818",
+        "image_paths": [
+            "images/SCIN/images/-1463515357875525784.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST6.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is head or neck\n    According to the patient, the condition symptoms include bothersome appearance, increasing size, itching, burning, pain. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Sebaceous cyst",
+        "ground_truth_diagnosis": "Allergic Contact Dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "melanoma",
+                "ground_truth": "acne",
+                "similarity": 1.0,
+                "similarity_original": 0.9101
+            },
+            {
+                "pair_id": "B",
+                "predicted": "keratoacanthoma",
+                "ground_truth": "acne keloidalis",
+                "similarity": 0.0,
+                "similarity_original": 0.8588
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "melanoma",
+            "basal cell carcinoma",
+            "keratoacanthoma"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "acne",
+            "folliculitis",
+            "acne keloidalis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_3603",
+        "pmid": "case_3603",
+        "image_paths": [
+            "images/SCIN/images/3597635801230202250.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include increasing size, itching, burning. Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Lymphangiomatosis | Lymphedema | Lymphoma | Bacterial infection | Fungal infection",
+        "ground_truth_diagnosis": "pyoderma | insect bite | allergic contact dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "lymphangiomatosis",
+                "ground_truth": "pyoderma",
+                "similarity": 0.0,
+                "similarity_original": 0.8485
+            },
+            {
+                "pair_id": "B",
+                "predicted": "bacterial infection",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9412
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "lymphangiomatosis",
+            "lymphedema",
+            "lymphoma",
+            "bacterial infection",
+            "fungal infection"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "pyoderma",
+            "insect bite",
+            "allergic contact dermatitis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2156",
+        "pmid": "case_2156",
+        "image_paths": [
+            "images/SCIN/images/-295260050531917160.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 60 TO 69 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Psoriasis | Eczema | Seborrheic dermatitis | Contact dermatitis",
+        "ground_truth_diagnosis": "eczema | pityriasis lichenoides",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "psoriasis",
+                "ground_truth": "eczema",
+                "similarity": 0.9383,
+                "similarity_original": 0.9606
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "pityriasis lichenoides",
+                "similarity": 0.0,
+                "similarity_original": 0.8618
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "seborrheic dermatitis",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "eczema",
+            "pityriasis lichenoides"
+        ],
+        "similarity_variance": 0.46915,
+        "similarity_range": 0.9383
+    },
+    {
+        "id": "case_3641",
+        "pmid": "case_3641",
+        "image_paths": [
+            "images/SCIN/images/-237525715880906966.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne | Folliculitis | Erythema | Contact dermatitis | Psoriasis",
+        "ground_truth_diagnosis": "allergic contact dermatitis | erythema migrans",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne",
+                "ground_truth": "erythema migrans",
+                "similarity": 0.0,
+                "similarity_original": 0.88
+            },
+            {
+                "pair_id": "B",
+                "predicted": "erythema",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9553
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "folliculitis",
+            "erythema",
+            "contact dermatitis",
+            "psoriasis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "allergic contact dermatitis",
+            "erythema migrans"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_29",
+        "pmid": "case_29",
+        "image_paths": [
+            "images/SCIN/images/7624703560142571231.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Erythema Multiforme",
+        "ground_truth_diagnosis": "Pigmented purpuric eruption",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne",
+                "ground_truth": "insect bite",
+                "similarity": 0.0,
+                "similarity_original": 0.8838
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "urticaria",
+                "similarity": 0.8399,
+                "similarity_original": 0.9326
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "eczema",
+            "contact dermatitis",
+            "papular urticaria",
+            "seborrheic dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "urticaria",
+            "insect bite"
+        ],
+        "similarity_variance": 0.41995,
+        "similarity_range": 0.8399
+    },
+    {
+        "id": "case_3428",
+        "pmid": "case_3428",
+        "image_paths": [
+            "images/SCIN/images/-3447371787593587076.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 50 TO 59 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST1.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is torso front\n    According to the patient, the condition symptoms include pain. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Psoriasis | Eczema | Seborrheic dermatitis | Contact dermatitis | Keratosis pilaris",
+        "ground_truth_diagnosis": "intertrigo | psoriasis | candida",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "eczema",
+                "ground_truth": "psoriasis",
+                "similarity": 1.0,
+                "similarity_original": 0.9606
+            },
+            {
+                "pair_id": "B",
+                "predicted": "keratosis pilaris",
+                "ground_truth": "intertrigo",
+                "similarity": 0.0,
+                "similarity_original": 0.8594
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "seborrheic dermatitis",
+            "contact dermatitis",
+            "keratosis pilaris"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "intertrigo",
+            "psoriasis",
+            "candida"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_1875",
+        "pmid": "case_1875",
+        "image_paths": [
+            "images/SCIN/images/1657533924064656282.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is torso back\n    According to the patient, the condition symptoms include bothersome appearance, itching. Other symptoms include fatigue.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne Vulgaris | Eczema | Psoriasis | Seborrheic Dermatitis | Contact Dermatitis",
+        "ground_truth_diagnosis": "tinea versicolor | seborrheic dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne vulgaris",
+                "ground_truth": "tinea versicolor",
+                "similarity": 0.0,
+                "similarity_original": 0.879
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "seborrheic dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9498
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne vulgaris",
+            "eczema",
+            "psoriasis",
+            "seborrheic dermatitis",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "tinea versicolor",
+            "seborrheic dermatitis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_340",
+        "pmid": "case_340",
+        "image_paths": [
+            "images/SCIN/images/-8002435013422524113.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Erythema Multiforme",
+        "ground_truth_diagnosis": "Urticaria",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "contact dermatitis",
+                "ground_truth": "post-inflammatory hyperpigmentation",
+                "similarity": 1.0,
+                "similarity_original": 0.918
+            },
+            {
+                "pair_id": "B",
+                "predicted": "pyoderma gangrenosum",
+                "ground_truth": "tinea versicolor",
+                "similarity": 0.0,
+                "similarity_original": 0.8584
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "folliculitis",
+            "erythema multiforme",
+            "contact dermatitis",
+            "pyoderma gangrenosum"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "tinea versicolor",
+            "post-inflammatory hyperpigmentation"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_837",
+        "pmid": "case_837",
+        "image_paths": [
+            "images/SCIN/images/-1009086705875443190.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 50 TO 59 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include bothersome appearance, itching, burning, pain. Other symptoms include chills.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Abscess",
+        "ground_truth_diagnosis": "Prurigo nodularis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "eczema",
+                "ground_truth": "pemphigus foliaceus",
+                "similarity": 0.0,
+                "similarity_original": 0.8799
+            },
+            {
+                "pair_id": "B",
+                "predicted": "dermatitis",
+                "ground_truth": "prurigo nodularis",
+                "similarity": 0.9786,
+                "similarity_original": 0.9028
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "prurigo nodularis",
+            "lichen simplex chronicus",
+            "pemphigus foliaceus"
+        ],
+        "similarity_variance": 0.4893,
+        "similarity_range": 0.9786
+    },
+    {
+        "id": "case_274",
+        "pmid": "case_274",
+        "image_paths": [
+            "images/SCIN/images/1295850104787573131.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is back of hand\n    According to the patient, the condition symptoms include darkening. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne",
+        "ground_truth_diagnosis": "Urticaria",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "melasma",
+                "ground_truth": "lichen planus/lichenoid eruption",
+                "similarity": 0.0,
+                "similarity_original": 0.8605
+            },
+            {
+                "pair_id": "B",
+                "predicted": "hyperpigmentation",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9426
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "melasma",
+            "solar lentigines",
+            "hyperpigmentation"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "lichen planus/lichenoid eruption",
+            "post-inflammatory hyperpigmentation",
+            "eczema"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2126",
+        "pmid": "case_2126",
+        "image_paths": [
+            "images/SCIN/images/3451187859529680478.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include . Other symptoms include fatigue, joint pain.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Psoriasis | Eczema | Dermatitis | Seborrheic dermatitis",
+        "ground_truth_diagnosis": "cutaneous t cell lymphoma | granuloma annulare | eczema",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "eczema",
+                "ground_truth": "cutaneous t cell lymphoma",
+                "similarity": 0.0372,
+                "similarity_original": 0.897
+            },
+            {
+                "pair_id": "B",
+                "predicted": "dermatitis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.972
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "dermatitis",
+            "seborrheic dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "cutaneous t cell lymphoma",
+            "granuloma annulare",
+            "eczema"
+        ],
+        "similarity_variance": 0.4814,
+        "similarity_range": 0.9628
+    },
+    {
+        "id": "case_1072",
+        "pmid": "case_1072",
+        "image_paths": [
+            "images/SCIN/images/-8149549487851515128.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is fluid filled\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Eczema",
+        "ground_truth_diagnosis": "Psoriasis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "cyst",
+                "ground_truth": "lichen simplex chronicus",
+                "similarity": 0.0,
+                "similarity_original": 0.8794
+            },
+            {
+                "pair_id": "B",
+                "predicted": "abscess",
+                "ground_truth": "skin infection",
+                "similarity": 1.0,
+                "similarity_original": 0.9453
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "cyst",
+            "abscess",
+            "folliculitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "lichen simplex chronicus",
+            "skin infection"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_4549",
+        "pmid": "case_4549",
+        "image_paths": [
+            "images/SCIN/images/-6838520361613092230.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne | Eczema | Contact dermatitis | Impetigo",
+        "ground_truth_diagnosis": "miliaria | folliculitis | molluscum contagiosum",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne",
+                "ground_truth": "folliculitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9416
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "molluscum contagiosum",
+                "similarity": 0.0,
+                "similarity_original": 0.8883
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "eczema",
+            "contact dermatitis",
+            "impetigo"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "miliaria",
+            "folliculitis",
+            "molluscum contagiosum"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_2722",
+        "pmid": "case_2722",
+        "image_paths": [
+            "images/SCIN/images/-4359623154793798243.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Melanocytic lesion | Nevus | Dysplastic nevus | Melanoma",
+        "ground_truth_diagnosis": "skin and soft tissue atypical mycobacterial infection | basal cell carcinoma | pityriasis rosea",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "dysplastic nevus",
+                "ground_truth": "skin and soft tissue atypical mycobacterial infection",
+                "similarity": 0.0,
+                "similarity_original": 0.8514
+            },
+            {
+                "pair_id": "B",
+                "predicted": "melanoma",
+                "ground_truth": "basal cell carcinoma",
+                "similarity": 1.0,
+                "similarity_original": 0.9188
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "melanocytic lesion",
+            "nevus",
+            "dysplastic nevus",
+            "melanoma"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "skin and soft tissue atypical mycobacterial infection",
+            "basal cell carcinoma",
+            "pityriasis rosea"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_63",
+        "pmid": "case_63",
+        "image_paths": [
+            "images/SCIN/images/9160515254792469987.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Impetigo",
+        "ground_truth_diagnosis": "Herpes Zoster",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne",
+                "ground_truth": "acute dermatitis, nos",
+                "similarity": 0.0,
+                "similarity_original": 0.8606
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9671
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "folliculitis",
+            "impetigo",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "eczema",
+            "acute dermatitis, nos"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_1050",
+        "pmid": "case_1050",
+        "image_paths": [
+            "images/SCIN/images/-5553194372546963684.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is palm\n    According to the patient, the condition symptoms include . Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne",
+        "ground_truth_diagnosis": "O/E - ecchymoses present",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "normal skin",
+                "ground_truth": "eczema",
+                "similarity": 0.9616
+            },
+            {
+                "pair_id": "B",
+                "predicted": "normal skin",
+                "ground_truth": "syphilis",
+                "similarity": 0.8892
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "normal skin"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "eczema",
+            "syphilis",
+            "hand foot and mouth disease"
+        ],
+        "similarity_variance": 0.03620000000000001,
+        "similarity_range": 0.07240000000000002
+    },
+    {
+        "id": "case_911",
+        "pmid": "case_911",
+        "image_paths": [
+            "images/SCIN/images/8432675952781020680.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Seborrheic dermatitis",
+        "ground_truth_diagnosis": "Folliculitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "erythema multiforme",
+                "ground_truth": "basal cell carcinoma",
+                "similarity": 0.0,
+                "similarity_original": 0.8673
+            },
+            {
+                "pair_id": "B",
+                "predicted": "contact dermatitis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9671
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne",
+            "erythema multiforme",
+            "contact dermatitis",
+            "papular urticaria",
+            "erythema nodosum"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "eczema",
+            "basal cell carcinoma"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_462",
+        "pmid": "case_462",
+        "image_paths": [
+            "images/SCIN/images/-1819541404430956755.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is torso front\n    According to the patient, the condition symptoms include increasing size, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Melanoma",
+        "ground_truth_diagnosis": "Psoriasis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "contact dermatitis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9671
+            },
+            {
+                "pair_id": "B",
+                "predicted": "insect bites",
+                "ground_truth": "photodermatitis",
+                "similarity": 0.0126,
+                "similarity_original": 0.8966
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "contact dermatitis",
+            "insect bites",
+            "folliculitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "photodermatitis",
+            "eczema",
+            "allergic contact dermatitis"
+        ],
+        "similarity_variance": 0.4937,
+        "similarity_range": 0.9874
+    },
+    {
+        "id": "case_476",
+        "pmid": "case_476",
+        "image_paths": [
+            "images/SCIN/images/-5125507063415298841.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 40 TO 49 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST2.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is genitalia or groin\n    According to the patient, the condition symptoms include increasing size, itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Psoriasis",
+        "ground_truth_diagnosis": "Urticaria",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne vulgaris",
+                "ground_truth": "cd - contact dermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.8549
+            },
+            {
+                "pair_id": "B",
+                "predicted": "seborrheic dermatitis",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.952
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "acne vulgaris",
+            "contact dermatitis",
+            "psoriasis",
+            "seborrheic dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "cd - contact dermatitis",
+            "tinea",
+            "allergic contact dermatitis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_1076",
+        "pmid": "case_1076",
+        "image_paths": [
+            "images/SCIN/images/-4373106389490445020.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 30 TO 39 and the sex at birth is FEMALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST1.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Acne",
+        "ground_truth_diagnosis": "Allergic Contact Dermatitis",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "solar lentigines",
+                "ground_truth": "irritant contact dermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.8496
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9599
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "solar lentigines",
+            "actinic keratosis",
+            "eczema",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "photodermatitis",
+            "allergic contact dermatitis",
+            "irritant contact dermatitis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_3297",
+        "pmid": "case_3297",
+        "image_paths": [
+            "images/SCIN/images/-8977333528306725483.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is lack or african american.\n    The patient's Fitzpatrick Skin Type is NONE IDENTIFIED.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is head or neck\n    According to the patient, the condition symptoms include no relevant experience. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Scalp psoriasis | Folliculitis | Seborrheic dermatitis | Acne | Eczema | Minor infection",
+        "ground_truth_diagnosis": "scar condition | lichen planus/lichenoid eruption | post-inflammatory hyperpigmentation",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "acne",
+                "ground_truth": "lichen planus/lichenoid eruption",
+                "similarity": 0.0,
+                "similarity_original": 0.8639
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "post-inflammatory hyperpigmentation",
+                "similarity": 1.0,
+                "similarity_original": 0.9185
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "scalp psoriasis",
+            "folliculitis",
+            "seborrheic dermatitis",
+            "acne",
+            "eczema",
+            "minor infection"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "scar condition",
+            "lichen planus/lichenoid eruption",
+            "post-inflammatory hyperpigmentation"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_54",
+        "pmid": "case_54",
+        "image_paths": [
+            "images/SCIN/images/-1019470696082480487.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST4.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include itching. Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Lichen planus",
+        "ground_truth_diagnosis": "Insect Bite",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "contact dermatitis",
+                "ground_truth": "eczema",
+                "similarity": 1.0,
+                "similarity_original": 0.9671
+            },
+            {
+                "pair_id": "B",
+                "predicted": "psoriasis",
+                "ground_truth": "lichen nitidus",
+                "similarity": 0.0,
+                "similarity_original": 0.8845
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "contact dermatitis",
+            "eczema",
+            "psoriasis",
+            "seborrheic dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "eczema",
+            "lichen nitidus"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_1751",
+        "pmid": "case_1751",
+        "image_paths": [
+            "images/SCIN/images/-3787873050779418942.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 18 TO 29 and the sex at birth is MALE.\n    The patient's race is ispanic latino or spanish origin.\n    The patient's Fitzpatrick Skin Type is FST3.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include bothersome appearance, itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Actinic keratosis | Solar lentigines | Seborrheic keratosis | Psoriasis",
+        "ground_truth_diagnosis": "skin infection | foreign body reaction of the skin",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "solar lentigines",
+                "ground_truth": "foreign body reaction of the skin",
+                "similarity": 0.0,
+                "similarity_original": 0.8439
+            },
+            {
+                "pair_id": "B",
+                "predicted": "psoriasis",
+                "ground_truth": "skin infection",
+                "similarity": 1.0,
+                "similarity_original": 0.9408
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "actinic keratosis",
+            "solar lentigines",
+            "seborrheic keratosis",
+            "psoriasis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "skin infection",
+            "foreign body reaction of the skin"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_3776",
+        "pmid": "case_3776",
+        "image_paths": [
+            "images/SCIN/images/-241249718310996117.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is unknown\n    In the provided image, the body parts described is unknown\n    According to the patient, the condition symptoms include . Other symptoms include .\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Mole | Seborrheic keratosis",
+        "ground_truth_diagnosis": "drug rash | hypersensitivity",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "mole",
+                "ground_truth": "drug rash",
+                "similarity": 0.4479,
+                "similarity_original": 0.8864
+            },
+            {
+                "pair_id": "B",
+                "predicted": "seborrheic keratosis",
+                "ground_truth": "hypersensitivity",
+                "similarity": 0.0,
+                "similarity_original": 0.8821
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "mole",
+            "seborrheic keratosis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "drug rash",
+            "hypersensitivity"
+        ],
+        "similarity_variance": 0.22395,
+        "similarity_range": 0.4479
+    },
+    {
+        "id": "case_1932",
+        "pmid": "case_1932",
+        "image_paths": [
+            "images/SCIN/images/4122384987648229529.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is leg\n    According to the patient, the condition symptoms include itching, burning. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Dermatitis | Eczema | Fungal infection | Tinea versicolor",
+        "ground_truth_diagnosis": "verruca vulgaris | sk/isk | molluscum contagiosum",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "dermatitis",
+                "ground_truth": "verruca vulgaris",
+                "similarity": 1.0,
+                "similarity_original": 0.9023
+            },
+            {
+                "pair_id": "B",
+                "predicted": "eczema",
+                "ground_truth": "sk/isk",
+                "similarity": 0.0506,
+                "similarity_original": 0.8685
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "dermatitis",
+            "eczema",
+            "fungal infection",
+            "tinea versicolor"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "verruca vulgaris",
+            "sk/isk",
+            "molluscum contagiosum"
+        ],
+        "similarity_variance": 0.4747,
+        "similarity_range": 0.9494
+    },
+    {
+        "id": "case_2176",
+        "pmid": "case_2176",
+        "image_paths": [
+            "images/SCIN/images/7246737896596274694.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE 40 TO 49 and the sex at birth is MALE.\n    The patient's race is hite.\n    The patient's Fitzpatrick Skin Type is FST1.\n    In the provided image, the texture of the skin is flat\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include no relevant experience. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Solar Lentigines | Solar Keratosis | Moles | Pigmented Nevi",
+        "ground_truth_diagnosis": "tinea | psoriasis | tinea versicolor",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "solar lentigines",
+                "ground_truth": "tinea",
+                "similarity": 0.0,
+                "similarity_original": 0.8616
+            },
+            {
+                "pair_id": "B",
+                "predicted": "solar keratosis",
+                "ground_truth": "psoriasis",
+                "similarity": 1.0,
+                "similarity_original": 0.9149
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "solar lentigines",
+            "solar keratosis",
+            "moles",
+            "pigmented nevi"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "tinea",
+            "psoriasis",
+            "tinea versicolor"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_828",
+        "pmid": "case_828",
+        "image_paths": [
+            "images/SCIN/images/-564041309415525708.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is FST1.\n    In the provided image, the texture of the skin is rough or flaky\n    In the provided image, the body parts described is other\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Keratosis Pilaris",
+        "ground_truth_diagnosis": "Eczema",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "seborrheic dermatitis",
+                "ground_truth": "folliculitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9356
+            },
+            {
+                "pair_id": "B",
+                "predicted": "keratosis pilaris",
+                "ground_truth": "perforating dermatosis",
+                "similarity": 0.0,
+                "similarity_original": 0.8776
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "seborrheic dermatitis",
+            "eczema",
+            "keratosis pilaris",
+            "contact dermatitis"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "folliculitis",
+            "perforating dermatosis",
+            "molluscum contagiosum"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    },
+    {
+        "id": "case_58",
+        "pmid": "case_58",
+        "image_paths": [
+            "images/SCIN/images/-1214887362025110286.png"
+        ],
+        "prompt": "\n    You have been provided with a picture of a skin disease lesion, and you need to make a diagnosis based on your knowledge. \n    Here are some information you might need:\n    The patient's age group is AGE UNKNOWN and the sex at birth is OTHER OR UNSPECIFIED.\n    The patient's race is prefer not to answer.\n    The patient's Fitzpatrick Skin Type is nan.\n    In the provided image, the texture of the skin is raised or bumpy\n    In the provided image, the body parts described is arm\n    According to the patient, the condition symptoms include itching. Other symptoms include no relevant symptoms.\n    Note: If any detailed information is provided as NAN, simply omit that detail in your response.\n    How would you approach the diagnosis step by step, and what is your final diagnosis?\n    ",
+        "predicted_diagnosis": "Keratosis Pilaris",
+        "ground_truth_diagnosis": "Acute dermatitis, NOS",
+        "task3_pairs": [
+            {
+                "pair_id": "A",
+                "predicted": "eczema",
+                "ground_truth": "allergic contact dermatitis",
+                "similarity": 1.0,
+                "similarity_original": 0.9599
+            },
+            {
+                "pair_id": "B",
+                "predicted": "keratosis pilaris",
+                "ground_truth": "acute and chronic dermatitis",
+                "similarity": 0.0,
+                "similarity_original": 0.8868
+            }
+        ],
+        "predicted_differential_diagnosis_full": [
+            "psoriasis",
+            "eczema",
+            "seborrheic dermatitis",
+            "keratosis pilaris"
+        ],
+        "ground_truth_differential_diagnosis_full": [
+            "acute and chronic dermatitis",
+            "allergic contact dermatitis"
+        ],
+        "similarity_variance": 0.5,
+        "similarity_range": 1.0
+    }
+]
