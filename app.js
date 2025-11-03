@@ -141,7 +141,7 @@ function loadCase(index) {
 // 加载任务1
 function loadTask1(caseData) {
     const textElement = document.getElementById('displayText');
-    textElement.textContent = caseData.prompt || caseData.description || '暂无描述';
+    textElement.textContent = caseData.predicted_diagnosis || caseData.description || '暂无描述';
     
     loadImagesForTask1();
 }
