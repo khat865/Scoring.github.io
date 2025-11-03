@@ -1,6 +1,7 @@
 import json
 import random
 import re
+import os
 from typing import List, Dict, Tuple, Optional
 import numpy as np
 from datetime import datetime
@@ -419,7 +420,6 @@ def generate_task3_pairs(
         ]
 
 
-
 def create_default_pairs(
     pred_diff_list: List[str],
     truth_diff_list: List[str],
@@ -595,26 +595,57 @@ def process_evaluation_data(
     return processed_cases
 
 
+def get_image_signature(image_paths: List[str]) -> str:
+    """
+    生成图片路径的签名，用于识别相同的图片集合
+    """
+    if not image_paths:
+        return ""
+    # 提取文件名并排序，确保相同图片集合生成相同签名
+    sorted_paths = sorted([os.path.basename(p) for p in image_paths])
+    return "|".join(sorted_paths)
+
+
 def validate_and_filter_data(
     input_file: str,
     output_file: str,
     max_cases: int = 50,
-    min_similarity_variance: float = 0.0
+    min_similarity_variance: float = 0.0,
+    random_selection: bool = True,
+    random_seed: int = 42
 ) -> Tuple[List[Dict], List[Dict]]:
     """
     验证并筛选数据，优先保留相似度波动大的病例
+    
+    Args:
+        input_file: 输入文件路径
+        output_file: 输出文件路径
+        max_cases: 最大保留病例数
+        min_similarity_variance: 最小相似度波动阈值
+        random_selection: 是否随机选择（而非连续选择）
+        random_seed: 随机种子
     """
     print(f"\n{'='*70}")
     print("步骤2: 开始数据筛选和验证")
     print(f"{'='*70}")
     
+    # 设置随机种子以确保可重复性
+    if random_selection:
+        random.seed(random_seed)
+        np.random.seed(random_seed)
+    
     with open(input_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
     print(f"读取临时数据: {len(data)} 个病例")
+    print(f"随机选择模式: {'开启' if random_selection else '关闭'}")
+    print(f"随机种子: {random_seed if random_selection else 'N/A'}")
     
     valid_cases = []
     removed_cases = []
+    
+    # 用于跟踪已使用的图片集合
+    used_image_signatures = set()
     
     # 统计各种移除原因
     reason_stats = {
@@ -625,7 +656,8 @@ def validate_and_filter_data(
         '无图片路径': 0,
         '缺少必需字段': 0,
         '相似度波动过小': 0,
-        'pair中predicted和truth相同': 0  # 新增
+        'pair中predicted和truth相同': 0,
+        '图片重复': 0  # 新增
     }
     
     print(f"\n开始验证...")
@@ -648,7 +680,7 @@ def validate_and_filter_data(
             remove_reasons.append(task3_reason)
             reason_stats['task3_pairs问题'] += 1
         
-        # *** 新增规则: 检查 task3_pairs 中是否有 predicted 和 ground_truth 相同的情况 ***
+        # 规则3: 检查 task3_pairs 中是否有 predicted 和 ground_truth 相同的情况
         task3_pairs = case.get('task3_pairs', [])
         if task3_pairs:
             for pair in task3_pairs:
@@ -659,7 +691,7 @@ def validate_and_filter_data(
                     reason_stats['pair中predicted和truth相同'] += 1
                     break
         
-        # 规则3: 检查诊断是否一致
+        # 规则4: 检查诊断是否一致
         pred_diag = case.get('predicted_diagnosis', '')
         truth_diag = case.get('ground_truth_diagnosis', '')
         
@@ -670,13 +702,13 @@ def validate_and_filter_data(
             remove_reasons.append(f"诊断完全一致")
             reason_stats['诊断一致'] += 1
         
-        # 规则4: 检查图片路径
+        # 规则5: 检查图片路径
         image_paths = case.get('image_paths', [])
         if not image_paths or len(image_paths) == 0:
             remove_reasons.append("无图片路径")
             reason_stats['无图片路径'] += 1
         
-        # 规则5: 检查必需字段
+        # 规则6: 检查必需字段
         required_fields = ['id', 'pmid', 'prompt']
         for field in required_fields:
             if not case.get(field):
@@ -684,11 +716,18 @@ def validate_and_filter_data(
                 reason_stats['缺少必需字段'] += 1
                 break
         
-        # 规则6: 检查相似度波动
+        # 规则7: 检查相似度波动
         sim_variance = case.get('similarity_variance', 0.0)
         if sim_variance < min_similarity_variance:
             remove_reasons.append(f"相似度波动过小: {sim_variance:.4f} < {min_similarity_variance}")
             reason_stats['相似度波动过小'] += 1
+        
+        # 规则8: 检查图片是否重复
+        if image_paths:
+            img_signature = get_image_signature(image_paths)
+            if img_signature in used_image_signatures:
+                remove_reasons.append(f"图片集合重复")
+                reason_stats['图片重复'] += 1
         
         if remove_reasons:
             removed_cases.append({
@@ -697,9 +736,14 @@ def validate_and_filter_data(
                 'predicted_diagnosis': pred_diag,
                 'ground_truth_diagnosis': truth_diag,
                 'similarity_variance': case.get('similarity_variance', 0.0),
-                'task3_pairs': task3_pairs  # 添加详情用于调试
+                'task3_pairs': task3_pairs,
+                'image_signature': get_image_signature(image_paths) if image_paths else ''
             })
         else:
+            # 记录图片签名，避免重复
+            if image_paths:
+                img_signature = get_image_signature(image_paths)
+                used_image_signatures.add(img_signature)
             valid_cases.append(case)
     
     print(f"\n基本验证完成:")
@@ -714,7 +758,7 @@ def validate_and_filter_data(
     # 按相似度波动排序，选择波动最大的病例
     if len(valid_cases) > max_cases:
         print(f"\n{'='*70}")
-        print(f"有效病例数({len(valid_cases)})超过目标数({max_cases})，开始按相似度波动排序...")
+        print(f"有效病例数({len(valid_cases)})超过目标数({max_cases})，开始筛选...")
         print(f"{'='*70}")
         
         # 按相似度波动(标准差和极差的组合)降序排序
@@ -728,21 +772,91 @@ def validate_and_filter_data(
         
         # 显示波动分布
         print(f"\n相似度波动分析:")
-        print(f"  前10个病例的方差: {[round(c.get('similarity_variance', 0), 4) for c in valid_cases[:10]]}")
-        print(f"  后10个病例的方差: {[round(c.get('similarity_variance', 0), 4) for c in valid_cases[-10:]]}")
+        top_10 = [round(c.get('similarity_variance', 0), 4) for c in valid_cases[:10]]
+        print(f"  前10个病例的方差: {top_10}")
+        if len(valid_cases) >= 10:
+            bottom_10 = [round(c.get('similarity_variance', 0), 4) for c in valid_cases[-10:]]
+            print(f"  后10个病例的方差: {bottom_10}")
         
-        # 保留前max_cases个
-        extra_cases = valid_cases[max_cases:]
-        valid_cases = valid_cases[:max_cases]
+        if random_selection:
+            # 随机选择模式：从高波动病例中分层随机采样
+            print(f"\n使用随机选择模式 (种子={random_seed}):")
+            
+            # 将病例分成高、中、低波动三档
+            variances = [c.get('similarity_variance', 0) for c in valid_cases]
+            high_threshold = np.percentile(variances, 75)
+            medium_threshold = np.percentile(variances, 50)
+            
+            high_variance_cases = [c for c in valid_cases 
+                                  if c.get('similarity_variance', 0) >= high_threshold]
+            medium_variance_cases = [c for c in valid_cases 
+                                    if medium_threshold <= c.get('similarity_variance', 0) < high_threshold]
+            low_variance_cases = [c for c in valid_cases 
+                                 if c.get('similarity_variance', 0) < medium_threshold]
+            
+            print(f"  高波动病例: {len(high_variance_cases)} 个 (>= {high_threshold:.4f})")
+            print(f"  中波动病例: {len(medium_variance_cases)} 个 (>= {medium_threshold:.4f})")
+            print(f"  低波动病例: {len(low_variance_cases)} 个")
+            
+            # 分配策略：70%高波动，25%中波动，5%低波动
+            n_high = min(int(max_cases * 0.70), len(high_variance_cases))
+            n_medium = min(int(max_cases * 0.25), len(medium_variance_cases))
+            n_low = max_cases - n_high - n_medium
+            n_low = min(n_low, len(low_variance_cases))
+            
+            # 如果某一档不够，从其他档补充
+            total_selected = n_high + n_medium + n_low
+            if total_selected < max_cases:
+                remaining = max_cases - total_selected
+                if len(high_variance_cases) > n_high:
+                    additional = min(remaining, len(high_variance_cases) - n_high)
+                    n_high += additional
+                    remaining -= additional
+                if remaining > 0 and len(medium_variance_cases) > n_medium:
+                    additional = min(remaining, len(medium_variance_cases) - n_medium)
+                    n_medium += additional
+                    remaining -= additional
+                if remaining > 0 and len(low_variance_cases) > n_low:
+                    n_low += min(remaining, len(low_variance_cases) - n_low)
+            
+            print(f"\n选择策略:")
+            print(f"  从高波动中选择: {n_high} 个")
+            print(f"  从中波动中选择: {n_medium} 个")
+            print(f"  从低波动中选择: {n_low} 个")
+            
+            # 随机采样
+            selected_cases = []
+            if n_high > 0 and len(high_variance_cases) > 0:
+                selected_cases.extend(random.sample(high_variance_cases, n_high))
+            if n_medium > 0 and len(medium_variance_cases) > 0:
+                selected_cases.extend(random.sample(medium_variance_cases, n_medium))
+            if n_low > 0 and len(low_variance_cases) > 0:
+                selected_cases.extend(random.sample(low_variance_cases, n_low))
+            
+            # 随机打乱顺序，确保不相邻
+            random.shuffle(selected_cases)
+            
+            print(f"\n实际选择: {len(selected_cases)} 个病例")
+            
+            # 找出未被选中的病例
+            selected_ids = set(c.get('id') for c in selected_cases)
+            extra_cases = [c for c in valid_cases if c.get('id') not in selected_ids]
+            
+            valid_cases = selected_cases
+        else:
+            # 顺序选择模式：直接保留前max_cases个
+            print(f"\n使用顺序选择模式:")
+            extra_cases = valid_cases[max_cases:]
+            valid_cases = valid_cases[:max_cases]
         
-        print(f"\n保留前{max_cases}个波动最大的病例")
-        print(f"额外移除: {len(extra_cases)} 个病例(相似度波动较小)")
+        print(f"\n最终保留: {len(valid_cases)} 个病例")
+        print(f"额外移除: {len(extra_cases)} 个病例")
         
         # 将多余的病例加入移除列表
         for case in extra_cases:
             removed_cases.append({
                 'case_id': case.get('pmid', case.get('id')),
-                'reasons': [f'相似度波动较小，未进入前{max_cases}名'],
+                'reasons': [f'未被选入最终的{max_cases}个病例'],
                 'predicted_diagnosis': case.get('predicted_diagnosis', ''),
                 'ground_truth_diagnosis': case.get('ground_truth_diagnosis', ''),
                 'similarity_variance': case.get('similarity_variance', 0.0)
@@ -754,7 +868,7 @@ def validate_and_filter_data(
     
     # 输出最终统计信息
     print(f"\n{'='*70}")
-    print("筛选完成！最终统计")
+    print("筛选完成：最终统计")
     print(f"{'='*70}")
     print(f"原始病例数: {len(data)}")
     print(f"✓ 最终保留: {len(valid_cases)} 个")
@@ -888,7 +1002,9 @@ def main():
             input_file=temp_output,
             output_file=final_output,
             max_cases=50,
-            min_similarity_variance=0.0
+            min_similarity_variance=0.0,
+            random_selection=True,  # 开启随机选择
+            random_seed=42  # 设置随机种子确保可重复
         )
     except Exception as e:
         print(f"\n❌ 错误: 步骤2筛选失败")
@@ -944,8 +1060,6 @@ def main():
     print(f"✓ 最终数据保存在: {final_output}")
     print(f"✓ 临时数据保存在: {temp_output}")
     print("="*70 + "\n")
-
-
 
 
 if __name__ == "__main__":
