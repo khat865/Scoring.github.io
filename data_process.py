@@ -43,7 +43,7 @@ def replace_path_prefix(image_paths: List[str]) -> List[str]:
 def diagnoses_match(diag1: str, diag2: str, threshold: float = 0.8) -> bool:
     """
     判断两个诊断是否匹配
-    使用多种策略：完全匹配、包含关系、词汇重叠
+    使用多种策略:完全匹配、包含关系、词汇重叠
     """
     if not diag1 or not diag2:
         return False
@@ -55,7 +55,7 @@ def diagnoses_match(diag1: str, diag2: str, threshold: float = 0.8) -> bool:
     if d1 == d2:
         return True
     
-    # 包含关系（长度相近）
+    # 包含关系(长度相近)
     if d1 in d2 or d2 in d1:
         len_ratio = min(len(d1), len(d2)) / max(len(d1), len(d2))
         if len_ratio > threshold:
@@ -70,6 +70,132 @@ def diagnoses_match(diag1: str, diag2: str, threshold: float = 0.8) -> bool:
             return True
     
     return False
+
+
+def are_diagnoses_same(diag1: str, diag2: str, similarity_threshold: float = 0.9) -> bool:
+    """
+    判断两个诊断是否实质上相同
+    用于过滤掉 predicted 和 ground_truth 相同的配对
+    """
+    if not diag1 or not diag2:
+        return False
+    
+    d1 = normalize_diagnosis(diag1)
+    d2 = normalize_diagnosis(diag2)
+    
+    # 完全相同
+    if d1 == d2:
+        return True
+    
+    # 计算 Jaccard 相似度
+    words1 = set(d1.split())
+    words2 = set(d2.split())
+    
+    if not words1 or not words2:
+        return False
+    
+    intersection = len(words1.intersection(words2))
+    union = len(words1.union(words2))
+    jaccard = intersection / union if union > 0 else 0.0
+    
+    # 如果相似度很高，认为是相同的
+    if jaccard >= similarity_threshold:
+        return True
+    
+    # 检查包含关系（几乎完全包含）
+    if d1 in d2 or d2 in d1:
+        len_ratio = min(len(d1), len(d2)) / max(len(d1), len(d2))
+        if len_ratio > similarity_threshold:
+            return True
+    
+    return False
+
+
+def has_high_content_overlap(diag1: str, diag2: str, overlap_threshold: float = 0.7) -> bool:
+    """
+    检查两个诊断的内容重复度是否过高
+    例如: "contact dermatitis" vs "allergic contact dermatitis" 重复度很高
+    
+    Args:
+        diag1: 诊断1
+        diag2: 诊断2
+        overlap_threshold: 重复度阈值，超过此值认为重复度过高
+    
+    Returns:
+        True 如果内容重复度过高
+    """
+    if not diag1 or not diag2:
+        return False
+    
+    d1 = normalize_diagnosis(diag1)
+    d2 = normalize_diagnosis(diag2)
+    
+    words1 = set(d1.split())
+    words2 = set(d2.split())
+    
+    if not words1 or not words2:
+        return False
+    
+    # 计算 Jaccard 相似度
+    intersection = len(words1.intersection(words2))
+    union = len(words1.union(words2))
+    jaccard = intersection / union if union > 0 else 0.0
+    
+    # 检查重复度
+    if jaccard >= overlap_threshold:
+        return True
+    
+    # 检查包含关系：如果一个诊断的词汇被另一个几乎完全包含
+    if words1 and words2:
+        # 小集合在大集合中的占比
+        smaller = words1 if len(words1) <= len(words2) else words2
+        larger = words2 if len(words1) <= len(words2) else words1
+        
+        overlap_ratio = len(smaller.intersection(larger)) / len(smaller)
+        if overlap_ratio >= overlap_threshold:
+            return True
+    
+    return False
+
+
+def normalize_similarities_in_case(all_pairs: List[Dict]) -> List[Dict]:
+    """
+    对单个病例中的所有配对的相似度进行归一化 (0-1)
+    
+    Args:
+        all_pairs: 所有可能的配对列表
+    
+    Returns:
+        归一化后的配对列表
+    """
+    if not all_pairs:
+        return all_pairs
+    
+    # 提取所有相似度值
+    similarities = [pair['similarity'] for pair in all_pairs]
+    
+    if not similarities:
+        return all_pairs
+    
+    min_sim = min(similarities)
+    max_sim = max(similarities)
+    
+    # 如果最大值和最小值相同，所有相似度都设为 0.5
+    if max_sim - min_sim < 1e-6:
+        for pair in all_pairs:
+            pair['similarity_normalized'] = 0.5
+            pair['similarity_original'] = pair['similarity']
+        return all_pairs
+    
+    # Min-Max 归一化到 [0, 1]
+    for pair in all_pairs:
+        original_sim = pair['similarity']
+        normalized_sim = (original_sim - min_sim) / (max_sim - min_sim)
+        pair['similarity_normalized'] = round(normalized_sim, 4)
+        pair['similarity_original'] = original_sim
+        pair['similarity'] = pair['similarity_normalized']  # 使用归一化后的值
+    
+    return all_pairs
 
 
 def match_case_by_gt(case_eval: Dict, medical_data: List[Dict], debug=False) -> Optional[Dict]:
@@ -136,7 +262,7 @@ def calculate_similarity_variance(task3_pairs: List[Dict]) -> float:
 
 def calculate_similarity_range(task3_pairs: List[Dict]) -> float:
     """
-    计算task3_pairs中相似度的极差（最大值-最小值）
+    计算task3_pairs中相似度的极差(最大值-最小值)
     """
     if not task3_pairs or len(task3_pairs) < 2:
         return 0.0
@@ -174,15 +300,27 @@ def generate_task3_pairs(
 ) -> List[Dict]:
     """
     生成task3的两对诊断，优先选择相似度差异大的对
+    **改进版**:
+      - 跳过内容重复度高的pair
+      - 对相似度进行归一化(0-1)
+      - 保留原始相似度(similarity_original)
     """
     if len(pred_diff_list) < 2 or len(truth_diff_list) < 2:
-        # 数量不足，创建默认对
         return create_default_pairs(pred_diff_list, truth_diff_list, similarity_matrix)
     
     # 计算所有可能的配对及其相似度
     all_pairs = []
     for i, pred in enumerate(pred_diff_list):
         for j, truth in enumerate(truth_diff_list):
+            # 过滤1: 跳过实质相同的诊断
+            if are_diagnoses_same(pred, truth, similarity_threshold=0.85):
+                continue
+
+            # 过滤2: 跳过内容重复度过高的配对
+            if has_high_content_overlap(pred, truth, overlap_threshold=0.70):
+                continue
+
+            # 相似度
             if similarity_matrix and i < len(similarity_matrix) and j < len(similarity_matrix[i]):
                 similarity = similarity_matrix[i][j]
             else:
@@ -196,8 +334,35 @@ def generate_task3_pairs(
                 'similarity': round(similarity, 4)
             })
     
-    # 策略：选择相似度差异最大的两对
-    # 尝试所有两对组合，找出相似度差异最大的
+    # 若过滤后配对数量不足，宽松重试
+    if len(all_pairs) < 2:
+        print(f"  警告: 过滤相同/重复诊断后配对不足 ({len(all_pairs)}个)，使用宽松策略")
+        for i, pred in enumerate(pred_diff_list):
+            for j, truth in enumerate(truth_diff_list):
+                if are_diagnoses_same(pred, truth, similarity_threshold=0.95):
+                    continue
+                if has_high_content_overlap(pred, truth, overlap_threshold=0.8):
+                    continue
+                if similarity_matrix and i < len(similarity_matrix) and j < len(similarity_matrix[i]):
+                    similarity = similarity_matrix[i][j]
+                else:
+                    similarity = calculate_jaccard_similarity(pred, truth)
+                all_pairs.append({
+                    'pred_idx': i,
+                    'truth_idx': j,
+                    'predicted': pred,
+                    'ground_truth': truth,
+                    'similarity': round(similarity, 4)
+                })
+    
+    # 若仍不足，使用默认对
+    if len(all_pairs) < 2:
+        return create_default_pairs(pred_diff_list, truth_diff_list, similarity_matrix)
+
+    # 相似度归一化 (Min-Max)
+    all_pairs = normalize_similarities_in_case(all_pairs)
+
+    # 策略：选择归一化后相似度差异最大的两对
     best_variance = -1
     best_pair_combo = None
     
@@ -206,18 +371,16 @@ def generate_task3_pairs(
             pair1 = all_pairs[i]
             pair2 = all_pairs[j]
             
-            # 确保不重复使用同一个预测或真实诊断
             if (pair1['pred_idx'] == pair2['pred_idx'] or 
                 pair1['truth_idx'] == pair2['truth_idx']):
                 continue
             
-            # 计算相似度差异
             sim_diff = abs(pair1['similarity'] - pair2['similarity'])
-            
             if sim_diff > best_variance:
                 best_variance = sim_diff
                 best_pair_combo = (pair1, pair2)
     
+    # 输出结果
     if best_pair_combo:
         pair1, pair2 = best_pair_combo
         return [
@@ -225,18 +388,36 @@ def generate_task3_pairs(
                 'pair_id': 'A',
                 'predicted': pair1['predicted'],
                 'ground_truth': pair1['ground_truth'],
-                'similarity': pair1['similarity']
+                'similarity': round(pair1['similarity'], 4),
+                'similarity_original': pair1['similarity_original']
             },
             {
                 'pair_id': 'B',
                 'predicted': pair2['predicted'],
                 'ground_truth': pair2['ground_truth'],
-                'similarity': pair2['similarity']
+                'similarity': round(pair2['similarity'], 4),
+                'similarity_original': pair2['similarity_original']
             }
         ]
     else:
-        # 降级：随机选择两对
-        return create_default_pairs(pred_diff_list, truth_diff_list, similarity_matrix)
+        random.shuffle(all_pairs)
+        return [
+            {
+                'pair_id': 'A',
+                'predicted': all_pairs[0]['predicted'],
+                'ground_truth': all_pairs[0]['ground_truth'],
+                'similarity': all_pairs[0]['similarity'],
+                'similarity_original': all_pairs[0]['similarity_original']
+            },
+            {
+                'pair_id': 'B',
+                'predicted': all_pairs[1]['predicted'],
+                'ground_truth': all_pairs[1]['ground_truth'],
+                'similarity': all_pairs[1]['similarity'],
+                'similarity_original': all_pairs[1]['similarity_original']
+            }
+        ]
+
 
 
 def create_default_pairs(
@@ -299,7 +480,7 @@ def process_evaluation_data(
     per_sample_results = eval_data.get('per_sample_results', [])
     
     print(f"\n{'='*70}")
-    print(f"开始处理病例（共 {len(per_sample_results)} 个）...")
+    print(f"开始处理病例(共 {len(per_sample_results)} 个)...")
     print(f"{'='*70}")
     
     start_time = datetime.now()
@@ -344,7 +525,7 @@ def process_evaluation_data(
             image_paths = matched_item.get('image_paths', [])
             prompt = matched_item.get('prompt', '')
         else:
-            # 尝试按顺序匹配（作为后备方案）
+            # 尝试按顺序匹配(作为后备方案)
             fallback_count += 1
             if idx < len(medical_data):
                 image_paths = medical_data[idx].get('image_paths', [])
@@ -361,7 +542,7 @@ def process_evaluation_data(
         image_paths, replaced_count = replace_path_prefix(image_paths)
         total_path_replaced += replaced_count
         
-        # 生成task3_pairs：选择相似度波动大的两对
+        # 生成task3_pairs：选择相似度波动大的两对，且确保 predicted != ground_truth
         task3_pairs = generate_task3_pairs(
             pred_diff, 
             truth_diff, 
@@ -443,7 +624,8 @@ def validate_and_filter_data(
         '诊断一致': 0,
         '无图片路径': 0,
         '缺少必需字段': 0,
-        '相似度波动过小': 0
+        '相似度波动过小': 0,
+        'pair中predicted和truth相同': 0  # 新增
     }
     
     print(f"\n开始验证...")
@@ -465,6 +647,17 @@ def validate_and_filter_data(
         if not task3_valid:
             remove_reasons.append(task3_reason)
             reason_stats['task3_pairs问题'] += 1
+        
+        # *** 新增规则: 检查 task3_pairs 中是否有 predicted 和 ground_truth 相同的情况 ***
+        task3_pairs = case.get('task3_pairs', [])
+        if task3_pairs:
+            for pair in task3_pairs:
+                pred = pair.get('predicted', '')
+                truth = pair.get('ground_truth', '')
+                if are_diagnoses_same(pred, truth, similarity_threshold=0.85):
+                    remove_reasons.append(f"Pair {pair.get('pair_id')}中predicted和truth实质相同")
+                    reason_stats['pair中predicted和truth相同'] += 1
+                    break
         
         # 规则3: 检查诊断是否一致
         pred_diag = case.get('predicted_diagnosis', '')
@@ -503,7 +696,8 @@ def validate_and_filter_data(
                 'reasons': remove_reasons,
                 'predicted_diagnosis': pred_diag,
                 'ground_truth_diagnosis': truth_diag,
-                'similarity_variance': case.get('similarity_variance', 0.0)
+                'similarity_variance': case.get('similarity_variance', 0.0),
+                'task3_pairs': task3_pairs  # 添加详情用于调试
             })
         else:
             valid_cases.append(case)
@@ -523,7 +717,7 @@ def validate_and_filter_data(
         print(f"有效病例数({len(valid_cases)})超过目标数({max_cases})，开始按相似度波动排序...")
         print(f"{'='*70}")
         
-        # 按相似度波动（标准差和极差的组合）降序排序
+        # 按相似度波动(标准差和极差的组合)降序排序
         valid_cases.sort(
             key=lambda x: (
                 x.get('similarity_variance', 0) * 0.6 + 
@@ -542,7 +736,7 @@ def validate_and_filter_data(
         valid_cases = valid_cases[:max_cases]
         
         print(f"\n保留前{max_cases}个波动最大的病例")
-        print(f"额外移除: {len(extra_cases)} 个病例（相似度波动较小）")
+        print(f"额外移除: {len(extra_cases)} 个病例(相似度波动较小)")
         
         # 将多余的病例加入移除列表
         for case in extra_cases:
@@ -682,10 +876,12 @@ def main():
     except Exception as e:
         print(f"\n❌ 错误: 步骤1处理失败")
         print(f"错误信息: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return
     
     # 步骤2: 筛选数据
-    print("\n📊 步骤2: 筛选数据（优先保留相似度波动大的病例）")
+    print("\n📊 步骤2: 筛选数据(优先保留相似度波动大的病例)")
     print("-" * 70)
     try:
         valid_cases, removed_cases = validate_and_filter_data(
@@ -697,6 +893,8 @@ def main():
     except Exception as e:
         print(f"\n❌ 错误: 步骤2筛选失败")
         print(f"错误信息: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return
     
     # 显示示例
@@ -719,6 +917,25 @@ def main():
             print(f"    预测: {pair['predicted']}")
             print(f"    真实: {pair['ground_truth']}")
             print(f"    相似度: {pair['similarity']}")
+            # 验证是否相同
+            if are_diagnoses_same(pair['predicted'], pair['ground_truth'], 0.85):
+                print(f"    ⚠️ 警告: 该对中predicted和truth实质相同!")
+    
+    # 显示一些被移除的案例（用于调试）
+    if removed_cases:
+        print("\n" + "="*70)
+        print("移除案例示例(前3个):")
+        print("="*70)
+        for i, case in enumerate(removed_cases[:3]):
+            print(f"\n{i+1}. 病例ID: {case['case_id']}")
+            print(f"   移除原因: {', '.join(case['reasons'])}")
+            if 'task3_pairs' in case and case['task3_pairs']:
+                print(f"   Task3配对详情:")
+                for pair in case['task3_pairs']:
+                    pred = pair.get('predicted', '')
+                    truth = pair.get('ground_truth', '')
+                    same = are_diagnoses_same(pred, truth, 0.85)
+                    print(f"     {pair.get('pair_id')}对: pred='{pred[:40]}...' truth='{truth[:40]}...' 相同={same}")
     
     print("\n" + "="*70)
     print(f"结束时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -727,6 +944,8 @@ def main():
     print(f"✓ 最终数据保存在: {final_output}")
     print(f"✓ 临时数据保存在: {temp_output}")
     print("="*70 + "\n")
+
+
 
 
 if __name__ == "__main__":
